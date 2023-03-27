@@ -1,0 +1,264 @@
+:root {
+  --box-shadow--color: rgb(128, 128, 128);
+  --main--color: #cc1ecc;
+  --secondary--color: #800080;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*END CSS RESET*/
+
+h1 {
+  font-size: 30pt;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+a{
+    color: whitesmoke;
+}
+body {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  font-family: "Roboto", sans-serif;
+  /* color: purple; */
+}
+
+header {
+  border-bottom: 3px solid var(--main--color);
+    margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+    gap: 1rem;
+  padding: 1em 0;
+}
+
+header nav {
+  display: flex;
+  gap: 1em;
+}
+
+header nav a {
+  /* border: 1px solid ; */
+  border-radius: 8px;
+  background-color: var(--main--color);
+  padding: 0.4em 1em;
+  color: white;
+}
+header nav a:hover{
+    background-color: var(--secondary--color);
+}
+
+main {
+  margin: 1em 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+}
+
+main .container nav {
+  padding: 0 1em;
+  display: flex;
+  gap: 2em;
+}
+
+main .container nav a {
+  padding: .3em 0.6em;
+
+  background-color: var(--secondary--color);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+}
+
+main .container nav a::before {
+  content: "";
+  position: absolute;
+
+  background-color: transparent;
+
+  left: -20px;
+  bottom: 0;
+  height: 10px;
+  width: 20px;
+
+  border-bottom-right-radius: 8px;
+  box-shadow: 10px 0 0 0;
+  color: var(--secondary--color);
+
+  z-index: -1;
+}
+
+main .container nav a::after {
+  content: "";
+  position: absolute;
+
+  background-color: transparent;
+
+  /* left: -20px; */
+  right: -20px;
+  bottom: 0;
+  height: 10px;
+  width: 20px;
+
+  border-bottom-left-radius: 8px;
+  box-shadow: -10px 0 0 0;
+  color: var(--secondary--color);
+
+  z-index: -1;
+}
+.container .review {
+  background-color: var(--main--color);
+}
+.container .review::after,
+.container .review::before {
+  color: var(--main--color);
+}
+
+.content {
+  background-color: var(--secondary--color);
+border-radius: 8px;
+  height: 60vh;
+}
+
+@media only screen and (min-width: 640px) {
+  .container {
+    width: 80vw;
+  }
+}
