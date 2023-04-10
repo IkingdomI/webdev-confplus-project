@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/review.css" />
+    <title>Review Paper</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <h3>Papers</h3>
+      <div id="papers">
+        <label class="paper">
+          <input type="radio" name="paper" id="paper-1" checked="checked" />
+          <div class="paper-details">
+            <h5>Paper 1</h5>
+            <h6>author #1, author #2</h6>
+          </div>
+        </label>
+
+        <label class="paper">
+          <input type="radio" name="paper" id="paper-2" />
+          <div class="paper-details">
+            <h5>Paper 2</h5>
+            <h6>author #1, author #2</h6>
+          </div>
+        </label>
+
+        <label class="paper">
+          <input type="radio" name="paper" id="paper-3" />
+          <div class="paper-details">
+            <h5>Paper 3</h5>
+            <h6>author #1, author #2</h6>
+          </div>
+        </label>
+      </div>
+      <button>Select Paper</button>
+
+      <div id="paper-review">
+        <embed src="data/init/papers/Paper 001.pdf" width="800" height="1024">
+            <form action="">
+                <label for="evaluation">Overall Evaluation</label>
+                <div id="evaluation-radio">
+                    <label for="strong-accept">Strong accept</label>
+                    <input type="radio" name="evaluation" id="strong-accept" value="2">
+                    <label for="accept">Accept</label>
+                    <input type="radio" name="evaluation" id="accept" value="1">
+                    <label for="borderline">Borderline</label>
+                    <input type="radio" name="evaluation" id="borderline" value="0">
+                    <label for="reject">Reject</label>
+                    <input type="radio" name="evaluation" id="reject" value="-1">
+                    <label for="strong-reject">Strong reject</label>
+                    <input type="radio" name="evaluation" id="strong-reject" value="-2">
+                </div>
+                <label for="contribution">Overall Evaluation</label>
+                <div id="contribution-radio">
+                    <label for="major-contribution">a major and significant contribution</label>
+                    <input type="radio" name="contribution" id="major-contribution" value="5">
+                    <label for="clear-contribution">a clear contribution</label>
+                    <input type="radio" name="contribution" id="clear-contribution" value="4">
+                    <label for="minor-contribution">minor contribution</label>
+                    <input type="radio" name="contribution" id="minor-contribution" value="3">
+                    <label for="no-contribution">no obvious contribution</label>
+                    <input type="radio" name="contribution" id="no-contribution" value="2">
+                </div>
+                <label for="paper-strengths">Paper Strengths</label>
+                <textarea name="paper-strengths" id="paper-strengths" cols="30" rows="10"></textarea>
+                <label for="paper-weakness">Paper Strengths</label>
+                <textarea name="paper-weakness" id="paper-weakness" cols="30" rows="10"></textarea>
+                <input type="submit" value="submit paper">
+            </form>
+      </div>
+    </main>
+  </body>
+</html>

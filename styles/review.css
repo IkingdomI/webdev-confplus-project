@@ -1,0 +1,18 @@
+.paper{
+    display: block;
+}
+
+.paper > input{
+    visibility: hidden;
+    position: absolute;
+}
+
+.paper > input + div{
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.paper > input:checked + div{
+    background-color: #ffd6bb;
+    border: 1px solid #ff6600;
+}
