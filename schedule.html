@@ -7,6 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <nav><a href="/">Sessions</a><a href="/">New Session</a></nav>
+    </header>
+    <main>
+        <div id="sessions">
+            <div class="session">
+                <h4>session 1</h4>
+                <nav>location qatar</nav>
+                <nav>18 Dec 2022</nav>
+                <nav>16:00-20:00</nav>
+            </div>
+        </div>
+        <div>
+            <h3>For Creating a session</h3>
+            <form action="">
+                <label for="paper">Chosen Paper</label>
+                <select name="paper" id="paper">
+
+                </select>
+                <label for="presenter">Presenter</label><nav id="presenter"></nav>
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date">
+                <label for="start-time">Start</label>
+                <input type="time" name="start-time" id="start-time">
+                <label for="end-time">End</label>
+                <input type="time" name="end-time" id="end-time">
+                <input type="submit" value="Publish">
+            </form>
+        </div>
+    </main>
 </body>
 </html>
