@@ -14,12 +14,13 @@
     </header>
     <main>
       <div id="sessions">
-
         <label class="session">
           <input type="radio" name="session" id="session-1" checked />
 
           <div class="session-details">
             <h4>session 1</h4>
+            <h4>paper: something something</h4>
+            <h5>Presenter: person</h5>
             <nav>location qatar</nav>
             <nav>18 Dec 2022</nav>
             <nav>16:00-20:00</nav>
@@ -27,33 +28,33 @@
         </label>
 
         <label class="session">
-          <input type="radio" name="session" id="session-2" />
+          <input type="radio" name="session" id="session-1" checked />
 
           <div class="session-details">
             <h4>session 2</h4>
+            <h4>paper: otherthing something</h4>
+            <h5>Presenter: person</h5>
             <nav>location qatar</nav>
             <nav>18 Dec 2022</nav>
             <nav>16:00-20:00</nav>
           </div>
         </label>
-
-
       </div>
+
+      <div id="action-buttons"><button>Edit</button><button>Delete</button></div>
+
       <div>
-        <h3>For Creating a session</h3>
+        <h3>I AM A DUMMY FOR ADDING NEW SESSION</h3>
         <form action="">
           <label for="paper">Chosen Paper</label>
           <select name="paper" id="paper"></select>
           <label for="presenter">Presenter</label>
+          <input type="text" name="presenter" id="presenter" disabled />
           <nav id="presenter"></nav>
           <label for="location">Location</label>
-          <select name="location" id="location">
-
-          </select>
+          <select name="location" id="location"></select>
           <label for="date">Date</label>
-          <select name="date" id="date">
-
-          </select>
+          <select name="date" id="date"></select>
           <label for="from-time">From</label>
           <input type="time" name="from-time" id="from-time" />
           <label for="to-time">To</label>

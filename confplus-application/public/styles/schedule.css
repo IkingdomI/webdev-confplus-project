@@ -16,3 +16,8 @@
     background-color: #ffd6bb;
     border: 1px solid #ff6600;
 }
+
+header>nav{
+    display: flex;
+    gap: 2em;
+}
