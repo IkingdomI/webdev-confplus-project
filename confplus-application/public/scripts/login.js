@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           location.href = "review-papers.html";
           break;
         case "organizer":
-          location.href = "schedules.html";
+          location.href = "schedule.html";
           break;
       }
     }
