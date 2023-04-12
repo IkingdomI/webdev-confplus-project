@@ -1,0 +1,34 @@
+.paper{
+    display: block;
+}
+
+.paper > input{
+    visibility: hidden;
+    position: absolute;
+}
+
+.paper > input + div{
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.paper > input:checked + div{
+    background-color: #ffd6bb;
+    border: 1px solid #ff6600;
+}
+
+.collapse:hover{
+    text-decoration: underline;
+}
+
+.hide{
+    display: none;    
+}
+.toggle-collapse{
+    /* position: absolute; */
+    visibility: hidden;
+}
+.toggle-collapse::before{
+    content: "Show";
+    visibility: visible;
+}

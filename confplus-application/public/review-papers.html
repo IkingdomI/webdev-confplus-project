@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/review.css" />
+    <script src="./scripts/review.js"></script>
     <title>Review Paper</title>
   </head>
   <body>
@@ -15,8 +16,11 @@
         <label class="paper">
           <input type="radio" name="paper" id="paper-1" checked="checked" />
           <div class="paper-details">
-            <h5>Paper 1</h5>
-            <h6>author #1, author #2</h6>
+            <h5 class="title">Paper 1</h5>
+            <h6 class="authors">author #1, author #2</h6>
+            <p class="abstract">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti reprehenderit eos molestias deserunt iusto neque vitae error nam autem earum sequi at veniam quo blanditiis, tempore rem ex voluptas tempora?</p>
+            <div class="collapse">collapse</div>
+            <a href="">Download pdf</a>
           </div>
         </label>
 
@@ -69,7 +73,7 @@
                 <textarea name="paper-strengths" id="paper-strengths" cols="30" rows="10"></textarea>
                 <label for="paper-weakness">Paper Strengths</label>
                 <textarea name="paper-weakness" id="paper-weakness" cols="30" rows="10"></textarea>
-                <input type="submit" value="submit paper">
+                <input type="submit" value="submit review">
             </form>
       </div>
     </main>
