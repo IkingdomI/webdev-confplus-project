@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   const updatePresenter = () => {
-    presenterSelect.innerHTML = `<option value="0">None</option>
+    presenterSelect.innerHTML = `
     <option value="1">Author #1</option>`;
     for (let i = 0; i < countAuthors - 1; i++) {
       const authorNo = i + 2;
