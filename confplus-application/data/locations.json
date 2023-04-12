@@ -1,11 +1,14 @@
 [
     {
+        "value":"c07-145",
         "name":"Female Engineering Building C07-145"
     },
     {
+        "value":"bcr-e104",
         "name":"CSE Meeting Room BCR-E104"
     },
     {
+        "value":"b13-201",
         "name":"QU Library B13-201"
     }
 ]

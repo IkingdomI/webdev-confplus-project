@@ -1,41 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <link rel="stylesheet" href="./styles/schedule.css" />
+    <script src="./scripts/schedule.js"></script>
+  </head>
+  <body>
     <header>
-        <nav><a href="/">Sessions</a><a href="/">New Session</a></nav>
+      <nav><a href="/">Sessions</a><a href="/">New Session</a></nav>
     </header>
     <main>
-        <div id="sessions">
-            <div class="session">
-                <h4>session 1</h4>
-                <nav>location qatar</nav>
-                <nav>18 Dec 2022</nav>
-                <nav>16:00-20:00</nav>
-            </div>
-        </div>
-        <div>
-            <h3>For Creating a session</h3>
-            <form action="">
-                <label for="paper">Chosen Paper</label>
-                <select name="paper" id="paper">
+      <div id="sessions">
 
-                </select>
-                <label for="presenter">Presenter</label><nav id="presenter"></nav>
-                <label for="date">Date</label>
-                <input type="date" name="date" id="date">
-                <label for="start-time">Start</label>
-                <input type="time" name="start-time" id="start-time">
-                <label for="end-time">End</label>
-                <input type="time" name="end-time" id="end-time">
-                <input type="submit" value="Publish">
-            </form>
-        </div>
+        <label class="session">
+          <input type="radio" name="session" id="session-1" checked />
+
+          <div class="session-details">
+            <h4>session 1</h4>
+            <nav>location qatar</nav>
+            <nav>18 Dec 2022</nav>
+            <nav>16:00-20:00</nav>
+          </div>
+        </label>
+
+        <label class="session">
+          <input type="radio" name="session" id="session-2" />
+
+          <div class="session-details">
+            <h4>session 2</h4>
+            <nav>location qatar</nav>
+            <nav>18 Dec 2022</nav>
+            <nav>16:00-20:00</nav>
+          </div>
+        </label>
+
+
+      </div>
+      <div>
+        <h3>For Creating a session</h3>
+        <form action="">
+          <label for="paper">Chosen Paper</label>
+          <select name="paper" id="paper"></select>
+          <label for="presenter">Presenter</label>
+          <nav id="presenter"></nav>
+          <label for="location">Location</label>
+          <select name="location" id="location">
+
+          </select>
+          <label for="date">Date</label>
+          <select name="date" id="date">
+
+          </select>
+          <label for="from-time">From</label>
+          <input type="time" name="from-time" id="from-time" />
+          <label for="to-time">To</label>
+          <input type="time" name="to-time" id="to-time" />
+          <input type="submit" value="Publish" />
+        </form>
+      </div>
     </main>
-</body>
+  </body>
 </html>

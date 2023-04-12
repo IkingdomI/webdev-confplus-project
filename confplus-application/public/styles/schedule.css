@@ -1,0 +1,18 @@
+.session{
+    display: block;
+}
+
+.session > input{
+    visibility: hidden;
+    position: absolute;
+}
+
+.session > input + div{
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.session > input:checked + div{
+    background-color: #ffd6bb;
+    border: 1px solid #ff6600;
+}
