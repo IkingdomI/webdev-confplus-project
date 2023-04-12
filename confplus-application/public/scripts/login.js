@@ -12,14 +12,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       const user = await res.json();
 
-      sessionStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("user-id", user.id);
+
       switch (user.role) {
         case "author":
-          location.href = "submit.html";
-          break;
-        case "organizer":
+          location.href = "submit-paper.html";
           break;
         case "reviewer":
+          location.href = "review-papers.html";
+          break;
+        case "organizer":
+          location.href = "schedules.html";
           break;
       }
     }
