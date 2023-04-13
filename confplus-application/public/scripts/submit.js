@@ -8,7 +8,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   let countAuthors = 1;
 
   const res = await fetch("http://localhost:3000/api/institutions");
-    const institutions = await res.json();
+  const institutions = await res.json();
+
+
+  const authorName = document.querySelector("#author-name");
+  
+  const id = sessionStorage.getItem("user-id");
+  const userRes = await fetch(`http://localhost:3000/api/users/${id}`);
+  const user = await userRes.json();
+
+  authorName.textContent = `${user.first_name} ${user.last_name}`
+  
+
+
 
   addAuthor.addEventListener("click", async (event) => {
     event.preventDefault();
