@@ -42,6 +42,7 @@ nav a {
   letter-spacing: 2.07px;
   border: 1px solid rgba(1, 8, 81, 0.2);
   font-weight: bold;
+  text-decoration: none;
 }
 .login-btn:hover {
   cursor: pointer;
