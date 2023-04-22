@@ -18,10 +18,10 @@ export async function createPaper(obj){
     
     
     
-    accounts.push(obj);
+    papers.push(obj);
 
-    await fs.writeFile(path, JSON.stringify(accounts));
-    return account;
+    await fs.writeFile("data/papers.json", JSON.stringify(papers));
+    return obj;
 
 
 }
