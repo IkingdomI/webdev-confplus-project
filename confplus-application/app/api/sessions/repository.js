@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 
-const path = "data/sessions.json"
+const path = "data/schedule.json"
 
 export async function readSessions()
 {
