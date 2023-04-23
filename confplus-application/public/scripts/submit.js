@@ -80,4 +80,103 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
   
   loadAffiliation(1);
+
+
+//Submiting the form: 
+
+
+
+  document.querySelector("#submit-form").addEventListener("submit", async (event)=>{
+    event.preventDefault();
+    const formData = new FormData(document.querySelector("#submit-form"));
+    const body = {};
+    for(const[key, value] of formData){
+        body[key] = value;
+    }
+
+    console.log(body);
+    console.log(body.title);
+    console.log(body.abstract);
+    console.log(window['author-1-fname'].value);
+
+
+    body.authors = [];
+    console.log(body.authors);
+
+    // for(let child of authorsDiv.children){
+      // body.authors.push(
+      //   {
+      //     fname: 
+      //   }
+      // )
+      // console.log(child);
+    // }
+    for(let i =1;i<=countAuthors;i++){
+      body.authors.push(
+        {
+          fname: window[`author-${i}-fname`].value,
+          lname: window[`author-${i}-lname`].value,
+          email: window[`author-${i}-email`].value,
+          affiliation: window[`author-${i}-affiliation`].value
+
+        }
+      )
+    }
+    console.log(body.authors);
+    console.log(countAuthors);
+
+    //get the list of reviewrs
+    const res2 = await fetch(`http://localhost:3000/api/users`, {
+      method: "GET"
+    });
+    const usersResponse = await res2.json();
+
+    let reviewers = [];
+    let reviewersCount = 0;
+    for(const user of usersResponse){
+      if (user.role==="reviewer"){
+        reviewers.push(user);
+        reviewersCount++;
+      }
+    }
+
+    console.log(reviewers);
+    function getRandomReviewr(){
+      const rand = Math.floor(Math.random()*reviewers.length);
+      let reviewer = reviewers[rand];
+      reviewers.splice(rand, 1);
+      return reviewer;
+    }
+
+
+
+
+
+    const res = await fetch(`http://localhost:3000/api/papers`, {
+        method: "POST",
+        body: JSON.stringify({
+            title: body.title,
+            authors: body.authors,
+            abstract: body.abstract,
+            reviewer1: getRandomReviewr(),
+
+            reviewer2: getRandomReviewr()
+        })
+    });
+    const response = await res.json();
+
+
+    
+
+
+
+})
 });
+
+
+
+
+
+
+
+    

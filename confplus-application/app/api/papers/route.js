@@ -26,7 +26,12 @@ export async function POST(request){
             const paper = await repo.createPaper({
                 title: body.title,
                 authors: body.authors,
-                abstract: body.abstract
+                abstract: body.abstract,
+                presenter: body.presenter,
+                reviewer1: body.reviewer1,
+                reviewer2: body.reviewer2,
+                rating: body.rating
+
             });
             return Response.json(paper, {status: 201});
         }else{
