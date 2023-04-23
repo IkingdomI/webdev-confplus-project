@@ -3,7 +3,7 @@
         "session": "Session 1",
         "paper": "How to Feed Your Dragon.",
         "presenter": "Joe Schmoe",
-        "location": "IDF-86",
+        "location": "c07-145",
         "date": "18-12-2023",
         "time": "16:00-20:00"
     },
@@ -12,7 +12,7 @@
         "session": "Session 2",
         "paper": "Lifetime Achievement Award.",
         "presenter": "Daeodon shoshonensis",
-        "location": "IDF-87",
+        "location": "bcr-e104",
         "date": "18-12-2023",
         "time": "16:00-20:00"
     }
