@@ -80,4 +80,69 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
   
   loadAffiliation(1);
+
+
+//Submiting the form: 
+
+
+
+  document.querySelector("#submit-form").addEventListener("submit", async (event)=>{
+    event.preventDefault();
+    const formData = new FormData(document.querySelector("#submit-form"));
+    const body = {};
+    for(const[key, value] of formData){
+        body[key] = value;
+    }
+
+    console.log(body);
+    console.log(body.title);
+    console.log(body.abstract);
+    console.log(window['author-1-fname'].value);
+
+
+    body.authors = [];
+    console.log(body.authors);
+
+    // for(let child of authorsDiv.children){
+      // body.authors.push(
+      //   {
+      //     fname: 
+      //   }
+      // )
+      // console.log(child);
+    // }
+    for(let i =1;i<=countAuthors;i++){
+      body.authors.push(
+        {
+          fname: window[`author-${i}-fname`].value,
+          lname: window[`author-${i}-lname`].value,
+          email: window[`author-${i}-email`].value,
+          affiliation: window[`author-${i}-affiliation`].value
+
+        }
+      )
+    }
+    console.log(body.authors);
+    console.log(countAuthors);
+
+
+    const res = await fetch(`http://localhost:3000/api/papers`, {
+        method: "POST",
+        body: JSON.stringify({
+            title: body.title,
+            authors: body.authors,
+            abstract: body.abstract
+        })
+    });
+    const response = await res.json();
+
+})
 });
+
+
+
+
+
+
+
+    

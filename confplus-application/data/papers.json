@@ -1,1 +1,1 @@
-[{"title":"demo","abstract":"some text"},{"title":"demo2","authors":[],"abstract":"she sells sea shells on the seashore."}]
+[{"title":"demo","abstract":"some text"},{"title":"demo2","authors":[],"abstract":"she sells sea shells on the seashore."},{"title":"Java for intermediets","authors":[{"fname":"Tony","lname":"Stark","email":"tonyfake@author.com","affiliation":"tamu-qatar"},{"fname":"Yahia","lname":"Azzam","email":"yaya@bestauthor.com","affiliation":"cmu-qatar"}],"abstract":"The book targets a slightly more advanced java developing and introduces algorithms."}]
