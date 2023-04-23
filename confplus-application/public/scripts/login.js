@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  document.querySelector("#enter").addEventListener("click", async () => {
+  document.querySelector("#login").addEventListener("click", async () => {
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
 
