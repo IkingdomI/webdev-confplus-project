@@ -87,3 +87,37 @@ export async function PATCH(request, {params})
 		);
 	}
 }
+
+export async function DELETE(request, {params})
+{
+	try
+	{
+		const {session: id} = params;
+
+		const session = await repo.deleteSession(id);
+
+		if (session)
+		{
+			return Response.json(
+				session,
+				{ status: 200 }
+			);
+		}
+		else
+		{
+			return Response.json(
+				{ message: "Session not found." },
+				{ status: 404 }
+			);
+		}
+	}
+	catch (error)
+	{
+		console.log(error.message);
+		
+		return Response.json(
+			{ message: "Internal Server Error." },
+			{ status: 500 }
+		);
+	}	
+}
