@@ -39,10 +39,20 @@ export async function POST(request)
 		{
 			const session = await repo.createSession(body);
 
-			return Response.json(
-				session,
-				{ status: 200 }
-			);
+			if (session)
+			{
+				return Response.json(
+					session,
+					{ status: 200 }
+				);
+			}
+			else
+			{
+				return Response.json(
+					{ message: "A session with the same name already exists" },
+					{ status: 400 }
+				);
+			}
 		}
 		else
 		{

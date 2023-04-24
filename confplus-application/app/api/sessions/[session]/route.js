@@ -48,23 +48,32 @@ export async function PATCH(request, {params})
 			"location" in body
 		)
 		{
+			const session = await repo.updateSession(id, {
+				date: body.date,
+				time: body.time,
+				location: body.location
+			});
 
-		}
-
-		const session = await repo.updateSession(id, body);
-
-		if (session)
-		{
-			return Response.json(
-				session,
-				{ status: 200 }
-			);
+			if (session)
+			{
+				return Response.json(
+					session,
+					{ status: 200 }
+				);
+			}
+			else
+			{
+				return Response.json(
+					{ message: "Session not found." },
+					{ status: 404 }
+				);
+			}
 		}
 		else
 		{
 			return Response.json(
-				{ message: "Session not found." },
-				{ status: 404 }
+				{ message: "Invalid parameters." },
+				{ status: 400 }
 			);
 		}
 	}
