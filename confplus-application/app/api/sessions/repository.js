@@ -2,10 +2,15 @@ import { promises as fs } from "fs";
 
 const path = "data/schedule.json"
 
-export async function readSessions()
+export async function readSessions(date)
 {
 	const res = await fs.readFile(path);
-	const sessions = await JSON.parse(res);
+	let sessions = await JSON.parse(res);
+
+	if (date)
+	{
+		sessions = sessions.filter(s => s.date === date);
+	}
 
 	return sessions;
 }

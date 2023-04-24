@@ -4,8 +4,8 @@ export async function GET(request)
 {
 	try
 	{
-		const query = await URL;
-		const sessions = await repo.readSessions();
+		const date = new URL(request.url).searchParams.get("date");
+		const sessions = await repo.readSessions(date);
 
 		return Response.json(
 			sessions,
