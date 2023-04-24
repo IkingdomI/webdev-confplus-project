@@ -17,3 +17,9 @@ export async function readSession(id)
 
 	return session;
 }
+
+export async function createSession(body)
+{
+	const res = await fs.readFile(path);
+	const session = await JSON.parse(res);
+}

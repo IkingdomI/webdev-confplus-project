@@ -34,13 +34,24 @@ export async function GET(request, {params})
 	}
 }
 
-export async function PATCH(id, obj)
+export async function PATCH(request, {params})
 {
 	try 
 	{
 		const {session: id} = params;
+		const body = await request.json();
 
-		const session = await repo.readSession(id);
+		//We validate the values of these fields in client side.
+		if (
+			"date" in body &&
+			"time" in body &&
+			"location" in body
+		)
+		{
+
+		}
+
+		const session = await repo.updateSession(id, body);
 
 		if (session)
 		{
