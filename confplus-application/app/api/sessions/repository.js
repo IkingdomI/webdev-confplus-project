@@ -18,6 +18,26 @@ export async function readSession(id)
 	return session;
 }
 
+export async function updateSession(id, obj)
+{
+	const res = await fs.readFile(path);
+	const sessions = await JSON.parse(res);
+	const session = sessions.find(s => s.session === id);
+
+	if (!session)
+	{
+		return null
+	}
+
+	session.date = obj.date;
+	session.location = obj.location;
+	session.time = obj.time;
+
+	await fs.writeFile(path, JSON.stringify(sessions));
+
+	return session;
+}
+
 export async function createSession(obj)
 {
 	const res = await fs.readFile(path);

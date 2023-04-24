@@ -1,1 +1,26 @@
-[{"session":"Session 1","paper":"How to Feed Your Dragon.","presenter":"Joe Schmoe","location":"c07-145","date":"18-12-2023","time":"16:00-20:00"},{"session":"Session 2","paper":"Lifetime Achievement Award.","presenter":"Daeodon shoshonensis","location":"bcr-e104","date":"18-12-2023","time":"16:00-20:00"},{"session":"Session 3","paper":"Attack of the Killer Queen","presenter":"Khamsin","location":"bcr-e104","date":"12-06-2023","time":"14:00-16:00"}]
+[
+    {
+        "session": "Session 1",
+        "paper": "How to Feed Your Dragon.",
+        "presenter": "Joe Schmoe",
+        "location": "b13-201",
+        "date": "12-06-2023",
+        "time": "14:00-16:00"
+    },
+    {
+        "session": "Session 2",
+        "paper": "Lifetime Achievement Award.",
+        "presenter": "Daeodon shoshonensis",
+        "location": "bcr-e104",
+        "date": "18-12-2023",
+        "time": "16:00-20:00"
+    },
+    {
+        "session": "Session 3",
+        "paper": "Attack of the Killer Queen",
+        "presenter": "Khamsin",
+        "location": "bcr-e104",
+        "date": "12-06-2023",
+        "time": "14:00-16:00"
+    }
+]
