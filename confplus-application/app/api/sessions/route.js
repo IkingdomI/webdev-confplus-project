@@ -4,6 +4,7 @@ export async function GET(request)
 {
 	try
 	{
+		const query = await URL;
 		const sessions = await repo.readSessions();
 
 		return Response.json(
