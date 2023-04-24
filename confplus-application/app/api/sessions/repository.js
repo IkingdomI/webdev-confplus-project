@@ -63,3 +63,18 @@ export async function createSession(obj)
 
 	return session
 }
+
+export async function deleteSession(id)
+{
+	const sessions = await JSON.parse(await fs.readFile(path));
+	const index = sessions.findIndex(s => s.session === id);
+
+	if (index > -1)
+	{
+		const session = sessions.splice(index, 1);
+		await fs.writeFile(path, JSON.stringify(sessions));
+		return session;
+	}
+
+	return null;
+}
