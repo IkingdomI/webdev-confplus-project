@@ -10,17 +10,20 @@ body {
   flex-direction: column;
 }
 header {
-  margin-top: 20px;
-  margin-left: 110px;
-  align-items: center;
   display: flex;
+  align-self: center;
+  margin-top: 20px;
+  align-items: center;
   justify-content: space-between;
-  width: 80%;
+  width: 85%;
+  
   
 }
 .logo {
   display: flex;
   align-items: center;
+  padding: 5px;
+  margin-left: 5px;
 }
 .conf-plus {
   margin-left: 10px;
@@ -28,27 +31,27 @@ header {
 .ellipse-1 {
   width: 21%;
   height: 56%;
-  margin-right: 14px;
+  
 }
 
 nav a {
   text-decoration: none;
   color: #18537a;
-  letter-spacing: 2px;
-  margin-right: 120px;
+  letter-spacing: 1.5px;
+  margin-right: 110px;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
 }
 .welcome-banner {
   
-  width: 90vh;
+  width: 120vh;
   align-self: center;
   align-items: center;
   display: flex;
   color: #18537a;
   font-size: 30px;
   font-style: italic;
-  justify-content: center;
+  justify-content: space-between;
  
 }
 #author-name{
@@ -58,10 +61,11 @@ nav a {
   margin-left:15px;
   width: 50px;
 }
-submit-form{
-  border: 3px solid red;
+.submit-form{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .upload {
   background-color: rgba(255, 255, 255, 1);
@@ -182,23 +186,24 @@ textarea{
   overflow: hidden;
   color: #18537a;
   border: 1px solid #18537a;
-  padding: 90px;
+  padding: 40px;
   margin: 20px;
   border-radius: 15px;
   font-weight: 600;
-  width: 100vh;
-  height: auto;
+  width: 70vh;
+  justify-content: center;
+  
   
 }
 
 #authors-container{
-display: flex;
-flex-direction: column;
-width: max-content;
-border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+width: 120vh;
 position: relative;
-padding: 25px;
-margin-bottom: 20px;
+padding: 20px;
+margin-bottom: 10px;
+bottom: 20px;
 }
 
 
@@ -207,12 +212,24 @@ margin-bottom: 20px;
   border-radius: 5px;
 
 }
-.info-group,.interaction{
+.info-group{
   border: 1px solid ;
   display: flex;
   flex-direction: column;
   margin: 20px;
   padding: 15px;
+  border-radius: 15px;
+}
+.interaction{
+  position: relative;
+  border: 1px solid ;
+  display: flex;
+  flex-direction: column;
+ border-radius: 15px;
+  padding: 10px;
+  bottom: 20px;
+  width: 70vh;
+  align-self: center;
 }
 .aff-selector-group{
   display: flex;
@@ -285,7 +302,7 @@ margin-bottom: 20px;
 }
 
 .remove-author-btn:focus {
-  box-shadow: #ca0b0b 0 0 0 1.5px inset, rgba(224, 20, 44, 0.4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #0cc252 0 -3px 0 inset;
+  box-shadow: #ca0b0b 0 0 0 1.5px inset, rgba(224, 20, 44, 0.4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #131d17 0 -3px 0 inset;
 }
 
 .remove-author-btn:hover {
@@ -317,10 +334,9 @@ margin-bottom: 20px;
   background: rgb(245, 243, 243);
   border: none;
   border-radius: 6px;
-  box-shadow: rgba(33, 164, 59, 0.4) 0 2px 4px,rgba(26, 104, 72, 0.3) 0 7px 13px -3px,rgba(33, 129, 92, 0.5) 0 -3px 0 inset;
+  box-shadow: rgba(104, 105, 104, 0.4) 0 2px 4px,rgba(62, 66, 64, 0.3) 0 7px 13px -3px,rgba(53, 53, 53, 0.5) 0 -3px 0 inset;
   color: #18537a;
   cursor: pointer;
-  
   height: 40px;
   justify-content: center;
   align-self: center;
@@ -336,6 +352,25 @@ margin-bottom: 20px;
   font-size: 15px;
   font-weight: 500;
 
+}
+.submit:focus {
+  box-shadow: #c2b9b9 0 0 0 1.5px inset, rgba(37, 34, 35, 0.4) 0 2px 4px, rgba(53, 52, 56, 0.3) 0 7px 13px -3px, #141514 0 -3px 0 inset;
+}
+
+.submit:hover {
+  box-shadow: rgba(30, 26, 26, 0.941) 0 4px 8px, rgba(70, 67, 67, 0.963) 0 7px 13px -3px, #141313 0 -3px 0 inset;
+  color: #e8e8e8;
+  background: linear-gradient(
+    112deg,
+    rgb(189, 50, 152) 1%,
+    rgba(56, 19, 194, 1) 98%
+  );
+  transform: translateY(-2px);
+}
+
+.submit:active {
+  box-shadow: #757474 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
 
