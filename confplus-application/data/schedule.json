@@ -1,1 +1,16 @@
-[{"session":"Session 2","paper":"Lifetime Achievement Award.","presenter":"Daeodon shoshonensis","location":"bcr-e104","date":"18-12-2023","time":"16:00-20:00"},{"session":"Session 3","paper":"Attack of the Killer Queen","presenter":"Khamsin","location":"bcr-e104","date":"12-06-2023","time":"14:00-16:00"}]
+[
+    {
+        "title": "Java for intermediets",
+        "presenter": "Tony Stark",
+        "location": "b13-201",
+        "date": "12-06-2023",
+        "time": "14:00-16:00"
+    },
+    {
+        "title": "database systems",
+        "presenter": "Erling Haaland",
+        "location": "bcr-e104",
+        "date": "12-06-2023",
+        "time": "14:00-16:00"
+    }
+]
