@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const userRes = await fetch(`http://localhost:3000/api/users/${id}`);
   const user = await userRes.json();
 
-  authorName.textContent = `${user.first_name} ${user.last_name}` //UNCOMMENT ME LATER
+  // authorName.textContent = `${user.first_name} ${user.last_name}` //UNCOMMENT ME LATER
   
 
 
@@ -26,7 +26,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     event.preventDefault();
     countAuthors++;
 
-    const newAuthor = 
+    const newAuthor = `<div class="author" id=author-${countAuthors}>
+       <h4>Author #${countAuthors}</h4>
+       <label for="author-${countAuthors}-fname">First Name</label>
+       <input type="text" name="author-${countAuthors}-fname" id="author-${countAuthors}-fname">
+       <label for="author-${countAuthors}-lname">Last Name</label>
+       <input type="text" name="author-${countAuthors}-lname" id="author-${countAuthors}-lname">
+       <label for="author-${countAuthors}-email">Email</label>
+       <input type="email" name="author-${countAuthors}-email" id="author-${countAuthors}-email">
+       <label for="author-${countAuthors}-affiliation">Affiliation</label>
+       <select class="affiliation" name="author-${countAuthors}-affiliation" id="author-${countAuthors}-affiliation"></select>
+       
+       </div>`;
       //  <input type="text" name="author-${countAuthors}-affilitation" id="author-${countAuthors}-affilitation">
       `<div class="info-group" id="author-${countAuthors}">
               <h4>Author #${countAuthors}</h4>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit Paper</title>
+    <script src="scripts/submit.js"></script>
+  </head>
+  <body>
+    <header>
+      <h4>Author<nav id="author-name"></nav></h4>
+    </header>
+    <main>
+      <form id="submit-form" action="">
+        <input type="file" id="file" name="file" accept=".pdf">
+        <fieldset>
+          <legend>Paper Details</legend>
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" />
+
+          <label for="abstract">Abstract</label>
+          <textarea
+            name="abstract"
+            id="abstract"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </fieldset>
+        <fieldset>
+          <legend>Authors</legend>
+
+          <div id="authors">
+            <div class="author" id="author-1">
+              <h4>Author #1</h4>
+              <label for="author-1-fname">First Name</label>
+              <input type="text" name="author-1-fname" id="author-1-fname" />
+              <label for="author-1-lname">Last Name</label>
+              <input type="text" name="author-1-lname" id="author-1-lname" />
+              <label for="author-1-email">Email</label>
+              <input type="email" name="author-1-email" id="author-1-email" />
+              <label for="author-1-affilitation">Affiliation</label>
+              <!-- <input
+                type="text"
+                name="author-1-affiliation"
+                id="author-1-affiliation"
+              /> -->
+              <select name="author-1-affiliation" id="author-1-affiliation"></select>
+            </div>
+          </div>
+
+          <span id="buttons"
+            ><button id="add-author">+</button
+            ><button id="remove-author">-</button></span
+          >
+
+          <label for="presenter">presenter</label>
+          <select name="presenter" id="presenter">
+            <option value="1">Author #1</option>
+          </select>
+        </fieldset>
+        <input type="submit" value="submit paper">
+      </form>
+    </main>
+  </body>
+</html>

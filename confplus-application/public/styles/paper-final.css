@@ -51,6 +51,9 @@ nav a {
   justify-content: center;
  
 }
+#author-name{
+  color: #3a187a;
+}
 .author-logo {
   margin-left:15px;
   width: 50px;
@@ -190,6 +193,7 @@ textarea{
 
 #authors-container{
 display: flex;
+flex-direction: column;
 width: max-content;
 border: 2px solid black;
 position: relative;
@@ -402,6 +406,9 @@ footer {
 .full-col a {
   text-decoration: none;
 }
+
+
+
 @media (max-width: 740px) {
   nav a {
     margin-left: 60px;
