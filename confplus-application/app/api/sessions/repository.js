@@ -15,28 +15,31 @@ export async function readSessions(date)
 	return sessions;
 }
 
-export async function readSession(id)
+export async function readSession(title)
 {
 	const res = await fs.readFile(path);
-	const session = await JSON.parse(res).find(s => s.session === id);
+	const session = await JSON.parse(res).find(s => s.title === title);
 
 	return session;
 }
 
-export async function updateSession(id, obj)
+export async function updateSession(title, obj)
 {
 	const res = await fs.readFile(path);
 	const sessions = await JSON.parse(res);
-	const session = sessions.find(s => s.session === id);
+	const session = sessions.find(s => s.title === title);
 
 	if (!session)
 	{
 		return null
 	}
 
-	session.date = obj.date;
-	session.location = obj.location;
-	session.time = obj.time;
+	if (obj.date)
+		session.date = obj.date;
+	if (obj.location)
+		session.location = obj.location;
+	if (obj.time)
+		session.time = obj.time;
 
 	await fs.writeFile(path, JSON.stringify(sessions));
 
@@ -47,15 +50,20 @@ export async function createSession(obj)
 {
 	const res = await fs.readFile(path);
 	const sessions = await JSON.parse(res);
+	const papers = await JSON.parse(await fs.readFile("data/papers.json"));
 
-	if (sessions.find(s => s.session === obj.session))
+	if (sessions.find(s => s.title === obj.title))
 	{	
-		return null;
+		return { message: "DUPLICATE" };
+	}
+
+	if (!papers.find(p => p.title === obj.title))
+	{
+		return { message: "NO_PAPER" };
 	}
 
 	const session = {
-		session: obj.session,
-		paper: obj.paper,
+		title: obj.title,
 		presenter: obj.presenter,
 		location: obj.location,
 		date: obj.date,
@@ -69,10 +77,10 @@ export async function createSession(obj)
 	return session
 }
 
-export async function deleteSession(id)
+export async function deleteSession(title)
 {
 	const sessions = await JSON.parse(await fs.readFile(path));
-	const index = sessions.findIndex(s => s.session === id);
+	const index = sessions.findIndex(s => s.title === title);
 
 	if (index > -1)
 	{

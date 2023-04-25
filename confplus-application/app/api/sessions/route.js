@@ -30,8 +30,7 @@ export async function POST(request)
 		const body = await request.json();
 
 		if (
-			"session" in body &&
-			"paper" in body &&
+			"title" in body &&
 			"presenter" in body &&
 			"location" in body &&
 			"date" in body &&
@@ -42,6 +41,24 @@ export async function POST(request)
 
 			if (session)
 			{
+				if (session.message)
+				{
+					if (session.message === "DUPLICATE")
+					{
+						return Response.json(
+							{ message: "Paper already has a session." },
+							{ status: 400 }
+						);
+					}
+					else
+					{
+						return Response.json(
+							{ message: "Paper not found." },
+							{ status: 404 }
+						);
+					}
+				}
+
 				return Response.json(
 					session,
 					{ status: 200 }
