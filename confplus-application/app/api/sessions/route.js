@@ -31,7 +31,8 @@ export async function POST(request)
 
 		if (
 			"title" in body &&
-			"presenter" in body &&
+			"present_fname" in body &&
+			"present_lname" in body &&
 			"location" in body &&
 			"date" in body &&
 			"time" in body
@@ -50,10 +51,17 @@ export async function POST(request)
 							{ status: 400 }
 						);
 					}
-					else
+					else if (session.message === "NO_PAPER")
 					{
 						return Response.json(
 							{ message: "Paper not found." },
+							{ status: 404 }
+						);
+					}
+					else
+					{
+						return Response.json(
+							{ message: "Author not found." },
 							{ status: 404 }
 						);
 					}

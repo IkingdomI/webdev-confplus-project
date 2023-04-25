@@ -43,14 +43,16 @@ export async function PATCH(request, {params})
 
 		//We validate the values of these fields in client side.
 		if (
-			"presenter" in body ||
+			("present_fname" in body &&
+			"present_lname" in body ) ||
 			"date" in body ||
 			"time" in body ||
 			"location" in body
 		)
 		{
 			const session = await repo.updateSession(title, {
-				presenter: body.presenter,
+				present_fname: body.present_fname,
+				present_lname: body.present_lname,
 				date: body.date,
 				time: body.time,
 				location: body.location
@@ -58,6 +60,24 @@ export async function PATCH(request, {params})
 
 			if (session)
 			{
+				if (session.message)
+				{
+					if (session.message === "NO_SESSION")
+					{
+						return Response.json(
+							{ message: "Session not found." },
+							{ status: 404 }
+						);
+					}
+					else
+					{
+						return Response.json(
+							{ message: "Author not found." },
+							{ status: 404 }
+						);
+					}
+				}
+
 				return Response.json(
 					session,
 					{ status: 200 }
