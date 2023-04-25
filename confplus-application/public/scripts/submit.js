@@ -129,6 +129,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     body.authors = [];
     console.log(body.authors);
 
+
+    // const file = body.file;
+
+    // function readFile(input){
+    //   const fr = new FileReader();
+
+    //   fr.readAsDataURL(input);
+    //   fr.addEventListener("load", () =>{
+    //     const urlRes = fr.result;
+    //     console.log(urlRes);
+    //     return urlRes;
+    //   })
+      
+    // }
+
+    // const pdfURL = readFile(file);
+    // body.url = pdfURL;
+
+    // console.log(pdfURL);
+
     // for(let child of authorsDiv.children){
       // body.authors.push(
       //   {
@@ -171,7 +191,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const rand = Math.floor(Math.random()*reviewers.length);
       let reviewer = reviewers[rand];
       reviewers.splice(rand, 1);
-      return reviewer;
+      return reviewer.id;
     }
 
 
@@ -183,10 +203,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify({
             title: body.title,
             authors: body.authors,
+            // url: body.url,
             abstract: body.abstract,
-            reviewer1: getRandomReviewr(),
-
-            reviewer2: getRandomReviewr()
+            presenter: body.presenter,
+            reviewer1: {
+              id:getRandomReviewr(),
+              evaluation: null,
+              contribution: null
+            },
+            reviewer2: {
+              id:getRandomReviewr(),
+              evaluation: null,
+              contribution: null
+            },
+            rating: null
         })
     });
     const response = await res.json();
