@@ -42,11 +42,33 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 		const sessionsDiv = document.getElementById("sessions");
 		sessionsDiv.innerHTML = "";
 
-		schedule.forEach(s => {
+		schedule.forEach((s, i) => {
 			const sessionDiv = document.createElement("div");
 			sessionDiv.classList.add("session");
-			
+			sessionsDiv.appendChild(sessionDiv);
+
 			const radioBtn = document.createElement("input");
+			radioBtn.type = "radio";
+
+			radioBtn.checked = (i == 0)? true : false;
+			sessionDiv.appendChild(radioBtn);
+
+			const sessionCont = document.createElement("div");
+			sessionDiv.appendChild(sessionCont);
+
+			const paperHeading = document.createElement("h4");
+			paperHeading.innerText = s.title;
+			sessionCont.appendChild(paperHeading);
+
+			const presentHeading = document.createElement("h5");
+			presentHeading.innerText = `Presented by: ${s.presenter}`;
+			sessionCont.appendChild(presentHeading);
+
+			const tempolocalPara = document.createElement("p");
+			tempolocalPara.innerText = `Location: ${s.location}\nDate: ${s.date}\nTime: ${s.time}`;
+			sessionCont.appendChild(tempolocalPara);
+
+			sessionDiv.addEventListener("click", () => { console.log(s.title) });
 		});
 		//console.log(papers);
 	}
