@@ -47,12 +47,6 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			sessionDiv.classList.add("session");
 			sessionsDiv.appendChild(sessionDiv);
 
-			const radioBtn = document.createElement("input");
-			radioBtn.type = "radio";
-
-			radioBtn.checked = (i == 0)? true : false;
-			sessionDiv.appendChild(radioBtn);
-
 			const sessionCont = document.createElement("div");
 			sessionDiv.appendChild(sessionCont);
 
