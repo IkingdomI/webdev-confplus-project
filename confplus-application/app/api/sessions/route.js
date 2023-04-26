@@ -58,11 +58,18 @@ export async function POST(request)
 							{ status: 404 }
 						);
 					}
-					else
+					else if (session.message === "NO_AUTHOR")
 					{
 						return Response.json(
 							{ message: "Author not found." },
 							{ status: 404 }
+						);
+					}
+					else
+					{
+						return Response.json(
+							{ message: "Two sessions may not take place in the same time and place." },
+							{ status: 400 }
 						);
 					}
 				}

@@ -93,6 +93,11 @@ export async function createSession(obj)
 		return { message: "NO_AUTHOR" };
 	}
 
+	if (sessions.find(s => s.time === obj.time && s.date === obj.date && s.location === obj.location))
+	{
+		return { message: "CONFLICT" };
+	}
+
 	const session = {
 		title: obj.title,
 		presenter: `${obj.present_fname} ${obj.present_lname}`,
