@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			body: JSON.stringify(obj)
 		})).json();
 
-		console.log(session);
+		//console.log(session);
 
 		if (session)
 		{
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			method: "DELETE"
 		})).json();
 
-		console.log(session);
+		//console.log(session);
 
 		if (session)
 		{
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 		const schedule = await schedRes.json();
 		const papers = await (await fetch("/api/papers")).json();
 
-		console.log(schedule);
+		//console.log(schedule);
 
 		const sessionsDiv = document.getElementById("sessions");
 		sessionsDiv.innerHTML = "";
