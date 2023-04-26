@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             authors: body.authors,
             // url: body.url,
             abstract: body.abstract,
-            presenter: body.presenter,
+            presenter: body.presenter - 1,
             reviewer1: {
               id:getRandomReviewr(),
               evaluation: null,
