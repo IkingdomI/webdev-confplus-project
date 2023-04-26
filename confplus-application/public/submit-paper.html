@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Submit Paper</title>
+    <title>Home</title>
     <link rel="stylesheet" href="styles/paper-final.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,18 +36,18 @@
           src="https://static.overlay-tech.com/assets/3f5c369f-42af-49c3-9909-76c00cf7a166.png"
         />
       </div>
-      <div class="right">
+      
         <nav>
           <a href="home.html">Home</a>
         </nav>
-      </div>
+      
     </header>
     <div class="welcome-banner">
       <h1 class="welcome-author">
         Welcome Author:&nbsp
         <h2 id="author-name"></h2>
       </h1>
-      <img class="author-logo" src="/img/author-logo.png" />
+      <img class="author-logo" src="img/author-logo.png" />
     </div>
     <div class="upload">
       <form class="submit-form" id="submit-form" action="">
@@ -89,22 +89,6 @@
 
         <fieldset id="author-form" class="author-form">
           <legend>Authors</legend>
-
-          <div class="interaction">
-            <div class="buttons">
-              <button class="add-author-btn" id="add-author-btn">
-                Add Author</button
-              ><button class="remove-author-btn" id="remove-author-btn">
-                Remove Author
-              </button>
-            </div>
-            <div class="presenter-group">
-              <label class="label-group" for="presenter">Presenter</label>
-              <select name="presenter" id="presenter">
-                <option value="1">Author #1</option>
-              </select>
-            </div>
-          </div>
           <div class="authors-container" id="authors-container">
 
             <div class="info-group" id="author-1">
@@ -144,6 +128,22 @@
 
                 </select>
               </div>
+            </div>
+          </div>
+          <div class="interaction">
+            <div class="buttons">
+              <button class="add-author-btn" id="add-author-btn">
+                Add Author</button
+              ><button class="remove-author-btn" id="remove-author-btn">
+                Remove Author
+              </button>
+            </div>
+            <div class="presenter-group">
+              <label class="label-group" for="presenter">Presenter</label>
+              <select name="presenter" id="presenter">
+                <option value="" disabled selected>Select your option</option>
+                <option value="1">Author #1</option>
+              </select>
             </div>
           </div>
         </fieldset>
