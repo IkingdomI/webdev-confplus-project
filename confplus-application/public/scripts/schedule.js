@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 	const dates = await dateRes.json();
 	const dateSelect = document.querySelector('#date');
 
+	const timeRes = await fetch("/api/times");
+	const times = await timeRes.json();
+
 	dates.forEach(date=>{
 		const option = document.createElement('option');
 		option.value = date.date;
@@ -48,6 +51,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			sessionsDiv.appendChild(sessionDiv);
 
 			const sessionCont = document.createElement("div");
+			sessionCont.classList.add("session-content");
 			sessionDiv.appendChild(sessionCont);
 
 			const paperHeading = document.createElement("h4");
@@ -62,7 +66,20 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			tempolocalPara.innerText = `Location: ${s.location}\nDate: ${s.date}\nTime: ${s.time}`;
 			sessionCont.appendChild(tempolocalPara);
 
-			sessionDiv.addEventListener("click", () => { console.log(s.title) });
+			const btnsDiv = document.createElement("div");
+			btnsDiv.classList.add("session-btns");
+			sessionDiv.appendChild(btnsDiv);
+
+			const updateBtn = document.createElement("button");
+			updateBtn.classList.add("update-btn");
+			updateBtn.textContent = "Update";
+			updateBtn.addEventListener("click", () => { console.log(s.title) });
+			btnsDiv.appendChild(updateBtn);
+
+			const deleteBtn = document.createElement("button");
+			deleteBtn.classList.add("delete-btn");
+			deleteBtn.textContent = "Delete";
+			btnsDiv.appendChild(deleteBtn);
 		});
 		//console.log(papers);
 	}

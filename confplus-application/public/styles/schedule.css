@@ -1,5 +1,43 @@
 .session{
-    display: block;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.session > .session-content {
+
+}
+
+.session-btns {
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;
+    align-items: center;
+}
+
+.session-btns > button {
+    width: 40%;
+    height: 20%;
+    margin: 2%;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.update-btn {
+    background: linear-gradient(112deg,
+    rgb(189, 50, 152) 1%,
+    rgba(56, 19, 194, 1) 98%);
+    color: white;
+}
+
+.delete-btn {
+    background: linear-gradient(112deg,
+    rgb(189, 50, 50) 1%,
+    rgb(80, 6, 6) 98%);
+    color: white;
 }
 
 .session > input{
