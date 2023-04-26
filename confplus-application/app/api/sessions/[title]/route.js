@@ -4,9 +4,9 @@ export async function GET(request, {params})
 {
 	try 
 	{
-		const {session: id} = params;
+		const {title} = params;
 
-		const session = await repo.readSession(id);
+		const session = await repo.readSession(title);
 
 		if (session)
 		{
@@ -38,17 +38,21 @@ export async function PATCH(request, {params})
 {
 	try 
 	{
-		const {session: id} = params;
+		const {title} = params;
 		const body = await request.json();
 
 		//We validate the values of these fields in client side.
 		if (
-			"date" in body &&
-			"time" in body &&
+			("present_fname" in body &&
+			"present_lname" in body ) ||
+			"date" in body ||
+			"time" in body ||
 			"location" in body
 		)
 		{
-			const session = await repo.updateSession(id, {
+			const session = await repo.updateSession(title, {
+				present_fname: body.present_fname,
+				present_lname: body.present_lname,
 				date: body.date,
 				time: body.time,
 				location: body.location
@@ -56,6 +60,24 @@ export async function PATCH(request, {params})
 
 			if (session)
 			{
+				if (session.message)
+				{
+					if (session.message === "NO_SESSION")
+					{
+						return Response.json(
+							{ message: "Session not found." },
+							{ status: 404 }
+						);
+					}
+					else
+					{
+						return Response.json(
+							{ message: "Author not found." },
+							{ status: 404 }
+						);
+					}
+				}
+
 				return Response.json(
 					session,
 					{ status: 200 }
@@ -92,9 +114,9 @@ export async function DELETE(request, {params})
 {
 	try
 	{
-		const {session: id} = params;
+		const {title} = params;
 
-		const session = await repo.deleteSession(id);
+		const session = await repo.deleteSession(title);
 
 		if (session)
 		{

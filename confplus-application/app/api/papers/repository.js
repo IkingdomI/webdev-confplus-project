@@ -25,3 +25,11 @@ export async function createPaper(obj){
 
 
 }
+
+export async function readPaperById(id){
+    const data = await fs.readFile("data/papers.json");
+    let papers = JSON.parse(data);
+
+    let filteredPapers = papers.filter((paper) => (paper.review1.id||paper.review2.id)===id);
+    
+}
