@@ -260,22 +260,25 @@ footer {
   clear: both;
   justify-content: space-around;
   padding: 0 3em;
+  
 }
 
 footer h4 {
   width: fit-content;
   text-align: center;
   align-self: center;
+
 }
 
 .col1,
 .col2,
 .col3 {
-  /* margin: 30px; */
+  
+  /*margin: 30px; */
   text-align: center;
-  /* width: calc(31% - 60px); */
+  /*width: calc(31% - 60px); */
   width: fit-content;
-  height: 200px;
+  height: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -286,8 +289,13 @@ footer h4 {
 .col1 a {
   text-decoration: none;
   color: blue;
+  position: relative;
+  bottom: 20px;
 }
-
+.col1 p{
+  position: relative;
+  bottom: 20px;
+}
 .col2 a,
 .col3 a {
   text-decoration: none;
@@ -306,6 +314,7 @@ footer h4 {
   padding-bottom: 5px;
   background-color: white;
   text-align: center;
+  
 }
 
 .full-col a {
@@ -313,7 +322,9 @@ footer h4 {
 }
 
 footer img.conf-plus {
-  width: 140px;
+  position: relative;
+  bottom: 10px;
+  width: 120px;
 }
 @media (max-width: 740px) {
 
