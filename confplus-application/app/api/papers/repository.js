@@ -26,10 +26,14 @@ export async function createPaper(obj){
 
 }
 
-export async function readPaperById(id){
+export async function readPaperByTitle(title){
     const data = await fs.readFile("data/papers.json");
     let papers = JSON.parse(data);
 
-    let filteredPapers = papers.filter((paper) => (paper.review1.id||paper.review2.id)===id);
+    let paper = papers.filter((p) => p.title.toLowerCase()===title.toLowerCase());
+    if(paper){
+        return paper;
+    }
+    return null;
     
 }
