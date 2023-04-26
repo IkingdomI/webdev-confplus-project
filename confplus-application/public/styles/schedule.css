@@ -8,7 +8,8 @@
 }
 
 .session > .session-content {
-
+    display: flex;
+    flex-direction: column;
 }
 
 .session-btns {
