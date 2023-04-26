@@ -2,6 +2,55 @@ import { promises as fs } from "fs";
 
 const path = "data/schedule.json"
 
+export async function createSession(obj)
+{
+	const res = await fs.readFile(path);
+	const sessions = await JSON.parse(res);
+	const papers = await JSON.parse(await fs.readFile("data/papers.json"));
+
+	//console.log(obj);
+
+	if (sessions.find(s => s.title === obj.title))
+	{	
+		return { message: "DUPLICATE" };
+	}
+
+	const paper = papers.find(p => p.title === obj.title);
+
+	//console.log(paper);
+
+	if (!paper)
+	{
+		return { message: "NO_PAPER" };
+	}
+
+	const author = paper.authors.find(a => a.fname === obj.present_fname && a.lname === obj.present_lname);
+
+	if (!author)
+	{
+		return { message: "NO_AUTHOR" };
+	}
+
+	if (sessions.find(s => s.time === obj.time && s.date === obj.date && s.location === obj.location))
+	{
+		return { message: "CONFLICT" };
+	}
+
+	const session = {
+		title: obj.title,
+		presenter: `${obj.present_fname} ${obj.present_lname}`,
+		location: obj.location,
+		date: obj.date,
+		time: obj.time
+	};
+
+	sessions.push(session);
+
+	await fs.writeFile(path, JSON.stringify(sessions));
+
+	return session
+}
+
 export async function readSessions(date)
 {
 	const res = await fs.readFile(path);
@@ -62,55 +111,6 @@ export async function updateSession(title, obj)
 	await fs.writeFile(path, JSON.stringify(sessions));
 
 	return session;
-}
-
-export async function createSession(obj)
-{
-	const res = await fs.readFile(path);
-	const sessions = await JSON.parse(res);
-	const papers = await JSON.parse(await fs.readFile("data/papers.json"));
-
-	//console.log(obj);
-
-	if (sessions.find(s => s.title === obj.title))
-	{	
-		return { message: "DUPLICATE" };
-	}
-
-	const paper = papers.find(p => p.title === obj.title);
-
-	//console.log(paper);
-
-	if (!paper)
-	{
-		return { message: "NO_PAPER" };
-	}
-
-	const author = paper.authors.find(a => a.fname === obj.present_fname && a.lname === obj.present_lname);
-
-	if (!author)
-	{
-		return { message: "NO_AUTHOR" };
-	}
-
-	if (sessions.find(s => s.time === obj.time && s.date === obj.date && s.location === obj.location))
-	{
-		return { message: "CONFLICT" };
-	}
-
-	const session = {
-		title: obj.title,
-		presenter: `${obj.present_fname} ${obj.present_lname}`,
-		location: obj.location,
-		date: obj.date,
-		time: obj.time
-	};
-
-	sessions.push(session);
-
-	await fs.writeFile(path, JSON.stringify(sessions));
-
-	return session
 }
 
 export async function deleteSession(title)
