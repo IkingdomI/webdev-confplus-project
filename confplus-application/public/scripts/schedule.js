@@ -62,9 +62,29 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			presentHeading.innerText = `Presented by: ${s.presenter}`;
 			sessionCont.appendChild(presentHeading);
 
-			const tempolocalPara = document.createElement("p");
-			tempolocalPara.innerText = `Location: ${s.location}\nDate: ${s.date}\nTime: ${s.time}`;
-			sessionCont.appendChild(tempolocalPara);
+			const dSelect = document.createElement("select");
+			const dIndex = dates.findIndex(d => d.date === s.date);
+			console.log(dates);
+			dates.forEach((d, i) => {
+				const dateOpt = document.createElement("option");
+				dateOpt.value = i;
+				dateOpt.text = d.date;
+				dateOpt.selected = (i === dIndex);
+				dSelect.appendChild(dateOpt);
+			});
+			sessionCont.appendChild(dSelect);
+
+			const tSelect = document.createElement("select");
+			const tIndex = times.findIndex(t => t.time === s.time);
+			times.forEach((t, i) => {
+				const timeOpt = document.createElement("option");
+				timeOpt.value = i;
+				timeOpt.text = t.time;
+				timeOpt.selected = (i === tIndex);
+				//console.log(t, i);
+				tSelect.appendChild(timeOpt);
+			});
+			sessionCont.appendChild(tSelect);
 
 			const btnsDiv = document.createElement("div");
 			btnsDiv.classList.add("session-btns");
@@ -84,5 +104,6 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 		//console.log(papers);
 	}
 
+	console.log("eep");
 	loadSchedule()
 });
