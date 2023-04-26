@@ -36,7 +36,10 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 
 	async function updateSession(title, obj)
 	{
-		const session = await (await fetch(`/api/sessions/${title}`, { method: "PATCH", body: JSON.stringify(obj)})).json();
+		const session = await (await fetch(`/api/sessions/${title}`, {
+			method: "PATCH",
+			body: JSON.stringify(obj)
+		})).json();
 
 		console.log(session);
 
@@ -50,6 +53,32 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			{
 				loadSchedule();
 				alert("Session Updated!");
+			}
+		}
+		else
+		{
+			alert("Session not found.");
+		}
+	}
+
+	async function deleteSession(title)
+	{
+		const session = await (await fetch(`/api/sessions/${title}`, {
+			method: "DELETE"
+		})).json();
+
+		console.log(session);
+
+		if (session)
+		{
+			if (session.message)
+			{
+				alert(session.message);
+			}
+			else
+			{
+				loadSchedule();
+				alert("Session Deleted!");
 			}
 		}
 		else
@@ -152,26 +181,26 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			updateBtn.classList.add("update-btn");
 			updateBtn.textContent = "Update";
 			updateBtn.addEventListener("click", () => {
-				const obj = {
+				updateSession(s.title, {
 					location: lSelect.value,
 					date: dSelect.value,
 					time: tSelect.value
-				};
-
-				console.log(s.title, obj);
-
-				updateSession(s.title, obj);
+				});
 			});
 			btnsDiv.appendChild(updateBtn);
 
 			const deleteBtn = document.createElement("button");
 			deleteBtn.classList.add("delete-btn");
 			deleteBtn.textContent = "Delete";
+			deleteBtn.addEventListener("click", () => {
+				deleteSession(s.title);
+			});
 			btnsDiv.appendChild(deleteBtn);
 		});
 		//console.log(papers);
 	}
 
 	console.log("eep");
+	console.log(null === 0);
 	loadSchedule()
 });
