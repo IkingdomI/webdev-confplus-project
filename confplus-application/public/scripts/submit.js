@@ -209,12 +209,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             reviewer1: {
               id:getRandomReviewr(),
               evaluation: null,
-              contribution: null
+              contribution: null,
+              strenth: null,
+              weakness: null
             },
             reviewer2: {
               id:getRandomReviewr(),
               evaluation: null,
-              contribution: null
+              contribution: null,
+              strenth: null,
+              weakness: null
             },
             rating: null
         })
