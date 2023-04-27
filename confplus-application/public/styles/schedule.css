@@ -1,3 +1,8 @@
+#sessions {
+    display: flex;
+    flex-direction: column;
+}
+
 .session{
     display: grid;
     grid-template-columns: 3fr 1fr;
