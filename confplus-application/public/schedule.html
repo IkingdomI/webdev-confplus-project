@@ -34,7 +34,7 @@
     <!-- <nav><a href="/">Sessions</a><a href="/">New Session</a></nav> -->
   </header>
   <main>
-    <fieldset>
+    <fieldset id="sessions-field">
       <legend>sessions</legend>
       <div id="sessions">
         <!-- <label class="session">
@@ -67,9 +67,9 @@
 
     <!-- <div id="action-buttons"><button>Edit</button><button>Delete</button></div> -->
 
-    <div id="new-session">
+    <!-- <div id="new-session"> -->
       <!-- <h3>I AM A DUMMY FOR ADDING NEW SESSION</h3> -->
-      <fieldset>
+      <fieldset id="new-session-field">
         <legend>New Session</legend>
         <form action="">
           <label for="paper">Chosen Paper</label>
@@ -85,10 +85,10 @@
           <input type="time" name="from-time" id="from-time" />
           <label for="to-time">To</label>
           <input type="time" name="to-time" id="to-time" />
-          <input type="submit" value="Publish" />
+          <input class="submit" type="submit" value="Publish" />
         </form>
       </fieldset>
-    </div>
+    <!-- </div> -->
   </main>
 </body>
 

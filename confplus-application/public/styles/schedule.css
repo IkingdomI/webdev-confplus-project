@@ -2,10 +2,13 @@ html {
     box-sizing: border-box;
 }
 
+* {
+    font-family: "Jost", sans-serif;
+}
+
 *,
 *:before,
 *:after {
-    font-family: "Jost", sans-serif;
     box-sizing: inherit;
     padding: 0;
     margin: 0;
@@ -28,24 +31,29 @@ header {
     display: flex;
     flex-direction: column;
 }
-#main-header{
+
+#main-header {
     display: flex;
     justify-content: space-between;
 }
+
 .logo {
     display: flex;
     align-items: center;
     padding: 5px;
 }
+
 .ellipse-1 {
     width: 21%;
     height: 56%;
 
 }
-header nav{
+
+header nav {
     display: flex;
     align-items: center;
 }
+
 header nav a {
     text-decoration: none;
     color: #18537a;
@@ -75,26 +83,31 @@ header nav a {
     width: 50px;
 }
 
-fieldset{
+fieldset {
     max-width: 580px;
-    max-height: 400px;
-  display: flex;
-  flex-direction: column;
-  color: #18537a;
-  border: 1px solid #18537a;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 15px;
-  font-weight: 600;
-  bottom: 17px;
+
+    display: flex;
+    flex-direction: column;
+    color: #18537a;
+    border: 1px solid #18537a;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 15px;
+    font-weight: 600;
+    bottom: 17px;
 }
+
 legend {
     font-size: 28px;
     font-weight: 600;
     font-style: italic;
     color: #18537a;
-  }
-
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #sessions {
     display: flex;
     flex-direction: column;
@@ -112,6 +125,7 @@ legend {
 .session>.session-content {
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
 .session-btns {
@@ -122,11 +136,16 @@ legend {
 }
 
 .session-btns>button {
-    width: 40%;
-    height: 20%;
+    width: 60px;
+    /* height: 20%; */
     margin: 2%;
     border-radius: 10px;
     border-style: none;
+}
+
+button {
+    padding: 1.6px 8px;
+    width: fit-content;
 }
 
 .update-btn {
@@ -163,11 +182,68 @@ header>nav {
     gap: 2em;
 }
 
-#new-session form{
+#sessions-field {
+    max-height: 400px;
+    overflow: scroll;
+}
+#new-session-field{
+    width: fit-content;
+}
+#new-session-field form {
     display: flex;
     flex-direction: column;
 }
 
-#new-session label+*{
+#new-session-field label+* {
     margin-bottom: 10px;
+}
+
+#new-session-field select,
+#new-session-field input {
+    width: fit-content;
+    min-width: 250px;
+}
+
+#new-session-field input.submit {
+    min-width: fit-content;
+    align-items: center;
+    background: #33607e;
+    border: none;
+    border-radius: 6px;
+    box-shadow: rgba(104, 105, 104, 0.4) 0 2px 4px, rgba(62, 66, 64, 0.3) 0 7px 13px -3px, rgba(53, 53, 53, 0.5) 0 -3px 0 inset;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    justify-content: center;
+    align-self: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+
+#new-session-field input.submit:focus {
+    box-shadow: #c2b9b9 0 0 0 1.5px inset, rgba(37, 34, 35, 0.4) 0 2px 4px, rgba(53, 52, 56, 0.3) 0 7px 13px -3px, #141514 0 -3px 0 inset;
+}
+
+#new-session-field input.submit:hover {
+    box-shadow: rgba(30, 26, 26, 0.941) 0 4px 8px, rgba(70, 67, 67, 0.963) 0 7px 13px -3px, #141313 0 -3px 0 inset;
+    color: #e8e8e8;
+    background: linear-gradient(112deg,
+            rgb(189, 50, 152) 1%,
+            rgba(56, 19, 194, 1) 98%);
+    transform: translateY(-2px);
+}
+
+#new-session-field input.submit:active {
+    box-shadow: #757474 0 3px 7px inset;
+    transform: translateY(2px);
 }
