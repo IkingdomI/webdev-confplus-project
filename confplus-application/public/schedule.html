@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles/schedule.css" />
-    <script src="./scripts/schedule.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <body>
-    <header>
-      <div id="main-header">
-        <div class="logo">
-          <img
-          alt=""
-          class="ellipse-1"
-          src="https://static.overlay-tech.com/assets/9a55634b-39b2-4337-8d0b-50a20ee617b1.svg"
-          /><img
-          alt=""
-          class="conf-plus"
-          src="https://static.overlay-tech.com/assets/3f5c369f-42af-49c3-9909-76c00cf7a166.png"
-          />
-        </div>
-        <nav>
-          <a href="home.html">Home</a>
-        </nav>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles/schedule.css" />
+  <script src="./scripts/schedule.js"></script>
+</head>
+
+<body>
+  <header>
+    <div id="main-header">
+      <div class="logo">
+        <img alt="" class="ellipse-1"
+          src="https://static.overlay-tech.com/assets/9a55634b-39b2-4337-8d0b-50a20ee617b1.svg" /><img alt=""
+          class="conf-plus" src="https://static.overlay-tech.com/assets/3f5c369f-42af-49c3-9909-76c00cf7a166.png" />
       </div>
-      <div class="welcome-banner">
-        <h1 class="welcome-organizer">
-          Welcome Organizer:&nbsp
-          <h2 id="author-name"></h2>
-        </h1>
-        
-        <img class="organizer-logo" src="img/calendar-edit-regular-96.png" />
-      </div>
-      <!-- <h4>Organizer<nav id="organizer-name"></nav></h4> -->
-      <!-- <nav><a href="/">Sessions</a><a href="/">New Session</a></nav> -->
-    </header>
-    <main>
+      <nav>
+        <a href="home.html">Home</a>
+      </nav>
+    </div>
+    <div class="welcome-banner">
+      <h1 class="welcome-organizer">
+        Welcome Organizer:&nbsp
+        <h2 id="organizer-name"></h2>
+      </h1>
+
+      <img class="organizer-logo" src="img/calendar-edit-regular-96.png" />
+    </div>
+    <!-- <h4>Organizer<nav id="organizer-name"></nav></h4> -->
+    <!-- <nav><a href="/">Sessions</a><a href="/">New Session</a></nav> -->
+  </header>
+  <main>
+    <fieldset>
+      <legend>sessions</legend>
       <div id="sessions">
         <!-- <label class="session">
-          <input type="radio" name="session" id="session-1" checked />
-
-          <div class="session-details">
-            <h4>session 1</h4>
-            <h4>paper: something something</h4>
-            <h5>Presenter: person</h5>
-            <nav>location qatar</nav>
-            <nav>18 Dec 2022</nav>
-            <nav>16:00-20:00</nav>
-          </div>
-        </label>
-
-        <label class="session">
-          <input type="radio" name="session" id="session-1"/>
-
-          <div class="session-details">
-            <h4>session 2</h4>
-            <h4>paper: otherthing something</h4>
-            <h5>Presenter: person</h5>
-            <nav>location qatar</nav>
-            <nav>18 Dec 2022</nav>
-            <nav>16:00-20:00</nav>
-          </div>
-        </label> -->
+            <input type="radio" name="session" id="session-1" checked />
+            
+            <div class="session-details">
+              <h4>session 1</h4>
+              <h4>paper: something something</h4>
+              <h5>Presenter: person</h5>
+              <nav>location qatar</nav>
+              <nav>18 Dec 2022</nav>
+              <nav>16:00-20:00</nav>
+            </div>
+          </label>
+          
+          <label class="session">
+            <input type="radio" name="session" id="session-1"/>
+            
+            <div class="session-details">
+              <h4>session 2</h4>
+              <h4>paper: otherthing something</h4>
+              <h5>Presenter: person</h5>
+              <nav>location qatar</nav>
+              <nav>18 Dec 2022</nav>
+              <nav>16:00-20:00</nav>
+            </div>
+          </label> -->
       </div>
+    </fieldset>
 
-      <!-- <div id="action-buttons"><button>Edit</button><button>Delete</button></div> -->
+    <!-- <div id="action-buttons"><button>Edit</button><button>Delete</button></div> -->
 
-      <div>
-        <h3>I AM A DUMMY FOR ADDING NEW SESSION</h3>
+    <div id="new-session">
+      <!-- <h3>I AM A DUMMY FOR ADDING NEW SESSION</h3> -->
+      <fieldset>
+        <legend>New Session</legend>
         <form action="">
           <label for="paper">Chosen Paper</label>
           <select name="paper" id="paper"></select>
@@ -86,7 +87,9 @@
           <input type="time" name="to-time" id="to-time" />
           <input type="submit" value="Publish" />
         </form>
-      </div>
-    </main>
-  </body>
+      </fieldset>
+    </div>
+  </main>
+</body>
+
 </html>

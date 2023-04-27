@@ -75,6 +75,26 @@ header nav a {
     width: 50px;
 }
 
+fieldset{
+    max-width: 580px;
+    max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  color: #18537a;
+  border: 1px solid #18537a;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 15px;
+  font-weight: 600;
+  bottom: 17px;
+}
+legend {
+    font-size: 28px;
+    font-weight: 600;
+    font-style: italic;
+    color: #18537a;
+  }
+
 #sessions {
     display: flex;
     flex-direction: column;
@@ -141,4 +161,13 @@ header nav a {
 header>nav {
     display: flex;
     gap: 2em;
+}
+
+#new-session form{
+    display: flex;
+    flex-direction: column;
+}
+
+#new-session label+*{
+    margin-bottom: 10px;
 }
