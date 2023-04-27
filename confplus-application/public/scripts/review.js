@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
   console.log("==============");
   console.log(assignedPapers);
   console.log(id);
-  console.log((papers[3].reviewer1.id||papers[3].reviewer2.id)===Number(id));
+  console.log((papers[3].reviewer1.id)===Number(id));
 
   // countPapers = assignedPapers.length;
 
@@ -33,21 +33,38 @@ document.addEventListener('DOMContentLoaded',async ()=>{
     <input type="radio" name="paper" id="paper-${countPapers}" checked="checked" />
     <div class="paper-details">
       <h5 class="title">Paper ${countPapers}</h5>
-      <h6 class="authors">${p.authors[0].fname} ${p.authors[0].lname}, ${p.authors[1].fname} ${p.authors[1].lname}</h6>
+      <h6 class="authors" id="authors${countPapers}"></h6>
       <p class="abstract">${p.abstract}</p>
       <div class="collapse">collapse</div>
       <a href="">Download pdf</a>
     </div>
-  </label>`
+  </label>`;
+    
 
-  papersDiv.innerHTML+=newPaper;
+    papersDiv.innerHTML+=newPaper;
+
+    let authorsHeader = document.querySelector(`#authors${countPapers}`);
+    console.log(authorsHeader);
+    let authorNames = [];
+
+    for(let author of p.authors){
+      
+      authorNames.push(`${author.fname} ${author.lname} `);
+      console.log(authorNames);
+      authorsHeader.innerText = authorNames.join(",");
+    }
   }
 
     //THIS IS A DUMMY CODE COMMENT IT IF NEEDED
-    const collapse = document.querySelector(".collapse");
-    collapse.addEventListener('click',()=>{
-        const abstract = document.querySelector(".abstract");
+    const collapse = document.querySelectorAll(".collapse");
+    for(let col of collapse){
+      console.log(col.parentElement.children[2]);
+      col.addEventListener('click',()=>{
+        const abstract = col.parentElement.children[2];
         abstract.classList.toggle('hide');
-        collapse.classList.toggle('toggle-collapse');
-    });
+        col.classList.toggle('toggle-collapse');
+      });
+    }
+    
+    
 });
