@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
     box-sizing: border-box;
 }
@@ -340,4 +341,348 @@ footer {
     position: relative;
     bottom: 10px;
     width: 120px;
+=======
+html {
+    box-sizing: border-box;
+}
+
+* {
+    font-family: "Jost", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+    header {
+        display: flex;
+        align-self: center;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: space-between;
+        width: 85%;
+        flex-wrap: wrap;
+      }
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    
+}
+.conf-plus {
+    margin-left: 10px;
+  }
+
+.ellipse-1 {
+    width: 21%;
+    height: 56%;
+
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #18537a;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.welcome-banner {
+
+    /* width: 120vh; */
+    align-self: center;
+    align-items: center;
+    display: flex;
+    color: #18537a;
+    font-size: 30px;
+    font-style: italic;
+    justify-content: space-between;
+
+}
+
+#organizer-name {
+    color: #3a187a;
+}
+
+.organizer-logo {
+    width: 50px;
+}
+
+fieldset {
+    max-width: 580px;
+
+    display: flex;
+    flex-direction: column;
+    color: #18537a;
+    border: 1px solid #18537a;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 15px;
+    font-weight: 600;
+    bottom: 17px;
+}
+
+legend {
+    font-size: 28px;
+    font-weight: 600;
+    font-style: italic;
+    color: #18537a;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#sessions {
+    display: flex;
+    flex-direction: column;
+}
+
+.session {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.session>.session-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.session-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.session-btns>button {
+    width: 60px;
+    /* height: 20%; */
+    margin: 2%;
+    border-radius: 10px;
+    border-style: none;
+}
+
+button {
+    padding: 1.6px 8px;
+    width: fit-content;
+}
+
+.update-btn {
+    background: linear-gradient(112deg,
+            rgb(189, 50, 152) 1%,
+            rgba(56, 19, 194, 1) 98%);
+    color: white;
+}
+
+.delete-btn {
+    background: linear-gradient(112deg,
+            rgb(189, 50, 50) 1%,
+            rgb(80, 6, 6) 98%);
+    color: white;
+}
+
+.session>input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.session>input+div {
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.session>input:checked+div {
+    background-color: #ffd6bb;
+    border: 1px solid #ff6600;
+}
+
+header>nav {
+    display: flex;
+    gap: 2em;
+}
+
+#sessions-field {
+    max-height: 400px;
+    overflow: scroll;
+}
+#new-session-field{
+    width: fit-content;
+    padding: 20px;
+}
+#new-session-field form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#new-session-field label+* {
+    margin-bottom: 10px;
+}
+
+#new-session-field select,
+#new-session-field input {
+    width: fit-content;
+    min-width: 250px;
+}
+
+#new-session-field input.submit {
+    min-width: fit-content;
+    align-items: center;
+    background: #33607e;
+    border: none;
+    border-radius: 6px;
+    box-shadow: rgba(104, 105, 104, 0.4) 0 2px 4px, rgba(62, 66, 64, 0.3) 0 7px 13px -3px, rgba(53, 53, 53, 0.5) 0 -3px 0 inset;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    justify-content: center;
+    align-self: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+
+#new-session-field input.submit:focus {
+    box-shadow: #c2b9b9 0 0 0 1.5px inset, rgba(37, 34, 35, 0.4) 0 2px 4px, rgba(53, 52, 56, 0.3) 0 7px 13px -3px, #141514 0 -3px 0 inset;
+}
+
+#new-session-field input.submit:hover {
+    box-shadow: rgba(30, 26, 26, 0.941) 0 4px 8px, rgba(70, 67, 67, 0.963) 0 7px 13px -3px, #141313 0 -3px 0 inset;
+    color: #e8e8e8;
+    background: linear-gradient(112deg,
+            rgb(189, 50, 152) 1%,
+            rgba(56, 19, 194, 1) 98%);
+    transform: translateY(-2px);
+}
+
+#new-session-field input.submit:active {
+    box-shadow: #757474 0 3px 7px inset;
+    transform: translateY(2px);
+}
+footer {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    clear: both;
+    color: #18537a;
+    margin: 0 auto;
+    float: left;
+    width: 100%;
+    display: grid;
+    grid-column: 1/-1;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 100%;
+    clear: both;
+    justify-content: space-around;
+    padding: 0 3em;
+    
+  }
+  
+  footer h4 {
+    width: fit-content;
+    text-align: center;
+    align-self: center;
+  
+  }
+  
+  .col1,
+  .col2,
+  .col3 {
+    
+    /*margin: 30px; */
+    text-align: center;
+    /*width: calc(31% - 60px); */
+    width: fit-content;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  
+  .col1 a {
+    text-decoration: none;
+    color: blue;
+    position: relative;
+    bottom: 20px;
+  }
+  .col1 p{
+    position: relative;
+    bottom: 20px;
+  }
+  .col2 a,
+  .col3 a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .col2 a:hover,
+  .col3 a:hover {
+    color: blue;
+  }
+  
+  .full-col {
+    display: inline-block;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: white;
+    text-align: center;
+    
+  }
+  
+  .full-col a {
+    text-decoration: none;
+  }
+  
+  footer img.conf-plus {
+    position: relative;
+    bottom: 10px;
+    width: 120px;
+>>>>>>> 06e3bcc69fe91c902117403738731a60570e1408
   }

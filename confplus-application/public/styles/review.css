@@ -427,3 +427,19 @@ footer {
   text-decoration: none;
 }
 
+.collapse:hover{
+  text-decoration: underline;
+}
+
+.hide{
+  display: none;    
+}
+.toggle-collapse{
+  /* position: absolute; */
+  visibility: hidden;
+}
+.toggle-collapse::before{
+  content: "Show";
+  visibility: visible;
+}
+
