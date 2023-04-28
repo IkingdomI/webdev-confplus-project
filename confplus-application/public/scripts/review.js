@@ -94,113 +94,30 @@ document.addEventListener('DOMContentLoaded',async ()=>{
     }
     const reviewForm = document.querySelector("#reviewForm");
     reviewForm.hidden = true;
+    let selectedPaper = null;
 
-    const selectPaper = document.querySelector(".submit");
-    selectPaper.addEventListener("click", async(e) =>{ 
-        e.preventDefault();
-        reviewForm.hidden = false;
-        const papersToReview = document.querySelectorAll(".paper");
+    //selecting the paper for which we will submit the review:
+    const papersToReview = document.querySelectorAll(".paper");
         for(let p of papersToReview){
           if(p.children[0].checked){
+            selectedPaper = p;
             console.log(p.children[0]);
             //prints the title of the selected page:
-            const pageTitle = p.children[1].children[1].children[0].children[0].innerText;
+            const pageTitle = selectedPaper.children[1].children[1].children[0].children[0].innerText;
             console.log(pageTitle);
             console.log(`HI I AM ${pageTitle}`);
 
             
 
-            reviewForm.addEventListener("submit", async (event)=>{
-              event.preventDefault();
-              console.log(`HI HELLO IAM HERE UNDER SUBMIT FORM AND THIS IS ${pageTitle}`);
-
-              let paperRes = await fetch(`http://localhost:3000/api/papers/${pageTitle}`, {
-              method: "GET"
-              });
-
-              let thisPaper = await paperRes.json();
-
-              let isReviewer1 = false;
-              let isReviewer2 = false;
-              console.log(thisPaper[0].reviewer2.id===Number(id));
-
-              if(thisPaper[0].reviewer1.id===Number(id)){
-                console.log(`reviewer1 is the reviewer with id: ${id}`);
-                isReviewer1 = true;
-              }
-              else if(thisPaper[0].reviewer2.id===Number(id)){
-                console.log(`reviewer2 is the reviewer with id: ${id}`);
-                isReviewer2 = true;
-              }
-
-
-              const formData = new FormData(document.querySelector("#reviewForm"));
-              const body = {};
-
-              if(isReviewer1){
-                  for(const[key, value] of formData){
-                      body[key] = value;
-                  }
-        
-                  console.log(body);
-
-                  const reviewerObject = {
-                     evaluation: body.evaluation,
-                      contribution: body.contribution,
-                      strength: body.strength,
-                      weakness: body.weakness
-                  };
-
-                  console.log(reviewerObject);
-        
-                  // const res = await fetch(`http://localhost:3000/api/papers/${pageTitle}`, {
-                  //     method: "PUT",
-                  //     body: JSON.stringify({
-                  //         reviewer1: {
-                  //           evaluation: body.evaluation,
-                  //           contribution: body.contribution,
-                  //           strength: body.strength,
-                  //           weakness: body.weakness
-                  //         }
-                  //     })
-                  // });
-                  // const response = await res.json();
-              }
-              else if(isReviewer2){
-                for(const[key, value] of formData){
-                  body[key] = value;
-                }
-    
-              console.log(body);
-
-              const reviewerObject = {
-                evaluation: body.evaluation,
-                 contribution: body.contribution,
-                 strength: body.strength,
-                 weakness: body.weakness
-             };
-
-             console.log(reviewerObject);
-    
-              // const res = await fetch(`http://localhost:3000/api/papers/${pageTitle}`, {
-              //     method: "PUT",
-              //     body: JSON.stringify({
-              //         reviewer2: {
-              //           evaluation: body.evaluation,
-              //           contribution: body.contribution,
-              //           strength: body.strength,
-              //           weakness: body.weakness
-              //         }
-              //     })
-              // });
-              // const response = await res.json();
-              }
-    
-             })
+            
           }
          const radioInput = p.children[0];
          radioInput.addEventListener("change", ()=>{
           reviewForm.reset();
+          if(p.children[0].checked){
+            selectedPaper = p;
+          }
+          
           if(!reviewForm.hidden){
             console.log("it should now hide if it's visible")
             reviewForm.hidden = true;
@@ -210,6 +127,96 @@ document.addEventListener('DOMContentLoaded',async ()=>{
        
 
         }
+
+//HERE THE SUBMIT REVIEW SHOULD BE HANDLED
+        reviewForm.addEventListener("submit", async (event)=>{
+          event.preventDefault();
+          console.log(selectedPaper);
+          console.log(`HI HELLO IAM HERE UNDER SUBMIT FORM AND THIS IS ${selectedPaper.children[1].children[1].children[0].children[0].innerText}`);
+
+          let paperRes = await fetch(`http://localhost:3000/api/papers/${selectedPaper.children[1].children[1].children[0].children[0].innerText}`, {
+          method: "GET"
+          });
+
+          let thisPaper = await paperRes.json();
+
+          let isReviewer1 = false;
+          let isReviewer2 = false;
+          console.log(thisPaper[0].reviewer2.id===Number(id));
+
+          if(thisPaper[0].reviewer1.id===Number(id)){
+            console.log(`reviewer1 is the reviewer with id: ${id}`);
+            isReviewer1 = true;
+          }
+          else if(thisPaper[0].reviewer2.id===Number(id)){
+            console.log(`reviewer2 is the reviewer with id: ${id}`);
+            isReviewer2 = true;
+          }
+
+
+          const formData = new FormData(document.querySelector("#reviewForm"));
+          const body = {};
+
+          if(isReviewer1){
+              for(const[key, value] of formData){
+                  body[key] = value;
+              }
+    
+              console.log(body);
+
+              const reviewer1Object = {
+                  id: Number(id),
+                 evaluation: body.evaluation,
+                  contribution: body.contribution,
+                  strength: window[`paper-strengths`],
+                  weakness: window[`paper-weakness`]
+              };
+
+              console.log(reviewer1Object);
+    
+              const res = await fetch(`http://localhost:3000/api/papers/${selectedPaper.children[1].children[1].children[0].children[0].innerText}`, {
+                  method: "PUT",
+                  body: JSON.stringify({
+                      reviewer1: reviewer1Object
+                  })
+              });
+              const response = await res.json();
+          }
+          else if(isReviewer2){
+            for(const[key, value] of formData){
+              body[key] = value;
+            }
+
+          console.log(body);
+
+          const reviewer2Object = {
+            id: Number(id),
+            evaluation: body.evaluation,
+             contribution: body.contribution,
+             strength: window[`paper-strengths`],
+             weakness: window[`paper-weakness`]
+         };
+
+         console.log(reviewer2Object);
+
+          const res = await fetch(`http://localhost:3000/api/papers/${selectedPaper.children[1].children[1].children[0].children[0].innerText}`, {
+              method: "PUT",
+              body: JSON.stringify({
+                  reviewer2: reviewer2Object
+              })
+          });
+          const response = await res.json();
+          }
+
+         })
+
+
+
+    const selectPaper = document.querySelector(".submit");
+    selectPaper.addEventListener("click", async(e) =>{ 
+        e.preventDefault();
+        reviewForm.hidden = false;
+        
         
     })
 
