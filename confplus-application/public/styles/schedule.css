@@ -26,22 +26,26 @@ body {
     height: 100vh;
     width: 100vw;
 }
+    header {
+        display: flex;
+        align-self: center;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: space-between;
+        width: 85%;
+        flex-wrap: wrap;
+      }
 
-header {
-    display: flex;
-    flex-direction: column;
-}
-
-#main-header {
-    display: flex;
-    justify-content: space-between;
-}
 
 .logo {
     display: flex;
     align-items: center;
     padding: 5px;
+    
 }
+.conf-plus {
+    margin-left: 10px;
+  }
 
 .ellipse-1 {
     width: 21%;
@@ -188,10 +192,12 @@ header>nav {
 }
 #new-session-field{
     width: fit-content;
+    padding: 20px;
 }
 #new-session-field form {
     display: flex;
     flex-direction: column;
+    padding: 20px;
 }
 
 #new-session-field label+* {
@@ -247,3 +253,91 @@ header>nav {
     box-shadow: #757474 0 3px 7px inset;
     transform: translateY(2px);
 }
+footer {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    clear: both;
+    color: #18537a;
+    margin: 0 auto;
+    float: left;
+    width: 100%;
+    display: grid;
+    grid-column: 1/-1;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 100%;
+    clear: both;
+    justify-content: space-around;
+    padding: 0 3em;
+    
+  }
+  
+  footer h4 {
+    width: fit-content;
+    text-align: center;
+    align-self: center;
+  
+  }
+  
+  .col1,
+  .col2,
+  .col3 {
+    
+    /*margin: 30px; */
+    text-align: center;
+    /*width: calc(31% - 60px); */
+    width: fit-content;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  
+  .col1 a {
+    text-decoration: none;
+    color: blue;
+    position: relative;
+    bottom: 20px;
+  }
+  .col1 p{
+    position: relative;
+    bottom: 20px;
+  }
+  .col2 a,
+  .col3 a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .col2 a:hover,
+  .col3 a:hover {
+    color: blue;
+  }
+  
+  .full-col {
+    display: inline-block;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: white;
+    text-align: center;
+    
+  }
+  
+  .full-col a {
+    text-decoration: none;
+  }
+  
+  footer img.conf-plus {
+    position: relative;
+    bottom: 10px;
+    width: 120px;
+  }
