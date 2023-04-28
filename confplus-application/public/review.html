@@ -23,9 +23,10 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="review.css"></link>
+    <link rel="stylesheet" href="styles/review.css"></link>
     <rel></rel>
     <href></href>
+    <script src="./scripts/review.js"></script>
      </head>
      
   <body>
@@ -57,7 +58,7 @@
     
     <div class="upload">
       <div id="papers">
-        <label class="paper">
+        <!-- <label class="paper">
           <input type="radio" name="radio" checked />
           
           <span class="radio-btn"><i class="las la-check"></i>
@@ -94,14 +95,14 @@
             <a class="download-btn" href=""><i class="fa fa-download"></i> Download</a>
           </div>
           </span>
-        </label>
+        </label> -->
       
         
       </div>
          <button class="submit">Select Paper</button>
        <div id="paper-review">
          <!-- <embed src="../data/init/papers/Paper 001.pdf" width="800" height="1024"> -->
-         <form action="">
+         <form action="" id="reviewForm">
             <div class="evaluation">
                <div class="evaluation-box">
                  <label class="overall-evaluation" for="evaluation">Overall Evaluation:</label>
@@ -188,10 +189,12 @@
             </div>
           </div>
 
+
+            <div class="final-submit">
+              <input class="submit-review-btn" type="submit" value="Submit Review">
+            </div>
            </form>
-           <div class="final-submit">
-           <input class="submit-review-btn" type="submit" value="Submit Review">
-          </div>
+           
       </div>
    </div>
     <footer>
