@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           location.href = "submit-paper.html";
           break;
         case "reviewer":
-          location.href = "review-papers.html";
+          location.href = "review.html";
           break;
         case "organizer":
           location.href = "schedule.html";
