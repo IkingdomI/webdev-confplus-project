@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
           });
 
           let thisPaper = await paperRes.json();
+          console.log(thisPaper);
 
           let isReviewer1 = false;
           let isReviewer2 = false;
@@ -168,16 +169,19 @@ document.addEventListener('DOMContentLoaded',async ()=>{
                   id: Number(id),
                  evaluation: body.evaluation,
                   contribution: body.contribution,
-                  strength: window[`paper-strengths`],
-                  weakness: window[`paper-weakness`]
+                  strength: window[`paper-strengths`].value,
+                  weakness: window[`paper-weakness`].value
               };
 
               console.log(reviewer1Object);
+              let rate = ((Number(thisPaper[0].reviewer2.evaluation) + Number(reviewer1Object.evaluation))/2);
+              console.log(rate);
     
               const res = await fetch(`http://localhost:3000/api/papers/${selectedPaper.children[1].children[1].children[0].children[0].innerText}`, {
                   method: "PUT",
                   body: JSON.stringify({
-                      reviewer1: reviewer1Object
+                      reviewer1: reviewer1Object,
+                      rating: rate
                   })
               });
               const response = await res.json();
@@ -193,16 +197,20 @@ document.addEventListener('DOMContentLoaded',async ()=>{
             id: Number(id),
             evaluation: body.evaluation,
              contribution: body.contribution,
-             strength: window[`paper-strengths`],
-             weakness: window[`paper-weakness`]
+             strength: window[`paper-strengths`].value,
+             weakness: window[`paper-weakness`].value
          };
 
          console.log(reviewer2Object);
+         let rate = ((Number(thisPaper[0].reviewer1.evaluation) + Number(reviewer2Object.evaluation))/2);
+         console.log(Number(thisPaper[0].reviewer1.evaluation));
+         console.log(rate);
 
           const res = await fetch(`http://localhost:3000/api/papers/${selectedPaper.children[1].children[1].children[0].children[0].innerText}`, {
               method: "PUT",
               body: JSON.stringify({
-                  reviewer2: reviewer2Object
+                  reviewer2: reviewer2Object,
+                  rating: rate
               })
           });
           const response = await res.json();
