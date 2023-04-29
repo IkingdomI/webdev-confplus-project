@@ -202,7 +202,11 @@ document.addEventListener('DOMContentLoaded',async ()=>{
          };
 
          console.log(reviewer2Object);
-         let rate = ((Number(thisPaper[0].reviewer1.evaluation) + Number(reviewer2Object.evaluation))/2);
+
+         let rate = null
+         if (thisPaper[0].reviewer1.evaluation !== null && reviewer2Object.evaluation !== null)
+          rate = ((Number(thisPaper[0].reviewer1.evaluation) + Number(reviewer2Object.evaluation)));
+        
          console.log(Number(thisPaper[0].reviewer1.evaluation));
          console.log(rate);
 
