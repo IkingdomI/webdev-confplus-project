@@ -7,32 +7,72 @@ document.addEventListener('DOMContentLoaded',async ()=>{
   
 	organizerName.textContent = `${user.first_name} ${user.last_name}`
 
-  
+	const paperRes = await fetch("/api/papers");
+	const approvedPapers = await paperRes.json().filter(a => a.rating >= 2);
+	const mainPaperSelect = document.getElementById("paper");
+
+	mainPaperSelect.forEach(p => {
+		const option = document.createElement('option');
+		option.value = p.value;
+		option.text = p.name;
+		mainPaperSelect.appendChild(option);
+	});
   
 	const locRes = await fetch("/api/locations");
 	const locations = await locRes.json();
-	const locSelect = document.querySelector('#location');
+	const mainLocSelect = document.querySelector('#location');
 
 	locations.forEach(loc=>{
 		const option = document.createElement('option');
 		option.value = loc.value;
 		option.text = loc.name;
-		locSelect.appendChild(option)
+		mainLocSelect.appendChild(option)
 	})
 
 	const dateRes = await fetch("/api/conference-dates");
 	const dates = await dateRes.json();
-	const dateSelect = document.querySelector('#date');
+	const mainDateSelect = document.querySelector('#date');
 
 	const timeRes = await fetch("/api/times");
 	const times = await timeRes.json();
+	const mainTimeSelect = document.querySelector("#from-to-time");
 
 	dates.forEach(date=>{
 		const option = document.createElement('option');
 		option.value = date.date;
 		option.text = date.date;
-		dateSelect.appendChild(option)
-	})
+		mainDateSelect.appendChild(option)
+	});
+
+	times.forEach(time => {
+		const option = document.createElement("option");
+		option.value = time.time;
+		option.text = time.time;
+		mainTimeSelect.appendChild(option);
+	});
+
+	document.getElementById("submit-session").addEventListener("click", (e) => {
+		e.preventDefault();
+
+	});
+
+	async function createSession(title, obj)
+	{
+		const session = await (await fetch("/api/sessions", {
+			method: "POST",
+			body: JSON.stringify(obj)
+		}));
+
+		if (session.message)
+		{
+			alert(session.message);
+		}
+		else
+		{
+			loadSchedule();
+			alert("A session has been created!");
+		}
+	}
 
 	async function updateSession(title, obj)
 	{

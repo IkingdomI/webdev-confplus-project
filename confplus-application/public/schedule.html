@@ -78,19 +78,17 @@
         <legend>New Session</legend>
         <form action="">
           <label for="paper">Chosen Paper</label>
-          <select name="paper" id="paper"></select>
+          <select name="paper" id="paper" required></select>
           <label for="presenter">Presenter</label>
           <input type="text" name="presenter" id="presenter" disabled />
           <nav id="presenter"></nav>
           <label for="location">Location</label>
-          <select name="location" id="location"></select>
+          <select name="location" id="location" required></select>
           <label for="date">Date</label>
-          <select name="date" id="date"></select>
-          <label for="from-time">From</label>
-          <input type="time" name="from-time" id="from-time" />
-          <label for="to-time">To</label>
-          <input type="time" name="to-time" id="to-time" />
-          <input class="submit" type="submit" value="Publish" />
+          <select name="date" id="date" required></select>
+          <label for="from-to-time">From-To Time</label>
+          <select name="from-to-time" id="from-to-time" required></select>
+          <input class="submit" id="submit-session" type="submit" value="Publish">
         </form>
       </fieldset>
     <!-- </div> -->
