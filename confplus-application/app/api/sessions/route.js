@@ -31,8 +31,6 @@ export async function POST(request)
 
 		if (
 			"title" in body &&
-			"present_fname" in body &&
-			"present_lname" in body &&
 			"location" in body &&
 			"date" in body &&
 			"time" in body
