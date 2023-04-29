@@ -8,13 +8,16 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 	organizerName.textContent = `${user.first_name} ${user.last_name}`
 
 	const paperRes = await fetch("/api/papers");
-	const approvedPapers = await paperRes.json().filter(a => a.rating >= 2);
+	const approvedPapers = (await paperRes.json()).filter(a => a.rating >= 2);
 	const mainPaperSelect = document.getElementById("paper");
 
-	mainPaperSelect.forEach(p => {
+	console.log("hm");
+	//console.log(approvedPapers);
+
+	approvedPapers.forEach(p => {
 		const option = document.createElement('option');
-		option.value = p.value;
-		option.text = p.name;
+		option.value = p.title;
+		option.text = p.title;
 		mainPaperSelect.appendChild(option);
 	});
   
@@ -54,14 +57,20 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 	document.getElementById("submit-session").addEventListener("click", (e) => {
 		e.preventDefault();
 
+		createSession({
+			title: mainPaperSelect.value,
+			location: mainLocSelect.value,
+			time: mainTimeSelect.value,
+			date: mainDateSelect.value
+		});
 	});
 
-	async function createSession(title, obj)
+	async function createSession(obj)
 	{
 		const session = await (await fetch("/api/sessions", {
 			method: "POST",
 			body: JSON.stringify(obj)
-		}));
+		})).json();
 
 		if (session.message)
 		{
