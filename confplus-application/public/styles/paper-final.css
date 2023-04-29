@@ -37,46 +37,49 @@ nav a {
   letter-spacing: 1.5px;
   margin-right: 110px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 19px;
 }
 .welcome-banner {
-  width: 120vh;
+  
+  width: 80%;
+  display: flex;
   align-self: center;
   align-items: center;
-  display: flex;
+  justify-content: center;
   color: #18537a;
-  font-size: 30px;
+  font-size: 29px;
   font-style: italic;
-  margin-left: 20vh;
+  
+  
+  
 }
 #author-name {
   color: #3a187a;
 }
 .author-logo {
-  margin-left: 15px;
-  width: 50px;
+  width: 5vh;
 }
 .submit-form {
+ 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+ width: 80vh;
 }
 .upload {
   background-color: rgba(255, 255, 255, 1);
   border-radius: 24px;
-  width: 90%;
+  width: 95%;
   box-shadow: -5px -5px 60px 15px rgba(30, 119, 204, 0.1),
     5px 5px 60px 15px rgba(30, 119, 204, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  align-self: center;
-  overflow: hidden;
+  
 }
 .paper-form {
-  width: 80vh;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   color: #18537a;
@@ -181,23 +184,19 @@ textarea {
   overflow: hidden;
   color: #18537a;
   border: 3px solid #18537a;
-  padding: 40px;
-  margin: 20px;
   border-radius: 15px;
   font-weight: 600;
-  width: 70vh;
+  width: 80vh;
   justify-content: center;
+  padding-bottom: 20px;
 }
 
 #authors-container {
- 
+  
   display: flex;
   flex-wrap: wrap;
-  width: 120vh;
-  position: relative;
-  padding: 20px;
-  margin-bottom: 10px;
-  bottom: 20px;
+ 
+ 
 }
 
 .aff-selector,
@@ -214,25 +213,25 @@ textarea {
   border-radius: 15px;
 }
 .interaction {
-  position: relative;
   border: 1px solid;
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  padding: 10px;
-  bottom: 20px;
-  width: 70vh;
+  padding: 20px;
   align-self: center;
 }
 .aff-selector-group {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 15px;
 }
 
 .buttons {
+  
+  width: 30vh;
+  padding: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 10px;
 }
 .add-author-btn {
@@ -255,8 +254,8 @@ textarea {
   line-height: 1;
   list-style: none;
   overflow: hidden;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
   position: relative;
   text-align: left;
   text-decoration: none;
@@ -298,8 +297,8 @@ textarea {
   line-height: 1;
   list-style: none;
   overflow: hidden;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
   position: relative;
   text-align: left;
   text-decoration: none;
@@ -358,6 +357,7 @@ textarea {
   transition: box-shadow 0.15s, transform 0.15s;
   font-size: 15px;
   font-weight: 500;
+  margin-top: 5px;
 }
 .submit:focus {
   box-shadow: #c2b9b9 0 0 0 1.5px inset, rgba(37, 34, 35, 0.4) 0 2px 4px,
@@ -470,7 +470,7 @@ footer img.conf-plus {
   width: 120px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 750px) {
   header {
     display: flex;
     flex-direction: column;
@@ -479,50 +479,53 @@ footer img.conf-plus {
 
   nav a {
     margin-left: 10vh;
+    margin-bottom: 10vh;
   }
   .welcome-banner {
-    width: 50vh;
+ 
+    width: 60vh;
     display: flex;
-    
-    margin-right: 13vh;
+    font-size: 20px;
     justify-content: center;
-    flex-wrap: wrap;
-    font-size: 25px;
+    align-items: center;
+    text-align: center;
   }
   .upload {
     
     display: flex;
-   
-    width: 95%;
+    width: 93%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
   }
-  .submit-form {
-    display: block;
-  }
+ .submit-form{
+  width: fit-content;
+  
+ }
   .paper-form {
     width: fit-content;
     position: relative;
-    margin-left: 8vh;
+    margin-left: 3vh;
   }
   .author-form {
+    padding: 0;
     width: fit-content;
+    padding-bottom: 10px;
   }
   #authors-container {
     display: flex;
     flex-wrap: wrap;
     width: 50vh;
-    position: relative;
-    padding: 20px;
-    margin-bottom: 10px;
+    
   }
 
   .interaction {
     padding: 10px;
-
-    width: 40vh;
+    width: 30vh;
+  }
+  .submit-btn{
+    margin-top: 10px;
   }
 
   .row {
