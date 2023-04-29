@@ -174,7 +174,9 @@ document.addEventListener('DOMContentLoaded',async ()=>{
               };
 
               console.log(reviewer1Object);
-              let rate = ((Number(thisPaper[0].reviewer2.evaluation) + Number(reviewer1Object.evaluation))/2);
+              let rate = null;
+              if (thisPaper[0].reviewer2.evaluation !== null && reviewer1Object.evaluation !== null)
+                rate = Number(thisPaper[0].reviewer2.evaluation) + Number(reviewer1Object.evaluation);
               console.log(rate);
     
               const res = await fetch(`http://localhost:3000/api/papers/${selectedPaper.children[1].children[1].children[0].children[0].innerText}`, {
@@ -205,7 +207,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 
          let rate = null
          if (thisPaper[0].reviewer1.evaluation !== null && reviewer2Object.evaluation !== null)
-          rate = ((Number(thisPaper[0].reviewer1.evaluation) + Number(reviewer2Object.evaluation)));
+          rate = Number(thisPaper[0].reviewer1.evaluation) + Number(reviewer2Object.evaluation);
         
          console.log(Number(thisPaper[0].reviewer1.evaluation));
          console.log(rate);
