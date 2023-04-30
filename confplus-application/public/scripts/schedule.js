@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 			`${paper.authors[paper.presenter].fname} ${paper.authors[paper.presenter].lname}`;
 	});
 
+	const dummyOpt = document.createElement("option");
+	dummyOpt.value = "";
+	dummyOpt.text = "--select a paper--";
+	mainPaperSelect.appendChild(dummyOpt);
+
 	approvedPapers.forEach(p => {
 		const option = document.createElement('option');
 		option.value = p.title;
@@ -74,19 +79,27 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 
 	async function createSession(obj)
 	{
-		const session = await (await fetch("/api/sessions", {
-			method: "POST",
-			body: JSON.stringify(obj)
-		})).json();
-
-		if (session.message)
+		if (obj.title.length === 0)
 		{
-			alert(session.message);
+			alert("Select a paper");
+			
 		}
 		else
 		{
-			loadSchedule();
-			alert("A session has been created!");
+			const session = await (await fetch("/api/sessions", {
+				method: "POST",
+				body: JSON.stringify(obj)
+			})).json();
+
+			if (session.message)
+			{
+				alert(session.message);
+			}
+			else
+			{
+				loadSchedule();
+				alert("A session has been created!");
+			}
 		}
 	}
 
