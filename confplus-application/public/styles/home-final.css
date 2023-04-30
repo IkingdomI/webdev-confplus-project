@@ -186,12 +186,7 @@ select {
 }
 
 .event .event-left .date {
-  font-size: 56px;
-}
-
-.event .event-left .month {
-  font-size: 16px;
-  font-weight: normal;
+  font-size: 30px;
 }
 
 .event .event-right {
