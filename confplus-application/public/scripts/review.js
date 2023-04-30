@@ -232,7 +232,8 @@ document.addEventListener('DOMContentLoaded',async ()=>{
           });
           const response = await res.json();
           }
-
+          location.reload();
+          reviewForm.reset();
          })
 
 
