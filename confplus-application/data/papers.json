@@ -1,1 +1,260 @@
-[{"title":"Java for intermediets","authors":[{"fname":"Tony","lname":"Stark","email":"tonyfake@author.com","affiliation":"tamu-qatar"},{"fname":"Yahia","lname":"Azzam","email":"yaya@bestauthor.com","affiliation":"cmu-qatar"}],"abstract":"The book targets a slightly more advanced java developing and introduces algorithms.","reviewer1":{"id":12,"evaluation":null,"contribution":null,"strength":null,"weakness":null},"reviewer2":{"id":13,"evaluation":"1","contribution":"4","strength":"unique and provides new ideas","weakness":"rather short"},"rating":null},{"title":"database systems","authors":[{"fname":"Erling","lname":"Haaland","email":"haaland@author.com","affiliation":"qu"},{"fname":"Artur","lname":"Beterbiev","email":"beterbiev@author.com","affiliation":"cmu-qatar"}],"abstract":"fundamentals of database systems.","reviewer1":{"id":11,"evaluation":"1","contribution":"3","strength":"The paper had strong explanation and good resources","weakness":"The provided examples and problems were lacking and were not sufficient"},"reviewer2":{"id":13,"evaluation":"0","contribution":"3","strength":"The paper had strong and clear explanation of its subjects.","weakness":"The structure of the paper was unstable and it proposed poor examples/problems."},"rating":1},{"title":"Global Warming","authors":[{"fname":"Luka","lname":"Modric","email":"modric@author.com","affiliation":"udst"},{"fname":"Albert","lname":"Einstein","email":"einstein@smart.com","affiliation":"qu"}],"abstract":"This is a research paper to discuss and evaluate the main reasons for global warming and how to resist it.","presenter":0,"reviewer1":{"id":8,"evaluation":"2","contribution":"5","strength":"paper had crucial points","weakness":""},"reviewer2":{"id":3,"evaluation":"1","contribution":"5","strength":"paper discussed important points and provided good examples and future patterns.","weakness":"The paper was long and had a lot of unnecessary subjects"},"rating":3},{"title":"Electric cars","authors":[{"fname":"Elon","lname":"Musk","email":"musk@twitter.com","affiliation":"tamu-qatar"}],"abstract":"A paper to showcase and analyze the rise of electric cars and its impact on the environment relative to ICE vehicles.","presenter":0,"reviewer1":{"id":7,"evaluation":"1","contribution":"4","strength":"Great take on the current world of cars","weakness":"It exaggerated some points"},"reviewer2":{"id":13,"evaluation":"2","contribution":"4","strength":"The paper proposed an important problem on our modern world and analyzed it effectively","weakness":""},"rating":1.5},{"title":"BST Data Structure","authors":[{"fname":"Mamdouh","lname":"NasrAllah","email":"mamdouh@author.com","affiliation":"qu"},{"fname":"Bill","lname":"Gates","email":"gates@mircosoft.com","affiliation":"tamu-qatar"}],"abstract":"the Binary Search Tree data structure is a popular structure that can combine some of the advantages of arrays and linked lists.","presenter":0,"reviewer1":{"id":8,"evaluation":"1","contribution":"3","strength":"It has good explanation.","weakness":"no answer sheets were provided for the problems."},"reviewer2":{"id":6,"evaluation":"1","contribution":"4","strength":"good paper with informative examples.","weakness":"the problems were too difficult."},"rating":2},{"title":"Social Experiment","authors":[{"fname":"Mate","lname":"Rimac","email":"materimac@author.com","affiliation":"cmu-qatar"},{"fname":"Ibn","lname":"Khaldun","email":"ibnkhaldun@sociologist.com","affiliation":"qu"}],"abstract":"a social experiment to measure how much people interact with social experiments.(LOL)","presenter":0,"reviewer1":{"id":8,"evaluation":null,"contribution":null,"strength":null,"weakness":null},"reviewer2":{"id":9,"evaluation":null,"contribution":null,"strength":null,"weakness":null},"rating":null}]
+[
+  {
+    "title": "Java for intermediets",
+    "authors": [
+      {
+        "fname": "Tony",
+        "lname": "Stark",
+        "email": "tonyfake@author.com",
+        "affiliation": "tamu-qatar"
+      },
+      {
+        "fname": "Yahia",
+        "lname": "Azzam",
+        "email": "yaya@bestauthor.com",
+        "affiliation": "cmu-qatar"
+      }
+    ],
+    "abstract": "The book targets a slightly more advanced java developing and introduces algorithms.",
+    "reviewer1": {
+      "id": 12,
+      "evaluation": null,
+      "contribution": null,
+      "strength": null,
+      "weakness": null
+    },
+    "reviewer2": {
+      "id": 13,
+      "evaluation": "1",
+      "contribution": "4",
+      "strength": "unique and provides new ideas",
+      "weakness": "rather short"
+    },
+    "rating": null
+  },
+  {
+    "title": "database systems",
+    "authors": [
+      {
+        "fname": "Erling",
+        "lname": "Haaland",
+        "email": "haaland@author.com",
+        "affiliation": "qu"
+      },
+      {
+        "fname": "Artur",
+        "lname": "Beterbiev",
+        "email": "beterbiev@author.com",
+        "affiliation": "cmu-qatar"
+      }
+    ],
+    "abstract": "fundamentals of database systems.",
+    "reviewer1": {
+      "id": 11,
+      "evaluation": "1",
+      "contribution": "3",
+      "strength": "The paper had strong explanation and good resources",
+      "weakness": "The provided examples and problems were lacking and were not sufficient"
+    },
+    "reviewer2": {
+      "id": 13,
+      "evaluation": "0",
+      "contribution": "3",
+      "strength": "The paper had strong and clear explanation of its subjects.",
+      "weakness": "The structure of the paper was unstable and it proposed poor examples/problems."
+    },
+    "rating": 1
+  },
+  {
+    "title": "Global Warming",
+    "authors": [
+      {
+        "fname": "Luka",
+        "lname": "Modric",
+        "email": "modric@author.com",
+        "affiliation": "udst"
+      },
+      {
+        "fname": "Albert",
+        "lname": "Einstein",
+        "email": "einstein@smart.com",
+        "affiliation": "qu"
+      }
+    ],
+    "abstract": "This is a research paper to discuss and evaluate the main reasons for global warming and how to resist it.",
+    "presenter": 0,
+    "reviewer1": {
+      "id": 8,
+      "evaluation": "2",
+      "contribution": "5",
+      "strength": "paper had crucial points",
+      "weakness": ""
+    },
+    "reviewer2": {
+      "id": 3,
+      "evaluation": "1",
+      "contribution": "5",
+      "strength": "paper discussed important points and provided good examples and future patterns.",
+      "weakness": "The paper was long and had a lot of unnecessary subjects"
+    },
+    "rating": 3
+  },
+  {
+    "title": "Electric cars",
+    "authors": [
+      {
+        "fname": "Elon",
+        "lname": "Musk",
+        "email": "musk@twitter.com",
+        "affiliation": "tamu-qatar"
+      }
+    ],
+    "abstract": "A paper to showcase and analyze the rise of electric cars and its impact on the environment relative to ICE vehicles.",
+    "presenter": 0,
+    "reviewer1": {
+      "id": 7,
+      "evaluation": "1",
+      "contribution": "4",
+      "strength": "Great take on the current world of cars",
+      "weakness": "It exaggerated some points"
+    },
+    "reviewer2": {
+      "id": 13,
+      "evaluation": "2",
+      "contribution": "4",
+      "strength": "The paper proposed an important problem on our modern world and analyzed it effectively",
+      "weakness": ""
+    },
+    "rating": 1.5
+  },
+  {
+    "title": "BST Data Structure",
+    "authors": [
+      {
+        "fname": "Mamdouh",
+        "lname": "NasrAllah",
+        "email": "mamdouh@author.com",
+        "affiliation": "qu"
+      },
+      {
+        "fname": "Bill",
+        "lname": "Gates",
+        "email": "gates@mircosoft.com",
+        "affiliation": "tamu-qatar"
+      }
+    ],
+    "abstract": "the Binary Search Tree data structure is a popular structure that can combine some of the advantages of arrays and linked lists.",
+    "presenter": 0,
+    "reviewer1": {
+      "id": 8,
+      "evaluation": "1",
+      "contribution": "3",
+      "strength": "It has good explanation.",
+      "weakness": "no answer sheets were provided for the problems."
+    },
+    "reviewer2": {
+      "id": 6,
+      "evaluation": "1",
+      "contribution": "4",
+      "strength": "good paper with informative examples.",
+      "weakness": "the problems were too difficult."
+    },
+    "rating": 2
+  },
+  {
+    "title": "Social Experiment",
+    "authors": [
+      {
+        "fname": "Mate",
+        "lname": "Rimac",
+        "email": "materimac@author.com",
+        "affiliation": "cmu-qatar"
+      },
+      {
+        "fname": "Ibn",
+        "lname": "Khaldun",
+        "email": "ibnkhaldun@sociologist.com",
+        "affiliation": "qu"
+      }
+    ],
+    "abstract": "a social experiment to measure how much people interact with social experiments.(LOL)",
+    "presenter": 0,
+    "reviewer1": {
+      "id": 8,
+      "evaluation": null,
+      "contribution": null,
+      "strength": null,
+      "weakness": null
+    },
+    "reviewer2": {
+      "id": 9,
+      "evaluation": null,
+      "contribution": null,
+      "strength": null,
+      "weakness": null
+    },
+    "rating": null
+  },
+  {
+    "title": "HTML and CSS",
+    "authors": [
+      {
+        "fname": "Ethan",
+        "lname": "Turner",
+        "email": "Ethan@turner.com",
+        "affiliation": "qu"
+      },
+      {
+        "fname": "Adam",
+        "lname": "Wexler",
+        "email": "Adam@wexler.com",
+        "affiliation": "udst"
+      }
+    ],
+    "abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "presenter": 0,
+    "reviewer1": {
+      "id": 8,
+      "evaluation": null,
+      "contribution": null,
+      "strenth": null,
+      "weakness": null
+    },
+    "reviewer2": {
+      "id": 5,
+      "evaluation": null,
+      "contribution": null,
+      "strenth": null,
+      "weakness": null
+    },
+    "rating": null
+  },
+  {
+    "title": "React and JSX",
+    "authors": [
+      {
+        "fname": "Ethan",
+        "lname": "Turner",
+        "email": "smith@john.com",
+        "affiliation": "qu"
+      }
+    ],
+    "abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ",
+    "presenter": 0,
+    "reviewer1": {
+      "id": 3,
+      "evaluation": null,
+      "contribution": null,
+      "strenth": null,
+      "weakness": null
+    },
+    "reviewer2": {
+      "id": 5,
+      "evaluation": null,
+      "contribution": null,
+      "strenth": null,
+      "weakness": null
+    },
+    "rating": null
+  }
+]

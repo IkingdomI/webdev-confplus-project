@@ -223,6 +223,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             rating: null
         })
     });
+    if(res.ok){
+      alert("paper submitted!")
+    }else{
+      alert("couldn't submit paper")
+    }
+    location.reload()
+    document.querySelector("#submit-form").reset();
+
+    
     const response = await res.json();
 
 
