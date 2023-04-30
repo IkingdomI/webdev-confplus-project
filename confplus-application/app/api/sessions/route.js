@@ -74,7 +74,7 @@ export async function POST(request)
 
 				return Response.json(
 					session,
-					{ status: 200 }
+					{ status: 201 }
 				);
 			}
 			else
