@@ -82,9 +82,10 @@ nav a {
   width: fit-content;
   display: flex;
   flex-direction: column;
+  align-items: center;
   color: #18537a;
   border: 3px solid #18537a;
-  padding: 60px;
+  padding: 2em;
   margin: 20px;
   border-radius: 15px;
   font-weight: 600;
@@ -189,6 +190,7 @@ textarea {
   width: 80vh;
   justify-content: center;
   padding-bottom: 20px;
+  
 }
 
 #authors-container {
@@ -227,12 +229,12 @@ textarea {
 }
 
 .buttons {
-  
   width: 30vh;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  gap: 8px;
 }
 .add-author-btn {
   align-items: center;
@@ -482,11 +484,13 @@ footer img.conf-plus {
     margin-bottom: 10vh;
   }
   .welcome-banner {
- 
+      
+    
     width: fit-content;
     display: flex;
     font-size: 20px;
     justify-content: center;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
   }
@@ -496,7 +500,7 @@ footer img.conf-plus {
   .upload {
     
     display: flex;
-    width: 93%;
+    /* width: 93%; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -543,4 +547,33 @@ footer img.conf-plus {
   footer p {
     width: 280px;
   }
+}
+
+@media only screen and (max-width: 480px) {
+  .upload{
+    border-radius: 0;
+    width: 100%;
+
+  }
+
+  .paper-form{
+    padding: 1em 0;
+  }
+
+  .info-group{
+    margin: 0;
+  }
+  .author-form{
+    padding: 20px 5px;
+    gap: 10px;
+  }
+
+  input[type="text"], input[type="email"] {
+    width: 100%;
+  }
+  label{
+    width: fit-content;
+  }
+
+  
 }
