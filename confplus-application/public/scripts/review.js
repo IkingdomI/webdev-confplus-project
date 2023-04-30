@@ -232,6 +232,11 @@ document.addEventListener('DOMContentLoaded',async ()=>{
           });
           const response = await res.json();
           }
+          if(res.ok){
+            alert("review submitted!");
+          }else{
+            alert("not submitted");
+          }
           location.reload();
           reviewForm.reset();
          })

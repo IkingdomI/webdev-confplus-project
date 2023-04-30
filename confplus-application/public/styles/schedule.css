@@ -173,7 +173,7 @@ legend {
   transition: box-shadow .15s,transform .15s;
   font-weight: 500;
 }
-.update-btn:hover{
+.update-btn:hover,.delete-btn:hover{
    box-shadow: rgba(30, 26, 26, 0.941) 0 4px 8px, rgba(70, 67, 67, 0.963) 0 7px 13px -3px, #141313 0 -3px 0 inset;
     color: #e8e8e8;
     background: linear-gradient(
@@ -191,7 +191,9 @@ legend {
             rgb(80, 6, 6) 98%);
     color: white;
 }
-
+.delete-btn:hover {
+cursor: pointer;
+}
 .session>input {
     visibility: hidden;
     position: absolute;
