@@ -43,8 +43,6 @@ export async function PATCH(request, {params})
 
 		//We validate the values of these fields in client side.
 		if (
-			("present_fname" in body &&
-			"present_lname" in body ) ||
 			"date" in body ||
 			"time" in body ||
 			"location" in body

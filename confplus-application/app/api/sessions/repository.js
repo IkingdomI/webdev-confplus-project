@@ -24,13 +24,6 @@ export async function createSession(obj)
 		return { message: "NO_PAPER" };
 	}
 
-	const author = paper.authors.find(a => a.fname === obj.present_fname && a.lname === obj.present_lname);
-
-	if (!author)
-	{
-		return { message: "NO_AUTHOR" };
-	}
-
 	if (sessions.find(s => s.time === obj.time && s.date === obj.date && s.location === obj.location))
 	{
 		return { message: "CONFLICT" };
@@ -38,7 +31,7 @@ export async function createSession(obj)
 
 	const session = {
 		title: obj.title,
-		presenter: `${obj.present_fname} ${obj.present_lname}`,
+		presenter: `${paper.authors[paper.presenter].fname} ${paper.authors[paper.presenter].lname}`,
 		location: obj.location,
 		date: obj.date,
 		time: obj.time
@@ -83,22 +76,6 @@ export async function updateSession(title, obj)
 	if (!session)
 	{
 		return { message: "NO_SESSION" };
-	}
-
-	if (obj.present_fname)
-	{
-		const paper = (await JSON.parse(await fs.readFile("data/papers.json"))).find(p => p.title === title);
-
-		//console.log(paper);
-
-		if (paper.authors.find(a => a.fname === obj.present_fname && a.lname === obj.present_lname))
-		{
-			session.presenter = `${obj.present_fname} ${obj.present_lname}`;
-		}
-		else
-		{
-			return { message: "NO_AUTHOR" };
-		}
 	}
 
 	if (obj.date)
