@@ -470,7 +470,7 @@ footer img.conf-plus {
   width: 120px;
 }
 
-@media (max-width: 750px) {
+@media only screen and (max-width: 750px) {
   header {
     display: flex;
     flex-direction: column;
