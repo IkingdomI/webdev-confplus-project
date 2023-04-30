@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
     <p class="abstract">${p.abstract}</p>
     </div>
       <div class="interaction">
-    <div class="collapse">collapse</div>
+    <div class="collapse">Show Abstract</div>
     <a class="download-btn" href=""><i class="fa fa-download"></i> Download</a>
 
   </div>
@@ -81,15 +81,26 @@ document.addEventListener('DOMContentLoaded',async ()=>{
     }
   }
 
+    
     //THIS IS A DUMMY CODE COMMENT IT IF NEEDED
     const collapse = document.querySelectorAll(".collapse");
     for(let col of collapse){
       console.log(col.parentElement.parentElement.children[1].children[1]);
       // console.log(col.parentElement.children[2]);
+      const abstract = col.parentElement.parentElement.children[1].children[1];
+      abstract.classList.toggle('hide');
+        // col.classList.toggle('toggle-collapse');
       col.addEventListener('click',()=>{
-        const abstract = col.parentElement.parentElement.children[1].children[1];
         abstract.classList.toggle('hide');
-        col.classList.toggle('toggle-collapse');
+        // let toggle = ['Show Abstract','Hide Abstract'];
+        // col.innerHTML = toggle.pop();
+        // toggle.unshift(`${col.innerHTML}`);
+        if(col.innerHTML=="Show Abstract"){
+          col.innerHTML="Hide Abstract"
+        }else{
+          col.innerHTML="Show Abstract"
+        }
+        // col.classList.toggle('toggle-collapse');
       });
     }
     const reviewForm = document.querySelector("#reviewForm");
