@@ -102,10 +102,10 @@ console.log(selectOptions)
   </div>
   </div>
 </div>`
-        );
+        ).join('');
      } 
       else{
-        sessionsDiv.innerHTML = `<h2>No Available sessions</h2>`;
+        sessionsDiv.innerHTML = `<h2 class="no-sessions">No Available sessions</h2>`;
       }
     //}
     if(targetValue=="show-all") {
@@ -139,7 +139,7 @@ console.log(selectOptions)
     </div>
   </div>
   </div>
-</div>`);
+</div>`).join('');
 sessionsDiv.children[0].hidden=true;
 console.log(sessionsDiv.children);
     }
