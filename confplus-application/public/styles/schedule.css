@@ -128,7 +128,6 @@ legend {
     border-radius: 15px;
     padding: 15px;
     margin: 10px;
-    
 }
 
 .session>.session-content {
@@ -212,8 +211,9 @@ header>nav {
 }
 
 #sessions-field {
-    max-height: 400px;
-    overflow: scroll;
+    max-height: 40%;
+    overflow-y: scroll;
+    width: auto;
 }
 #new-session-field{
     width: fit-content;
