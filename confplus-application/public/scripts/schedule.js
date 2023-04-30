@@ -11,8 +11,15 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 	const approvedPapers = (await paperRes.json()).filter(a => a.rating >= 2);
 	const mainPaperSelect = document.getElementById("paper");
 
-	console.log("hm");
+	//console.log("hm");
 	//console.log(approvedPapers);
+
+	mainPaperSelect.addEventListener("change" || "load", () => {
+		const paper = approvedPapers.find(p => p.title === mainPaperSelect.value);
+		//console.log(paper.authors);
+		document.getElementById("presenter").value =
+			`${paper.authors[paper.presenter].fname} ${paper.authors[paper.presenter].lname}`;
+	});
 
 	approvedPapers.forEach(p => {
 		const option = document.createElement('option');
