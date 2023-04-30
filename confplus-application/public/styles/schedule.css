@@ -23,9 +23,7 @@ img {
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
+    
 }
     header {
         display: flex;
@@ -34,16 +32,15 @@ body {
         align-items: center;
         justify-content: space-between;
         width: 85%;
-        flex-wrap: wrap;
       }
 
 
-.logo {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    
-}
+      .logo {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        margin-left: 5px;
+      }
 .conf-plus {
     margin-left: 10px;
   }
@@ -54,43 +51,53 @@ body {
 
 }
 
-header nav {
-    display: flex;
-    align-items: center;
-}
 
-header nav a {
+nav a {
     text-decoration: none;
-    color: #18537a;
-    letter-spacing: 1.5px;
-    font-weight: 500;
-    font-size: 16px;
-}
+  color: #18537a;
+  letter-spacing: 1.5px;
+  margin-right: 110px;
+  font-weight: 500;
+  font-size: 19px;
+  }
 
-.welcome-banner {
-
-    /* width: 120vh; */
-    align-self: center;
-    align-items: center;
-    display: flex;
-    color: #18537a;
-    font-size: 30px;
-    font-style: italic;
-    justify-content: space-between;
-
-}
+  .welcome-banner {
+  
+    width: 80%;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  color: #18537a;
+  font-size: 29px;
+  font-style: italic;
+ 
+   
+  }
 
 #organizer-name {
     color: #3a187a;
 }
 
 .organizer-logo {
-    width: 50px;
+    width: 5vh;
 }
-
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+    padding: 80px;
+    border-radius: 24px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 24px;
+    box-shadow: -5px -5px 60px 15px rgba(30, 119, 204, 0.1),
+      5px 5px 60px 15px rgba(30, 119, 204, 0.1);
+}
 fieldset {
-    max-width: 580px;
-
+  
     display: flex;
     flex-direction: column;
     color: #18537a;
@@ -108,11 +115,7 @@ legend {
     font-style: italic;
     color: #18537a;
 }
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 #sessions {
     display: flex;
     flex-direction: column;
@@ -122,9 +125,10 @@ main{
     display: grid;
     grid-template-columns: 3fr 1fr;
     border-style: solid;
-    border-radius: 5px;
-    padding: 5px;
+    border-radius: 15px;
+    padding: 15px;
     margin: 10px;
+    
 }
 
 .session>.session-content {
@@ -148,16 +152,39 @@ main{
     border-style: none;
 }
 
-button {
-    padding: 1.6px 8px;
-    width: fit-content;
-}
 
 .update-btn {
-    background: linear-gradient(112deg,
-            rgb(189, 50, 152) 1%,
-            rgba(56, 19, 194, 1) 98%);
-    color: white;
+  background: rgb(245, 243, 243);
+  border: none;
+  border-radius: 6px;
+  box-shadow: rgba(104, 105, 104, 0.4) 0 2px 4px,rgba(62, 66, 64, 0.3) 0 7px 13px -3px,rgba(53, 53, 53, 0.5) 0 -3px 0 inset;
+  color: #18537a;
+  cursor: pointer;
+  height: 25px;
+  align-self: center;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 14px;
+  padding-right: 14px;
+  
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+ 
+  transition: box-shadow .15s,transform .15s;
+  font-size: 15px;
+  font-weight: 500;
+}
+.update-btn:hover{
+   box-shadow: rgba(30, 26, 26, 0.941) 0 4px 8px, rgba(70, 67, 67, 0.963) 0 7px 13px -3px, #141313 0 -3px 0 inset;
+    color: #e8e8e8;
+    background: linear-gradient(
+      112deg,
+      rgb(189, 50, 152) 1%,
+      rgba(56, 19, 194, 1) 98%
+    );
+    transform: translateY(-2px);
+    text-decoration: none;
 }
 
 .delete-btn {
@@ -342,3 +369,42 @@ footer {
     bottom: 10px;
     width: 120px;
 }
+@media (max-width: 750px) {
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    nav a {
+        margin-left: 13vh;
+      font-size: 20px;
+    }
+    .welcome-banner {
+    
+      padding: 6px;
+      width: fit-content;
+      display: flex;
+      font-size: 20px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .review-logo{
+      padding: 5px;
+    }
+    .row {
+      flex-direction: column;
+      /* flex-wrap: nowrap; */
+      align-items: center;
+      gap: 2em;
+      margin-bottom: 1.4em;
+    }
+    .row > * {
+      height: fit-content;
+    }
+    footer p {
+      width: 280px;
+    }
+  }
+
