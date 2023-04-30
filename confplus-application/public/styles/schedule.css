@@ -164,15 +164,12 @@ legend {
   align-self: center;
   list-style: none;
   overflow: hidden;
-  padding-left: 14px;
-  padding-right: 14px;
   
   position: relative;
   text-align: center;
   text-decoration: none;
  
   transition: box-shadow .15s,transform .15s;
-  font-size: 15px;
   font-weight: 500;
 }
 .update-btn:hover{
