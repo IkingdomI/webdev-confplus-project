@@ -34,45 +34,47 @@
   
   nav a {
     text-decoration: none;
-    color: #18537a;
-    letter-spacing: 1.5px;
-    margin-right: 110px;
-    font-weight: 500;
-    font-size: 16px;
+  color: #18537a;
+  letter-spacing: 1.5px;
+  margin-right: 110px;
+  font-weight: 500;
+  font-size: 19px;
   }
   .welcome-banner {
   
-    width: 120vh;
-    align-self: center;
-    align-items: center;
-    display: flex;
-    color: #18537a;
-    font-size: 30px;
-    font-style: italic;
-    justify-content: space-between;
+    width: 80%;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  color: #18537a;
+  font-size: 29px;
+  font-style: italic;
+ 
    
   }
   #reviewr-name{
     color: #3a187a;
   }
   .review-logo {
-    margin-left:15px;
-    width: 50px;
+    width: 5vh;
   }
   .upload {
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 24px;
-    width: 90%;
-    box-shadow: -5px -5px 60px 15px rgba(30, 119, 204, 0.1),
-      5px 5px 60px 15px rgba(30, 119, 204, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    align-self: center;
-    flex-wrap: wrap;
-    overflow: hidden;
-    padding-bottom: 5px;
+  
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  width: 80%;
+  margin: 0 auto;
+  padding: 80px;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 24px;
+  box-shadow: -5px -5px 60px 15px rgba(30, 119, 204, 0.1),
+    5px 5px 60px 15px rgba(30, 119, 204, 0.1);
+  
   }
   .title{
     font-size: 22px;
@@ -127,7 +129,7 @@
     display: flex;
     border-radius: 10px;
     position: relative;
-     width: 85vh;
+     width: 100%;
     box-shadow: 0 0 20px #c3c3c367;
     cursor: pointer;
   }
@@ -146,29 +148,6 @@
     transition: 0.2s;
     pointer-events: none;
     opacity: 0;
-  }
-
-  .radio-btn .hobbies-icon {
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .radio-btn .hobbies-icon i {
-    color: #8373e6;
-    line-height: 80px;
-    font-size: 60px;
-  }
-
-  .radio-btn .hobbies-icon h3 {
-    color: #8373e6;
-    font-family: "Raleway", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    text-transform: uppercase;
   }
 
   .paper input:checked + .radio-btn {
@@ -204,7 +183,7 @@
     font-weight: 500;
   
   }
-  .download-btn{
+  .download-btn, .collapse{
     background: rgb(245, 243, 243);
     border: none;
     border-radius: 6px;
@@ -213,7 +192,7 @@
     cursor: pointer;
     height: 25px;
     align-self: center;
-    line-height: 1;
+    
     list-style: none;
     overflow: hidden;
     padding-left: 12px;
@@ -227,11 +206,11 @@
     font-weight: 500;
     
   }
-  .submit:focus, .download-btn:focus, .submit-review-btn:focus{
+  .submit:focus, .download-btn:focus, .submit-review-btn:focus, .collapse:focus{
     box-shadow: #c2b9b9 0 0 0 1.5px inset, rgba(37, 34, 35, 0.4) 0 2px 4px, rgba(53, 52, 56, 0.3) 0 7px 13px -3px, #141514 0 -3px 0 inset;
   }
   
-  .submit:hover , .download-btn:hover, .submit-review-btn:hover {
+  .submit:hover , .download-btn:hover, .submit-review-btn:hover, .collapse:hover {
     box-shadow: rgba(30, 26, 26, 0.941) 0 4px 8px, rgba(70, 67, 67, 0.963) 0 7px 13px -3px, #141313 0 -3px 0 inset;
     color: #e8e8e8;
     background: linear-gradient(
@@ -240,29 +219,30 @@
       rgba(56, 19, 194, 1) 98%
     );
     transform: translateY(-2px);
+    text-decoration: none;
   }
   
   .submit:active {
-    box-shadow: #757474 0 3px 7px inset;
+    box-shadow: #b1b1b1 0 3px 7px inset;
     transform: translateY(2px);
   }
   .evaluation{
     display: flex;
-    
-    margin-top: 15px;    
-    justify-content: space-between;
-    align-items: center;
-    width: 90vh;
+    margin-top: 15px;  
+    width: 80vh;  
+    justify-content: space-around;
    
+    padding: 80px;
+  
   }
   .evaluation-box, .contribution-box{
     box-shadow: 0 0 20px #c3c3c367;
     display: flex;
   flex-direction: column;
-  margin: 20px;
-  padding: 10px;
+  
   border-radius: 15px;
-  transition: transform .3s
+  transition: transform .3s;
+  padding: 10px;
   }
   .evaluation-box:hover, .contribution-box:hover{
 transform: scale(1.1);  
@@ -289,10 +269,7 @@ cursor: pointer;
     height: 22px;
     width: 22px;
     border:5px solid #3b2e8f;
-    
     border-radius: 50%;
-    
-  
     transition: border-color .2s ease;
   }
   
@@ -363,73 +340,94 @@ cursor: pointer;
     margin-top: 10px;
     align-self: center;
   }
-footer {
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-  font-size: 18px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  clear: both;
-  color: #18537a;
-  margin: 0 auto;
-  float: left;
-  width: 100%;
-  display: grid;
-  grid-column: 1/-1;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  width: 100%;
-  clear: both;
-  justify-content: space-evenly;
-}
-
-.col1,
-.col2,
-.col3 {
-  margin: 30px;
-  text-align: center;
-  width: calc(31% - 60px);
-  height: 200px;
-  display: block;
-  flex-grow: 1;
-  flex-shrink: 1;
-}
-
-.col1 a {
-  text-decoration: none;
-  color: blue;
-}
-
-.col2 a,
-.col3 a {
-  text-decoration: none;
-  color: black;
-}
-
-.col2 a:hover,
-.col3 a:hover {
-  color: blue;
-}
-
-.full-col {
-  display: inline-block;
-  width: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  background-color: white;
-  text-align: center;
-}
-
-.full-col a {
-  text-decoration: none;
-}
-
-.collapse:hover{
-  text-decoration: underline;
-}
+  footer {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    clear: both;
+    color: #18537a;
+    margin: 0 auto;
+    float: left;
+    width: 100%;
+    display: grid;
+    grid-column: 1/-1;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 100%;
+    clear: both;
+    justify-content: space-around;
+    padding: 0 3em;
+    
+  }
+  
+  footer h4 {
+    width: fit-content;
+    text-align: center;
+    align-self: center;
+  
+  }
+  
+  .col1,
+  .col2,
+  .col3 {
+    
+    /*margin: 30px; */
+    text-align: center;
+    /*width: calc(31% - 60px); */
+    width: fit-content;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  
+  .col1 a {
+    text-decoration: none;
+    color: blue;
+    position: relative;
+    bottom: 20px;
+  }
+  .col1 p{
+    position: relative;
+    bottom: 20px;
+  }
+  .col2 a,
+  .col3 a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .col2 a:hover,
+  .col3 a:hover {
+    color: blue;
+  }
+  
+  .full-col {
+    display: inline-block;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: white;
+    text-align: center;
+    
+  }
+  
+  .full-col a {
+    text-decoration: none;
+  }
+  
+  footer img.conf-plus {
+    position: relative;
+    bottom: 10px;
+    width: 120px;
+  }
 
 .hide{
   display: none;    
@@ -443,3 +441,73 @@ footer {
   visibility: visible;
 }
 
+@media (max-width: 750px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav a {
+    margin-left: 10vh;
+    margin-bottom: 10vh;
+    font-size: 20px;
+  }
+  .welcome-banner {
+  
+    padding: 6px;
+    width: fit-content;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .review-logo{
+    padding: 5px;
+  }
+  
+  .upload {
+    
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    
+    flex-wrap: wrap;
+  }
+  .radio-btn{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 60vw;
+    height: fit-content;
+    padding: 10px;
+  }
+.evaluation{
+display: flex;
+flex-direction: column;
+width: fit-content;
+
+
+}
+.contribution-box{
+  margin-top: 30px;
+}
+
+
+
+ 
+  .row {
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
+    align-items: center;
+    gap: 2em;
+    margin-bottom: 1.4em;
+  }
+  .row > * {
+    height: fit-content;
+  }
+  footer p {
+    width: 280px;
+  }
+}
