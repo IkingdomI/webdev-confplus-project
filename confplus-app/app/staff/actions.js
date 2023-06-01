@@ -7,13 +7,49 @@ export async function isUserExist() {
 }
 
 export async function getUser() {
-  return cookies().get("user");
+  const cookie = cookies().get("user");
+  if (!cookie) return null;
+  const user = JSON.parse(cookie.value);
+  return user;
 }
 
 export async function setUser(user) {
-  cookies().set("user", user);
+    if(user){
+        cookies().set("user", JSON.stringify(user));
+    }else{
+        cookies().set("user", "", { expires: new Date('2016-10-05') });
+    }
 }
 
-export async function removeUser() {
-  cookies().set("user", undefined, { expires: new Date(0) });
+export async function logout() {
+  // cookies().set("user", "", { expires: new Date('2016-10-05') });
+  setUser(null);
+  
+  return true;
+}
+
+export async function login(formData) {
+  const res = await fetch(
+    `http://localhost:3000/api/login?email=${formData.get(
+      "email"
+    )}&password=${formData.get("password")}`
+  );
+  if (res.ok) {
+    const user = await res.json();
+    setUser(user);
+    return user.role;
+    // switch (user.role) {
+    //   case "author":
+    //     redirect("staff/author");
+    //     break;
+    //   case "reviewer":
+    //     redirect("staff/reviewer");
+    //     break;
+    //   case "organizer":
+    //     redirect("staff/organizer");
+    //     break;
+    // }
+  } else {
+    return null;
+  }
 }
