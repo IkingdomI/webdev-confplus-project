@@ -14,20 +14,20 @@ function Footer() {
             />
           </div>
           <p>Thanks for visiting our website. You can email us </p>{" "}
-          <a className="text-blue-700" href="">@ConfPlus.qu.edu.qa</a>
+          <a className="text-blue-700" href="/">@ConfPlus.qu.edu.qa</a>
         </div>
         <div>
           <h4>Quick Links</h4>
           <div>
             <ul className="flex flex-col items-center">
               <li>
-                <a href="">Join us</a>
+                <a href="/">Join us</a>
               </li>
               <li>
-                <a href="">About us</a>
+                <a href="/">About us</a>
               </li>
               <li>
-                <a href="">Contact</a>
+                <a href="/">Contact</a>
               </li>
             </ul>
           </div>
@@ -36,19 +36,19 @@ function Footer() {
           <h4>Communication</h4>
           <ul className="flex flex-col items-center">
             <li>
-              <a href="">Facebook</a>
+              <a href="/">Facebook</a>
             </li>
             <li>
-              <a href="">Twitter</a>
+              <a href="/">Twitter</a>
             </li>
             <li>
-              <a href="">Instagram</a>
+              <a href="/">Instagram</a>
             </li>
           </ul>
         </div>
       </div>
       <div className="md:text-center">
-        &copy; Copyright 2023 <a className="text-blue-700" href="">CMPS350 Web Dev</a>
+        &copy; Copyright 2023 <a className="text-blue-700" href={null}>CMPS350 Web Dev</a>
       </div>
     </footer>
   );

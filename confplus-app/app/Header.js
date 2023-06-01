@@ -17,8 +17,8 @@ function Header() {
           <li>
             <a className="hover:text-teal-700" href="/">Home</a>
           </li>
-          <li className="transition ease-out delay-100  hover:scale-110 hover:bg-violet-800 duration-300 hover:cursor-pointer text-white rounded-xl p-1 border bg-violet-600 w-fit">
-            <a href="/login">Login</a>
+          <li className="transition ease-out delay-100  hover:scale-110 hover:bg-violet-600 duration-300 hover:cursor-pointer text-white rounded-xl py-1 px-2 border bg-violet-800 w-fit">
+            <a href="/login">Staff</a>
           </li>
         </ul>
       </nav>
