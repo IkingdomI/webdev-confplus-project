@@ -15,70 +15,96 @@ datasource db {
 
 //create a new model called user with the following fields id, first_name, last_name, password, role
 model User {
-    id         Int    @id @default(autoincrement())
+    id         Int      @id @default(autoincrement())
     first_name String
     last_name  String
     password   String
     role       String
+    reviews    Review[] //We will enforce the relationship based on roles.
 }
 
 model Time {
-    time String @id @default(uuid())
+    id       Int       @id @default(autoincrement())
+    time     String    @unique
+    sessions Session[]
 }
 
 model Paper {
     id        Int      @id @default(autoincrement())
     title     String
-    author    Author[]
+    authors   Author[]
     abstract  String
     presenter Int
-    review    Review[]
-    session   Session @relation(fields: [sessionId], references: [id])
+    reviews   Review[]
+    score     Float?
+    session   Session  @relation(fields: [sessionId], references: [id])
     sessionId Int
 }
 
 model Author {
-    id          Int    @id @default(autoincrement())
+    id          Int         @id @default(autoincrement())
     fname       String
     lname       String
-    email       String @unique
-    affiliation String
-    paper       Paper  @relation(fields: [paperId], references: [id])
+    email       String      @unique
+
+    paper       Paper       @relation(fields: [paperId], references: [id])
     paperId     Int
+
+    affiliation Institution @relation(fields: [instID], references: [id])
+    instID      Int
+
+    sessions Session[]
 }
 
 model Review {
     id           Int    @id @default(autoincrement())
-    evaluation   String
-    contribution String
+    evaluation   Int
+    contribution Int
     strength     String
     weakness     String
-    paper        Paper  @relation(fields: [paperId], references: [id])
-    paperId      Int
+
+    reviewer   User @relation(fields: [reviewerID], references: [id])
+    reviewerID Int
+
+    paper   Paper @relation(fields: [paperId], references: [id])
+    paperId Int
 }
 
 model Session {
-    id        Int    @id @default(autoincrement())
-    title     String @unique
-    presenter String
-    location  String
-    date      String
-    time      String
-     paper     Paper[]
+    id    Int    @id @default(autoincrement())
+    title String @unique
+
+    presenter Author @relation(fields: [presentID], references: [id])
+    presentID Int
+
+    location Location @relation(fields: [locID], references: [id])
+    locID    Int
+
+    date   Condates @relation(fields: [dateID], references: [id])
+    dateID Int
+
+    time   Time    @relation(fields: [timeID], references: [id])
+    timeID Int
+
+    papers  Paper[]
 }
 
 model Location {
-    id         Int      @id @default(autoincrement())
-    value      String   @unique
-    name       String
-
+    id       Int       @id @default(autoincrement())
+    value    String    @unique
+    name     String
+    sessions Session[]
 }
 
-model institution {
-    value String @unique
-    name  String
+model Institution {
+    id      Int      @id @default(autoincrement())
+    value   String   @unique
+    name    String
+    authors Author[]
 }
 
 model Condates {
-    date       String   @unique
+    id       Int       @id @default(autoincrement())
+    date     String    @unique
+    sessions Session[]
 }
