@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+    provider = "prisma-client-js"
+}
+
+generator dbml {
+    provider = "prisma-dbml-generator"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+//create a new model called user with the following fields id, first_name, last_name, password, role
+model User {
+    id         Int    @id @default(autoincrement())
+    first_name String
+    last_name  String
+    password   String
+    role       String
+}
+
+model Time {
+    time String @id @default(uuid())
+}
+
+model Paper {
+    id        Int      @id @default(autoincrement())
+    title     String
+    author    Author[]
+    abstract  String
+    presenter Int
+    review    Review[]
+    session   Session @relation(fields: [sessionId], references: [id])
+    sessionId Int
+}
+
+model Author {
+    id          Int    @id @default(autoincrement())
+    fname       String
+    lname       String
+    email       String @unique
+    affiliation String
+    paper       Paper  @relation(fields: [paperId], references: [id])
+    paperId     Int
+}
+
+model Review {
+    id           Int    @id @default(autoincrement())
+    evaluation   String
+    contribution String
+    strength     String
+    weakness     String
+    paper        Paper  @relation(fields: [paperId], references: [id])
+    paperId      Int
+}
+
+model Session {
+    id        Int    @id @default(autoincrement())
+    title     String @unique
+    presenter String
+    location  String
+    date      String
+    time      String
+     paper     Paper[]
+}
+
+model Location {
+    id         Int      @id @default(autoincrement())
+    value      String   @unique
+    name       String
+
+}
+
+model institution {
+    value String @unique
+    name  String
+}
+
+model Condates {
+    date       String   @unique
+}
