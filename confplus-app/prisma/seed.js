@@ -13,16 +13,16 @@ const seed = async () => {
     
 
     try{
-        const data1 = await fs.readFileSync('../data/users.json', 'utf8');
+        const data1 = await fs.readFileSync('./data/users.json', 'utf8');
         const usersData = JSON.parse(data1);
 
-        const data2 = await fs.readFileSync('../data/institutions.json', 'utf8');
+        const data2 = await fs.readFileSync('./data/institutions.json', 'utf8');
         const institutions = JSON.parse(data2);
 
-        const data3 = await fs.readFileSync('../data/locations.json', 'utf8');
+        const data3 = await fs.readFileSync('./data/locations.json', 'utf8');
         const locations = JSON.parse(data3);
 
-        const data4 = await fs.readFileSync('../data/times.json', 'utf8');
+        const data4 = await fs.readFileSync('./data/times.json', 'utf8');
         const times = JSON.parse(data4);
 
         for(let user of usersData){
