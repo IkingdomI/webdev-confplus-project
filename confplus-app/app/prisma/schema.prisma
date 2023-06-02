@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+//create a new model called user with the following fields id, first_name, last_name, password, role
+model User {
+  id         Int        @id @default(autoincrement())
+  first_name String
+  last_name  String
+  email      String     @unique
+  password   String
+  role       String
+  author     Author?
+  reviewer   Reviewer?
+  organizer  Organizer?
+}
+
+model Time {
+  id       Int       @id @default(autoincrement())
+  time     String    @unique
+  sessions Session[]
+}
+
+model Organizer {
+  organizer User      @relation(fields: [id], references: [id])
+  id        Int       @id
+  sessions  Session[]
+}
+
+model Paper {
+  id          Int         @id @default(autoincrement())
+  title       String
+  author      Author      @relation(fields: [authorId], references: [id])
+  authorId    Int
+  authorAff   Institution @relation(fields: [authorAffId], references: [id])
+  authorAffId Int
+  coAuthors   CoAuthor[]
+  abstract    String
+  presenter   Int
+  reviews     Review[]
+  status      String
+  session     Session     @relation(fields: [sessionId], references: [id])
+  sessionId   Int
+  pdf         PDF?
+}
+
+model CoAuthor {
+  fname       String
+  lname       String
+  email       String
+  paper       Paper       @relation(fields: [paperId], references: [id])
+  paperId     Int
+  affiliation Institution @relation(fields: [affilId], references: [id])
+  affilId     Int
+
+  @@id([email, paperId])
+}
+
+model Author {
+  author User    @relation(fields: [id], references: [id])
+  id     Int     @id
+  papers Paper[]
+}
+
+model Reviewer {
+  reviewer User     @relation(fields: [id], references: [id])
+  id       Int      @id
+  reviews  Review[] //We will enforce the relationship based on roles.
+}
+
+model Review {
+  id           Int    @id @default(autoincrement())
+  evaluation   Int
+  contribution Int
+  strength     String
+  weakness     String
+
+  reviewer   Reviewer @relation(fields: [reviewerID], references: [id])
+  reviewerID Int
+
+  paper   Paper @relation(fields: [paperId], references: [id])
+  paperId Int
+}
+
+model Session {
+  id     Int    @id @default(autoincrement())
+  title  String @unique
+  status String
+
+  organizer   Organizer @relation(fields: [organizerId], references: [id])
+  organizerId Int
+
+  location Location @relation(fields: [locID], references: [id])
+  locID    Int
+
+  date   Condates @relation(fields: [dateID], references: [id])
+  dateID Int
+
+  time   Time @relation(fields: [timeID], references: [id])
+  timeID Int
+
+  papers Paper[]
+
+  @@unique([dateID, timeID])
+}
+
+model Location {
+  id       Int       @id @default(autoincrement())
+  value    String    @unique
+  name     String
+  sessions Session[]
+}
+
+model Institution {
+  id        Int        @id @default(autoincrement())
+  value     String     @unique
+  name      String
+  coAuthors CoAuthor[]
+  papers    Paper[]
+}
+
+model Condates {
+  id       Int       @id @default(autoincrement())
+  date     String    @unique
+  sessions Session[]
+}
+
+model PDF {
+  name    String @id
+  content Bytes
+  paper   Paper  @relation(fields: [paperId], references: [id])
+  paperId Int    @unique
+}
