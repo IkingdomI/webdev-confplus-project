@@ -8,7 +8,7 @@ export default function StaffLayout({ children }) {
     <>
       <Header />
       {children}
-      <footer>bye</footer>
+      <footer></footer>
     </>
   );
 }

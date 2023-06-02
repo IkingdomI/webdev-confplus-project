@@ -17,13 +17,13 @@ export default async function Header({ params}) {
         />
       </div>
       <nav className="flex flex-col items-center md:justify-center">
-        <ul className="flex flex-col md:flex-row md:gap-3 md:items-center   text-center w-fit">
+        <ul className="flex flex-row gap-2 items-center md:gap-3 text-center w-fit">
           <li>
             <a className="hover:text-teal-700" href="/">
               Home
             </a>
           </li>
-          <li className="transition ease-out delay-100  hover:scale-110 hover:bg-violet-600 duration-300 hover:cursor-pointer text-white rounded-xl py-1 px-2 border bg-violet-800 w-fit">
+          <li className="transition ease-out delay-100  hover:scale-110 hover:bg-violet-600 duration-300 hover:cursor-pointer text-white rounded-xl py-1 px-2  bg-violet-800 w-fit">
             <a href="/login">Staff</a>
           </li>
           {user && <Logout />}
@@ -36,7 +36,7 @@ export default async function Header({ params}) {
 
 function Logout() {
   return (
-    <li className="transition ease-out delay-100  hover:scale-110 hover:bg-violet-600 duration-300 hover:cursor-pointer text-white rounded-xl py-1 px-2 border bg-violet-800 w-fit">
+    <li className="transition ease-out delay-100  hover:scale-110 hover:bg-violet-600 duration-300 hover:cursor-pointer text-white rounded-xl py-1 px-2  bg-violet-800 w-fit">
       <Link href="/logout">Logout</Link>
     </li>
   );
