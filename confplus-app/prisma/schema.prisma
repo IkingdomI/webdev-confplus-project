@@ -18,9 +18,13 @@ model User {
     id         Int      @id @default(autoincrement())
     first_name String
     last_name  String
+    email      String   @unique
     password   String
     role       String
-    reviews    Review[] //We will enforce the relationship based on roles.
+    author     Author?
+    reviewer   Reviewer?
+    organizer  Organizer?
+    
 }
 
 model Time {
@@ -29,31 +33,50 @@ model Time {
     sessions Session[]
 }
 
+model Organizer{
+  organizer   User  @relation(fields: [id], references: [id])
+  id    Int     @id
+  sessions Session[]
+}
+
 model Paper {
     id        Int      @id @default(autoincrement())
     title     String
-    authors   Author[]
+    author    Author  @relation(fields: [authorId], references: [id])
+    authorId  Int
+    authorAff   Institution @relation(fields: [authorAffId], references: [id])
+    authorAffId   Int
+    coAuthors CoAuthor[]
     abstract  String
     presenter Int
     reviews   Review[]
-    score     Float?
+    status     String
     session   Session  @relation(fields: [sessionId], references: [id])
     sessionId Int
+    pdf       PDF?
 }
 
-model Author {
-    id          Int         @id @default(autoincrement())
-    fname       String
-    lname       String
-    email       String      @unique
+model CoAuthor{
+  fname String
+  lname String
+  email  String
+  paper Paper @relation(fields: [paperId], references: [id])
+  paperId Int
+  affiliation   Institution @relation(fields: [affilId], references: [id])
+  affilId   Int
+  @@id([email, paperId])
+}
 
-    paper       Paper       @relation(fields: [paperId], references: [id])
-    paperId     Int
+model Author { 
+    author User  @relation(fields: [id], references: [id])
+    id    Int    @id 
+    papers   Paper[] 
+}
 
-    affiliation Institution @relation(fields: [instID], references: [id])
-    instID      Int
-
-    sessions Session[]
+model Reviewer {
+  reviewer User  @relation(fields: [id], references: [id])
+  id    Int    @id 
+  reviews    Review[] //We will enforce the relationship based on roles.
 }
 
 model Review {
@@ -63,7 +86,7 @@ model Review {
     strength     String
     weakness     String
 
-    reviewer   User @relation(fields: [reviewerID], references: [id])
+    reviewer   Reviewer @relation(fields: [reviewerID], references: [id])
     reviewerID Int
 
     paper   Paper @relation(fields: [paperId], references: [id])
@@ -73,20 +96,22 @@ model Review {
 model Session {
     id    Int    @id @default(autoincrement())
     title String @unique
+    status  String
 
-    presenter Author @relation(fields: [presentID], references: [id])
-    presentID Int
-
+    organizer Organizer @relation(fields: [organizerId], references: [id])
+    organizerId   Int
+    
     location Location @relation(fields: [locID], references: [id])
     locID    Int
 
     date   Condates @relation(fields: [dateID], references: [id])
     dateID Int
 
-    time   Time    @relation(fields: [timeID], references: [id])
+    time   Time @relation(fields: [timeID], references: [id])
     timeID Int
 
-    papers  Paper[]
+    papers Paper[]
+    @@unique([dateID, timeID])
 }
 
 model Location {
@@ -100,11 +125,20 @@ model Institution {
     id      Int      @id @default(autoincrement())
     value   String   @unique
     name    String
-    authors Author[]
+    coAuthors CoAuthor[]
+    papers     Paper[]
+
 }
 
 model Condates {
     id       Int       @id @default(autoincrement())
     date     String    @unique
     sessions Session[]
+}
+
+model PDF {
+    name    String @id
+    content Bytes
+    paper   Paper  @relation(fields: [paperId], references: [id])
+    paperId Int  @unique
 }
