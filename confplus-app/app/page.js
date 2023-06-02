@@ -25,7 +25,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="w-96">
+        <div className="w-96 mt-4">
           <div className="flex justify-between w-full">
             <h1>Here is our schedule</h1>
             <select></select>
