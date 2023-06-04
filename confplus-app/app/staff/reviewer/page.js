@@ -18,7 +18,15 @@ export default function ReviewerPage() {
 
   const [showReviewedPapers, setShowReviewedPapers] = useState(true);
   const [showNotReviewedPapers, setShowNotReviewedPapers] = useState(true);
-
+  
+  window.addEventListener("resize", () => {
+    // console.log("scream");
+    if (document.documentElement.clientWidth > 768){
+      setShowReviewedPapers(true);
+      setShowNotReviewedPapers(true);
+    };
+  });
+  
   return (
     <main className="mt-4 h-full w-full flex flex-col items-center gap-4">
       <h1 className="mb-6 mt-4">
@@ -69,4 +77,3 @@ export default function ReviewerPage() {
     </main>
   );
 }
-

@@ -19,6 +19,13 @@ export default function AuthorPage() {
   const [showSubmittedPapers, setShowSubmittedPapers] = useState(true);
   const [showNewPaper, setShowNewPaper] = useState(true);
 
+  window.addEventListener("resize", () => {
+    if (document.documentElement.clientWidth > 768) {
+      setShowSubmittedPapers(true);
+      setShowNewPaper(true);
+    }
+  });
+
   return (
     <main className="mt-4 h-full w-full flex flex-col items-center gap-4">
       <h1 className="mb-6 mt-4">

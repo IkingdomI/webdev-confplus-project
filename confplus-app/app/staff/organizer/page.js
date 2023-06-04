@@ -17,7 +17,16 @@ export default function OrganizerPage() {
   }, []);
 
   const [showPublishedSessions, setShowPublishedSessions] = useState(true);
+  const [showAcceptedPapers, setShowAcceptedPapers] = useState(true);
   const [showNewSession, setShowNewSession] = useState(true);
+
+  window.addEventListener("resize", () => {
+    if (document.documentElement.clientWidth > 768) {
+      setShowPublishedSessions(true);
+      setShowAcceptedPapers(true);
+      setShowNewSession(true);
+    }
+  });
 
   return (
     <main className="mt-4 h-full w-full flex flex-col items-center gap-4">
@@ -47,6 +56,26 @@ export default function OrganizerPage() {
         </div>
         <div className="w-full flex flex-col gap-2 items-center md:max-w-sm">
           <div className="flex gap-2 justify-between">
+            <h3 className="">Accepted Papers</h3>
+            <button
+              onClick={() => {
+                setShowAcceptedPapers(!showAcceptedPapers);
+              }}
+              className="text-2xl bg-slate-300 rounded-lg hover:bg-slate-400 md:hidden"
+            >
+              {showAcceptedPapers ? <FiChevronsDown /> : <FiChevronsUp />}
+            </button>
+          </div>
+          {showAcceptedPapers ? (
+            <div className="border-2 rounded w-full text-center text-gray-400 italic">
+              <AcceptedPapers />
+            </div>
+          ) : (
+            <div className="border-t-2 w-full">&nbsp;</div>
+          )}
+        </div>
+        <div className="w-full flex flex-col gap-2 items-center md:max-w-sm">
+          <div className="flex gap-2 justify-between">
             <h3>New Session</h3>
             <button
               onClick={() => {
@@ -65,9 +94,6 @@ export default function OrganizerPage() {
             <div className="border-t-2 w-full">&nbsp;</div>
           )}
         </div>
-        <div>
-          <h3 className="">Accepted Papers</h3>
-        </div>
       </div>
     </main>
   );
@@ -77,9 +103,15 @@ function PublishedSessions({ sessions }) {
   return <>No Session Published</>;
 }
 
+function AcceptedPapers() {
+  return <>No Accepted Papers Submitted</>;
+}
+
 function NewSessionForm({ author, coauthors, setCoauthors }) {
   return (
     <form className="flex flex-col gap-2 px-6 py-4 text-slate-950 not-italic">
+      <div className="w-full border rounded">Test</div>
+
       <div className="flex flex-col gap-2 items-start">
         <input type="text" name="title" placeholder="Title" required />
         <label htmlFor="date">Date</label>
