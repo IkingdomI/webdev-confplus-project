@@ -19,10 +19,6 @@ export async function readUsers(){
 
 
 export async function readUser(id){
-	
-
-
-
 	const data = await fs.readFile("data/users.json");
 	const users = JSON.parse(data);
 
