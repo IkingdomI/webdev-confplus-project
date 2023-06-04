@@ -1,7 +1,5 @@
 
-
 const fs = require('fs');
-
 
 
 const {PrismaClient} = require("@prisma/client");
@@ -24,7 +22,10 @@ const seed = async () => {
 
         const data4 = await fs.readFileSync('./data/times.json', 'utf8');
         const times = JSON.parse(data4);
-
+/*
+        const data5 = await fs.readFileSync('./data/conference-dates.json', 'utf8');
+        const condates = JSON.parse(data5);
+*/
         for(let user of usersData){
             await prisma.User.create({
                 data:{
@@ -69,8 +70,15 @@ const seed = async () => {
                     }
             })
         }
-
-       
+        /*
+        for(let d of condates){
+            await prisma.condates.create({
+                data:{
+                    date: d.date
+                    }
+            })
+        }
+       */
 
 
 

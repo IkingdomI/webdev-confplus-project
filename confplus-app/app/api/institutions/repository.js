@@ -1,8 +1,13 @@
-import {promises as fs} from 'fs';
+import path from "path";
+import { promises as fs } from "fs";
 
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
+const dataPath = path.join(process.cwd(), "../data/institutions.json");
 
 export async function readInstitutions(){
-    const data = await fs.readFile("data/institutions.json");
-    const institutions = JSON.parse(data);
+
+   const institutions= await prisma.institution.findMany();
     return institutions;
 }
