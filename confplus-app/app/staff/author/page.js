@@ -19,6 +19,7 @@ export default function AuthorPage() {
   const [showSubmittedPapers, setShowSubmittedPapers] = useState(true);
   const [showNewPaper, setShowNewPaper] = useState(true);
 
+  // reset the layout if someone messed with expanding/collapsing divs
   window.addEventListener("resize", () => {
     if (document.documentElement.clientWidth > 768) {
       setShowSubmittedPapers(true);
@@ -93,9 +94,9 @@ function NewPaperForm({ author, coauthors, setCoauthors }) {
         <input type="file" name="file" accept=".pdf" required />
 
         <label htmlFor="author">Author</label>
-        <input type="text" name="author" placeholder="First Name" disabled />
-        <input type="text" name="author" placeholder="Last Name" disabled />
-        <input type="text" name="author" placeholder="Email" disabled />
+        <input className="text-slate-600" type="text" name="author" placeholder="First Name" disabled value={author.first_name}/>
+        <input className="text-slate-600" type="text" name="author" placeholder="Last Name" disabled value={author.last_name}/>
+        <input className="text-slate-600" type="text" name="author" placeholder="Email" disabled value={author.email}/>
 
         <select>
           <option value="none">Affiliation</option>
@@ -131,7 +132,7 @@ function NewPaperForm({ author, coauthors, setCoauthors }) {
         <div className="xl:overflow-auto xl:max-h-[350px] xl:pr-2">
           {coauthors.map((coauthor, index) => {
             return (
-              <div className="flex gap-2 flex-col" key={coauthor.id}>
+              <div className="mb-2 flex gap-2 flex-col" key={coauthor.id}>
                 <label htmlFor="coauthor">Coauthor #{index + 1}</label>
                 <input
                   type="text"
@@ -151,6 +152,9 @@ function NewPaperForm({ author, coauthors, setCoauthors }) {
                   placeholder="Email"
                   disabled
                 />
+                <select>
+                  <option value="none">Affiliation</option>
+                </select>
               </div>
             );
           })}
