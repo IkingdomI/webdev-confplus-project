@@ -2,7 +2,7 @@ import * as repo from '../repository.js';
 
 
 
-export async function GET(request ,{ params}){
+export async function GET(request, {params}){
     try{
         const {id} = params;
         const user = await repo.readUser(id);

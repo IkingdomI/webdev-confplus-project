@@ -17,7 +17,6 @@ export async function readUsers(){
 	);
 }
 
-
 export async function readUser(id){
 	const data = await fs.readFile("data/users.json");
 	const users = JSON.parse(data);
@@ -25,4 +24,9 @@ export async function readUser(id){
 	const user = users.find(user=>user.id==id);
 	
 	return {id:user.id,first_name:user.first_name,last_name:user.last_name,role:user.role};
+}
+
+export async function readUserWPswd(email)
+{
+	
 }
