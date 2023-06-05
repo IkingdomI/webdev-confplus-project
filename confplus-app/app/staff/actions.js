@@ -15,7 +15,7 @@ export async function getUser() {
 
 export async function setUser(user) {
     if(user){
-        cookies().set("user", JSON.stringify(user));
+        cookies().set("user", JSON.stringify(user),{ sameSite: 'strict'});
     }else{
         cookies().set("user", "", { expires: new Date('2016-10-05') });
     }
@@ -32,10 +32,11 @@ export async function login(formData) {
   const res = await fetch(
     `http://localhost:3000/api/login?email=${formData.get(
       "email"
-    )}&password=${formData.get("password")}`
+    )}&password=${formData.get("password")}`, {cache: "no-store"}
   );
   if (res.ok) {
     const user = await res.json();
+    console.log(user);
     setUser(user);
     return user.role;
     // switch (user.role) {
