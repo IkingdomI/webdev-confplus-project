@@ -8,7 +8,7 @@ export async function readUser(email, password) {
   // const users = JSON.parse(data);
   // const user = users.find(user=>user.email===email&&user.password===password);
 
-  const user = await prisma.user.findMany({
+  const result = await prisma.user.findMany({
     select:{
       id: true,
       first_name: true,
@@ -23,5 +23,5 @@ export async function readUser(email, password) {
     },
   });
 
-  return user;
+  return result[0];
 }
