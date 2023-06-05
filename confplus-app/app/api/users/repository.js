@@ -1,4 +1,7 @@
 import {promises as fs} from 'fs';
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function readUsers(){
 	const data = await fs.readFile("data/users.json");
@@ -28,5 +31,5 @@ export async function readUser(id){
 
 export async function readUserWPswd(email)
 {
-	
+
 }
