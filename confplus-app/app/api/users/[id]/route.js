@@ -38,7 +38,7 @@ export async function GET(request, { params })
 
 		return Response.json(
 			{
-				message: "Internal Server Error."
+				message: error.message
 			},
 			{
 				status: 500
