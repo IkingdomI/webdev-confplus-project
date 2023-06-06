@@ -93,7 +93,7 @@ model Review {
 model Session {
   id     Int    @id @default(autoincrement())
   title  String @unique
-  status String
+  status String @default("not approved")
 
   organizer   Organizer @relation(fields: [organizerId], references: [id])
   organizerId Int
@@ -109,7 +109,7 @@ model Session {
 
   papers Paper[]
 
-  @@unique([dateID, timeID])
+  @@unique([dateID, timeID, locID])
 }
 
 model Location {
