@@ -1,10 +1,55 @@
+import { PrismaClient } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { promises as fs } from "fs";
 
 const path = "data/schedule.json"
 
+let prisma = null;
+
+if (!prisma)
+	prisma = new PrismaClient();
+
 export async function createSession(obj)
 {
-	const res = await fs.readFile(path);
+	const data = {
+		title: obj.title,
+		organizerId: obj.organizerId,
+		locID: obj.locID,
+		timeID: obj.timeID,
+		dateID: obj.dateID
+	}
+
+	//console.log(data);
+
+	try {
+		const session = await prisma.session.create({
+			data
+		});
+
+		return { error: 0, payload: session };
+	}
+	catch (e)
+	{
+		console.log(e.message);
+
+		if (e instanceof PrismaClientKnownRequestError)
+		{
+			if (e.code === "P2002")
+			{
+				return { error: 1, message: "Unique constraint violated" };
+			}
+			else if (e.code === "P2003")
+			{
+				//console.log(e.meta);
+
+				return { error: 2, message: "Foreign key constraint violated" };
+			}
+		}
+
+		return { error: 10, message: "Internal Server Error" };
+	}
+
+	/* const res = await fs.readFile(path);
 	const sessions = await JSON.parse(res);
 	const papers = await JSON.parse(await fs.readFile("data/papers.json"));
 
@@ -41,12 +86,55 @@ export async function createSession(obj)
 
 	await fs.writeFile(path, JSON.stringify(sessions));
 
-	return session
+	return session */
 }
 
 export async function readSessions(date)
 {
-	const res = await fs.readFile(path);
+	const query = {
+		select: {
+			id: true,
+			title: true,
+			status: true,
+			organizerId: true,
+			locID: true,
+			timeID: true,
+			dateID: true,
+			papers: true
+		}
+	};
+
+	try {
+		let sessions = null;
+
+		if (date)
+		{
+			sessions = await prisma.session.findMany({
+				...query,
+				where: {
+					date: {
+						date
+					}
+				}
+			});
+		}
+		else
+		{
+			sessions = await prisma.session.findMany({
+				...query
+			});
+		}
+
+		return { error: 0, payload: sessions };
+	}
+	catch (e)
+	{
+		console.error(e.message);
+
+		return { error: 1, message: "Internal Server Error" }
+	}
+
+	/* const res = await fs.readFile(path);
 	let sessions = await JSON.parse(res);
 
 	if (date)
@@ -54,7 +142,7 @@ export async function readSessions(date)
 		sessions = sessions.filter(s => s.date === date);
 	}
 
-	return sessions;
+	return sessions; */
 }
 
 export async function readSession(title)
