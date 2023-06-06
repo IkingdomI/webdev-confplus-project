@@ -1,23 +1,51 @@
-import {promises as fs} from 'fs';
+import { promises as fs } from 'fs';
 import { PrismaClient } from "@prisma/client";
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 const prisma = new PrismaClient();
 
-export async function readUsers(){
-	const data = await fs.readFile("data/users.json");
-	const users = JSON.parse(data);
-
-	// const user = users.find(user=>user.id==id);
-	
-	return users.map(u => u =
-		{
-			id: u.id,
-			first_name: u.first_name,
-			last_name: u.last_name,
-			email: u.email,
-			role: u.role
+export async function readUsers(role){
+	const query = {
+		where: {
+			role: role
 		}
-	);
+	};
+	
+	try {
+		let users = null;
+		
+		if (role === "author" || role === "reviewer" || role === "organizer")
+		{
+			users = await prisma.user.findMany({
+				...query,
+				select: {
+					id: true,
+					email: true,
+					first_name: true,
+					last_name: true,
+					role: true
+				}
+			});
+		}
+		else
+		{
+			users = await prisma.user.findMany({
+				select: {
+					id: true,
+					email: true,
+					first_name: true,
+					last_name: true,
+					role: true
+				}
+			});
+		}
+
+		return { error: 0, payload: users}
+	}
+	catch (e)
+	{
+		console.error(e.message);
+	}
 }
 
 export async function readUser(id){
