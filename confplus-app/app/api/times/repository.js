@@ -7,17 +7,27 @@ const dataPath = path.join(process.cwd(), "../data/times.json");
 
 const prisma = new PrismaClient();
 
-  export async function readTimes() {
-    const times = await prisma.time.findMany();
-    return times;
-  }
-  /*
+export async function readTimes() {
+	try {
+		const times = await prisma.time.findMany();
+		
+		return { error: 0, payload: times };
+	}
+	catch (e)
+	{
+		console.error(e.message);
+
+		return { error: 1, message: "Internal Server Error" }
+	}
+}
+
+/*
  async readTimes()
 {
-    const timesRes = await fs.readFile(path);
-    const times = await JSON.parse(timesRes);
+	const timesRes = await fs.readFile(path);
+	const times = await JSON.parse(timesRes);
 
-    return times;
+	return times;
 }
 */
 
