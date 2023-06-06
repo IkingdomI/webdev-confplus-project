@@ -2,21 +2,47 @@ import * as repo from '../repository.js';
 
 
 
-export async function GET(request, {params}){
-    try{
-        const {id} = params;
-        const user = await repo.readUser(id);
-    
-    if(user){
-        return Response.json(user,{status:200});
-    }else{
-        return Response.json({message:"ID not found"},{status:404});
-    }
-    
-    }
-    catch(error){
-        console.log(error.message);
+export async function GET(request, { params }) 
+{
+	const { id } = params;
 
-        return Response.json({message: "Internal Server Error."},{status:500});
-    }
+	//console.log(typeof(id));
+
+	if (isNaN(Number(id)))
+	{
+		return Response.json(
+			{
+				message: "Invalid Parameters"
+			},
+			{
+				status: 400
+			}
+		);
+	}
+
+	const response = await repo.readUser(Math.floor(Number(id)));
+
+	if (response.error === 0) {
+		return Response.json(response.payload, { status: 200 });
+	} else if (response.error === 1) {
+		return Response.json(
+			{
+				message: response.message
+			},
+			{
+				status: 404
+			}
+		);
+	} else {
+		console.log(error.message);
+
+		return Response.json(
+			{
+				message: "Internal Server Error."
+			},
+			{
+				status: 500
+			}
+		);
+	}
 }

@@ -69,12 +69,36 @@ export async function readUsers(role) {
 }
 
 export async function readUser(id){
-	const data = await fs.readFile("data/users.json");
-	const users = JSON.parse(data);
+	const query = {
+		id: true,
+		email: true,
+		first_name: true,
+		last_name: true,
+		role: true,
+	};
 
-	const user = users.find(user=>user.id==id);
-	
-	return {id:user.id,first_name:user.first_name,last_name:user.last_name,role:user.role};
+	try {
+		const user = await prisma.user.findUnique({
+			select:
+			{
+				...query
+			},
+			where: {
+				id: Number(id)
+			}
+		});
+
+		if (user)
+			return { error: 0, payload: user };
+		else
+			return { error: 1, message: "The user you are looking for does not exist" };
+	}
+	catch (e)
+	{
+		console.error(e.message);
+
+		return { error: 2, message: "Cry mad about it" }
+	}
 }
 
 export async function readUserWPswd(email)
