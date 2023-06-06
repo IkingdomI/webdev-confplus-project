@@ -97,11 +97,41 @@ export async function readUser(id){
 	{
 		console.error(e.message);
 
-		return { error: 2, message: "Cry mad about it" }
+		return { error: 2, message: "Internal Server Error" }
 	}
 }
 
 export async function readUserWPswd(email)
 {
+	const query = {
+		id: true,
+		email: true,
+		first_name: true,
+		last_name: true,
+		role: true,
+		password: true
+	};
 
+	try {
+		const user = await prisma.user.findUnique({
+			select:
+			{
+				...query
+			},
+			where: {
+				email
+			}
+		});
+
+		if (user)
+			return { error: 0, payload: user };
+		else
+			return { error: 1, message: "The user you are looking for does not exist" };
+	}
+	catch (e)
+	{
+		console.error(e.message);
+
+		return { error: 2, message: "Something wrong happened with Prisma" }
+	}
 }
