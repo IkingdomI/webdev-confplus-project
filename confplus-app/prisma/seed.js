@@ -34,15 +34,39 @@ const seed = async () => {
                         // instructions: element.instructions,
                         // image: element.image,
                         // ingredients: element.ingredients
-                       id: user.id,
-                       first_name: user.first_name,
-                       last_name: user.last_name,
-                       email: user.email,
-                       password: user.password,
-                       role: user.role 
-        
+                        id: user.id,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        email: user.email,
+                        password: user.password,
+                        role: user.role
+                }
+            });
+
+            if (user.role === "author")
+            {
+                await prisma.author.create({
+                    data: {
+                        id: user.id
                     }
-            })
+                });
+            }
+            else if (user.role === "organizer")
+            {
+                await prisma.organizer.create({
+                    data: {
+                        id: user.id
+                    }
+                });
+            }
+            else if (user.role === "reviewer")
+            {
+                await prisma.reviewer.create({
+                    data: {
+                        id: user.id
+                    }
+                });
+            }
         }
 
         for(let inst of institutions){
