@@ -103,20 +103,16 @@ export async function readUser(id){
 
 export async function readUserWPswd(email)
 {
-	const query = {
-		id: true,
-		email: true,
-		first_name: true,
-		last_name: true,
-		role: true,
-		password: true
-	};
-
 	try {
 		const user = await prisma.user.findUnique({
 			select:
 			{
-				...query
+				id: true,
+				email: true,
+				first_name: true,
+				last_name: true,
+				role: true,
+				password: true
 			},
 			where: {
 				email
