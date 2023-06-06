@@ -2,108 +2,128 @@ import * as repo from "../repository.js";
 
 export async function GET(request, {params})
 {
-	try 
-	{
-		const {title} = params;
+	const { title } = params;
 
-		const session = await repo.readSession(title);
+	const res = await repo.readSession(title);
 
-		if (session)
-		{
-			return Response.json(
-				session,
-				{ status: 200 }
-			);
-		}
-		else
-		{
-			return Response.json(
-				{ message: "Session not found." },
-				{ status: 404 }
-			);
-		}
-	}
-	catch (error)
+	if (res.error === 0)
 	{
-		console.log(error.message);
-		
 		return Response.json(
-			{ message: "Internal Server Error." },
-			{ status: 500 }
+			res.payload,
+			{
+				status: 200
+			}
+		);
+	}
+	else if (res.error === 1)
+	{
+		return Response.json(
+			{
+				message: res.message
+			},
+			{
+				status: 404
+			}
+		);
+	}
+	else
+	{
+		return Response.json(
+			{
+				message: res.message
+			},
+			{
+				status: 500
+			}
 		);
 	}
 }
 
 export async function PATCH(request, {params})
 {
-	try 
+	const { title } = params;
+	const body = await request.json();
+
+	if (
+		("dateID" in body && !isNaN(Number(body.dateID))) ||
+		("timeID" in body && !isNaN(Number(body.timeID))) ||
+		("locID" in body && !isNaN(Number(body.locID)))
+	)
 	{
-		const {title} = params;
-		const body = await request.json();
+		const obj = {};
+		
+		if ("dateID" in body)
+			obj.dateID = Math.floor(Number(body.dateID))
+		if ("timeID" in body)
+			obj.timeID = Math.floor(Number(body.timeID))
+		if ("locID" in body)
+			obj.locID = Math.floor(Number(body.locID))
 
-		//We validate the values of these fields in client side.
-		if (
-			"date" in body ||
-			"time" in body ||
-			"location" in body
-		)
+		const res = await repo.updateSession(title, obj);
+
+		if (res.error === 0)
 		{
-			const session = await repo.updateSession(title, {
-				present_fname: body.present_fname,
-				present_lname: body.present_lname,
-				date: body.date,
-				time: body.time,
-				location: body.location
-			});
-
-			if (session)
-			{
-				if (session.message)
+			return Response.json(
+				res.payload,
 				{
-					if (session.message === "NO_SESSION")
-					{
-						return Response.json(
-							{ message: "Session not found." },
-							{ status: 404 }
-						);
-					}
-					else
-					{
-						return Response.json(
-							{ message: "Author not found." },
-							{ status: 404 }
-						);
-					}
+					status: 200
 				}
-
-				return Response.json(
-					session,
-					{ status: 200 }
-				);
-			}
-			else
-			{
-				return Response.json(
-					{ message: "Session not found." },
-					{ status: 404 }
-				);
-			}
+			);
+		}
+		else if (res.error === 1)
+		{
+			return Response.json(
+				{
+					message: res.message
+				},
+				{
+					status: 404
+				}
+			);
+		}
+		else if (res.error === 2)
+		{
+			return Response.json(
+				{
+					message: "A session is already booked for that location at that time and date"
+				},
+				{
+					status: 400
+				}
+			);
+		}
+		else if (res.error === 3)
+		{
+			return Response.json(
+				{
+					message: "The values entered for the foreign keys could not be found"
+				},
+				{
+					status: 404
+				}
+			);
 		}
 		else
 		{
 			return Response.json(
-				{ message: "Invalid parameters." },
-				{ status: 400 }
+				{
+					message: res.message
+				},
+				{
+					status: 500
+				}
 			);
 		}
 	}
-	catch (error)
+	else
 	{
-		console.log(error.message);
-		
 		return Response.json(
-			{ message: "Internal Server Error." },
-			{ status: 500 }
+			{
+				message: "Invalid Parameters"
+			},
+			{
+				status: 400
+			}
 		);
 	}
 }
