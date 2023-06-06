@@ -28,6 +28,12 @@ input[type="text"],input[type="email"]{
   box-sizing: border-box;
 }
 
+@layer components {
+  input[type="email"].login-input {
+    @apply bg-slate-300/20 w-80 py-2 px-4 rounded-full text-slate-100 placeholder:text-slate-100 border-0;
+  }
+}
+
 select{
   border: 1px solid #ccc;
   border-radius: 4px;

@@ -32,7 +32,7 @@ export default function loginCard() {
             }}
           >
             <input
-              className="bg-slate-300/20 w-80 py-2 px-4 rounded-full text-slate-100 placeholder:text-slate-100"
+              className="bg-slate-300/20 w-80 py-2 px-4 rounded-full text-slate-100 placeholder:text-slate-100 login-input"
               type="email"
               id="email"
               name="email"
