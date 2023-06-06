@@ -2,13 +2,34 @@ import { promises as fs } from 'fs';
 import { PrismaClient } from "@prisma/client";
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
-const prisma = new PrismaClient();
+let prisma = null 
 
-export async function readUsers(role){
+if (!prisma)
+	prisma = new PrismaClient();
+
+export async function readUsers(role) {
+	let list = null;
+
+	switch (role) {
+		case "author":
+			list = "papers"
+			break;
+		case "organizer":
+			list = "sessions"
+			break;
+		case "reviewer":
+			list = "reviews"
+			break;
+		default:
+			break;
+	}
+
 	const query = {
-		where: {
-			role: role
-		}
+		id: true,
+		email: true,
+		first_name: true,
+		last_name: true,
+		role: true,
 	};
 	
 	try {
@@ -17,13 +38,16 @@ export async function readUsers(role){
 		if (role === "author" || role === "reviewer" || role === "organizer")
 		{
 			users = await prisma.user.findMany({
-				...query,
+				where: {
+					role: role
+				},
 				select: {
-					id: true,
-					email: true,
-					first_name: true,
-					last_name: true,
-					role: true
+					...query,
+					[role]: {
+						select: {
+							[list]: true
+						}
+					}
 				}
 			});
 		}
@@ -31,11 +55,7 @@ export async function readUsers(role){
 		{
 			users = await prisma.user.findMany({
 				select: {
-					id: true,
-					email: true,
-					first_name: true,
-					last_name: true,
-					role: true
+					...query
 				}
 			});
 		}

@@ -23,16 +23,28 @@ model User {
   organizer  Organizer?
 }
 
-model Time {
-  id       Int       @id @default(autoincrement())
-  time     String    @unique
-  sessions Session[]
+model Author {
+  author User    @relation(fields: [id], references: [id])
+  id     Int     @id
+  papers Paper[]
+}
+
+model Reviewer {
+  reviewer User     @relation(fields: [id], references: [id])
+  id       Int      @id
+  reviews  Review[]
 }
 
 model Organizer {
   organizer User      @relation(fields: [id], references: [id])
   id        Int       @id
   sessions  Session[]
+}
+
+model Time {
+  id       Int       @id @default(autoincrement())
+  time     String    @unique
+  sessions Session[]
 }
 
 model Paper {
@@ -62,18 +74,6 @@ model CoAuthor {
   affilId     Int
 
   @@id([email, paperId])
-}
-
-model Author {
-  author User    @relation(fields: [id], references: [id])
-  id     Int     @id
-  papers Paper[]
-}
-
-model Reviewer {
-  reviewer User     @relation(fields: [id], references: [id])
-  id       Int      @id
-  reviews  Review[] //We will enforce the relationship based on roles.
 }
 
 model Review {
