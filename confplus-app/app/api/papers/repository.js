@@ -18,7 +18,11 @@ export async function createPaper(obj){
 export async function readPapers(){
 	try
 	{
-		const papers = await prisma.paper.findMany();
+		const papers = await prisma.paper.findMany({
+			include: {
+				authors: true,
+			}
+		});
 
 		return { error: 0, payload: papers }
 	}
