@@ -54,11 +54,11 @@ model Paper {
   authorId    Int
   // authorAff   Institution @relation(fields: [authorAffId], references: [id])
   // authorAffId Int
-  authors   PaperAuthor[]
+  authors     PaperAuthor[]
   abstract    String
   presenter   Int
   reviews     Review[]
-  status      String
+  status      String       @default("not approved")
   session     Session?     @relation(fields: [sessionId], references: [id])
   sessionId   Int?
   pdf         PDF?
@@ -93,7 +93,6 @@ model Review {
 model Session {
   id     Int    @id @default(autoincrement())
   title  String @unique
-  status String @default("not approved")
 
   organizer   Organizer @relation(fields: [organizerId], references: [id])
   organizerId Int

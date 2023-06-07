@@ -56,7 +56,6 @@ export async function readSessions(date)
 		select: {
 			id: true,
 			title: true,
-			status: true,
 			organizerId: true,
 			locID: true,
 			timeID: true,
@@ -104,7 +103,6 @@ export async function readSession(title)
 			select: {
 				id: true,
 				title: true,
-				status: true,
 				organizerId: true,
 				timeID: true,
 				locID: true,

@@ -1,7 +1,20 @@
 import { PrismaClient } from '@prisma/client';
-import {promises as fs} from 'fs';
+import { promises as fs } from 'fs';
 
 const prisma = new PrismaClient();
+
+const query = {
+	id: true,
+	title: true,
+	authorID: true,
+	authors: true,
+	abstract: true,
+	reviews: true,
+	presenter: true,
+	status: true,
+	sessionID: true,
+	pdf: true
+};
 
 export async function createPaper(obj){
 	const data = await fs.readFile("data/papers.json");
@@ -19,8 +32,8 @@ export async function readPapers(){
 	try
 	{
 		const papers = await prisma.paper.findMany({
-			include: {
-				authors: true,
+			select: {
+				...query
 			}
 		});
 
@@ -41,6 +54,9 @@ export async function readPaper(title)
 		const paper = await prisma.paper.findMany({
 			where: {
 				title
+			},
+			select: {
+				...query
 			}
 		});
 
