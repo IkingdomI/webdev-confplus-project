@@ -1,8 +1,21 @@
+'use client'
 import Image from "next/image";
 import Header from "./Header.js";
 import Footer from "./Footer";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+
+  const [dates, setDates] = useState([])
+
+  useEffect(() => {
+    fetch('/api/conference-dates')
+      .then(res => res.json())
+      .then(data => {setDates(data)})
+      
+    // console.log(dates);
+  }, [])
+
   return (
     <>
       <Header />
@@ -25,10 +38,19 @@ export default function Home() {
           />
         </div>
 
-        <div className="w-96 mt-4">
-          <div className="flex justify-between w-full">
+        <div className="mt-4 w-full">
+          <div className="flex gap-2 items-center w-full mb-3">
             <h1>Here is our schedule</h1>
-            <select></select>
+            <select className="w-fit">
+              {dates.map((date) => (
+                <option key={date.id} value={date.id}>
+                  {date.date}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="border w-full text-center">
+            No schedule for this date
           </div>
         </div>
       </main>

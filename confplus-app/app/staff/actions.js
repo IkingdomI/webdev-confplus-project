@@ -54,3 +54,7 @@ export async function login(formData) {
     return null;
   }
 }
+
+export async function submitPaper(formData){
+  console.log(formData);
+}

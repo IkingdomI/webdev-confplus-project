@@ -158,6 +158,13 @@
         "email": "zoeallen@author.com",
         "password": "password123",
         "role": "author"
+    },{
+      "id": 21,
+        "first_name": "Hassn",
+        "last_name": "Karim",
+        "email": "hasankarim@admin.com",
+        "password": "password123",
+        "role": "admin"
     }
 ]
 

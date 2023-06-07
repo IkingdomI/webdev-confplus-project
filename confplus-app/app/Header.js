@@ -1,8 +1,16 @@
-import {getUser} from "./staff/actions.js";
+'use client'
+import { getUser } from "./staff/actions.js";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
-export default async function Header({ params}) {
-  const user = await getUser();
+export default function Header() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getUser().then((user) => setUser(user));
+  }, []);
+
   return (
     <header className="flex flex-col items-center md:flex-row max-w-5xl md:justify-between md:p-6 w-full ">
       {/* <h1 className="text-center">ConfPlus</h1> */}

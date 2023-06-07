@@ -52,19 +52,19 @@ model Paper {
   title       String
   author      Author      @relation(fields: [authorId], references: [id])
   authorId    Int
-  authorAff   Institution @relation(fields: [authorAffId], references: [id])
-  authorAffId Int
-  coAuthors   CoAuthor[]
+  // authorAff   Institution @relation(fields: [authorAffId], references: [id])
+  // authorAffId Int
+  authors   PaperAuthor[]
   abstract    String
   presenter   Int
   reviews     Review[]
   status      String
-  session     Session     @relation(fields: [sessionId], references: [id])
-  sessionId   Int
+  session     Session?     @relation(fields: [sessionId], references: [id])
+  sessionId   Int?
   pdf         PDF?
 }
 
-model CoAuthor {
+model PaperAuthor {
   fname       String
   lname       String
   email       String
@@ -123,8 +123,8 @@ model Institution {
   id        Int        @id @default(autoincrement())
   value     String     @unique
   name      String
-  coAuthors CoAuthor[]
-  papers    Paper[]
+  authors PaperAuthor[]
+  // papers    Paper[]
 }
 
 model Condates {
