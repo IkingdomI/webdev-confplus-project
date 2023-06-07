@@ -1,12 +1,36 @@
 import * as repo from './repository.js'
 
-export async function GET(request){
-    try{
-        const institutions = await repo.readInstitutions();
-        return Response.json(institutions,{status:200});
-    }catch(error){
-        console.log(error.message);
+export async function GET(request)
+{
+	const res = await repo.readInstitutions();
 
-        return Response.json({message: "Internal Server Error."},{status:500});
-    }
+	if (res.error == 0)
+	{
+		return Response.json(
+			res.payload,
+			{
+				status: 200
+			}
+		);
+	}
+	else
+	{
+		return Response.json(
+			{
+				message: res.message
+			},
+			{
+				status: 500
+			}
+		);
+	}
+
+	/* try{
+		const institutions = await repo.readInstitutions();
+		return Response.json(institutions,{status:200});
+	}catch(error){
+		console.log(error.message);
+
+		return Response.json({message: "Internal Server Error."},{status:500});
+	} */
 }

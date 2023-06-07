@@ -58,7 +58,7 @@ model Paper {
   abstract    String
   presenter   Int
   reviews     Review[]
-  status      String       @default("not approved")
+  status      String       @default("pending")
   session     Session?     @relation(fields: [sessionId], references: [id])
   sessionId   Int?
   pdf         PDF?
@@ -78,8 +78,8 @@ model PaperAuthor {
 
 model Review {
   id           Int    @id @default(autoincrement())
-  evaluation   Int
-  contribution Int
+  evaluation   Int?
+  contribution Int?
   strength     String
   weakness     String
 

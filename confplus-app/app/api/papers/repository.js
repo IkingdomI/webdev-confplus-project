@@ -6,13 +6,13 @@ const prisma = new PrismaClient();
 const query = {
 	id: true,
 	title: true,
-	authorID: true,
+	authorId: true,
 	authors: true,
 	abstract: true,
 	reviews: true,
 	presenter: true,
 	status: true,
-	sessionID: true,
+	sessionId: true,
 	pdf: true
 };
 
