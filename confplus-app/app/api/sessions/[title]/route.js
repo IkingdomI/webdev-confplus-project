@@ -96,10 +96,10 @@ export async function PATCH(request, {params})
 		{
 			return Response.json(
 				{
-					message: "The values entered for the foreign keys could not be found"
+					message: res.message
 				},
 				{
-					status: 404
+					status: 400
 				}
 			);
 		}
@@ -130,34 +130,49 @@ export async function PATCH(request, {params})
 
 export async function DELETE(request, {params})
 {
-	try
-	{
-		const {title} = params;
+	const { title } = params;
+	const res = await repo.deleteSession(title);
 
-		const session = await repo.deleteSession(title);
-
-		if (session)
-		{
-			return Response.json(
-				session,
-				{ status: 200 }
-			);
-		}
-		else
-		{
-			return Response.json(
-				{ message: "Session not found." },
-				{ status: 404 }
-			);
-		}
-	}
-	catch (error)
+	if (res.error === 0)
 	{
-		console.log(error.message);
-		
 		return Response.json(
-			{ message: "Internal Server Error." },
-			{ status: 500 }
+			res.payload,
+			{
+				status: 200
+			}
 		);
-	}	
+	}
+	else if (res.error === 1)
+	{
+		return Response.json(
+			{
+				message: res.message
+			},
+			{
+				status: 404
+			}
+		);
+	}
+	else if (res. error === 2)
+	{
+		return Response.json(
+			{
+				message: res.message
+			},
+			{
+				status: 400
+			}
+		);
+	}
+	else
+	{
+		return Response.json(
+			{
+				message: res.message
+			},
+			{
+				status: 500
+			}
+		);
+	}
 }

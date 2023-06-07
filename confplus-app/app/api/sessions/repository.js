@@ -178,22 +178,33 @@ export async function deleteSession(title)
 {
 	try
 	{
+		const session = await prisma.session.delete({
+			where: {
+				title
+			}
+		});
 
+		if (session)
+		{
+			return { error: 0, payload: session };
+		}
+		else
+		{
+			return { error: 1, message: "Session not found" };
+		}
 	}
 	catch (e)
 	{
-		
+		console.error(e.message);
+
+		if (e instanceof PrismaClientKnownRequestError)
+		{
+			if (e.code === "P2003")
+			{
+				return { error: 2, message: "Foreign Key Violation" }
+			}
+		}
+
+		return { error: 3, message: "Internal Server Error" };
 	}
-
-	/* const sessions = await JSON.parse(await fs.readFile(path));
-	const index = sessions.findIndex(s => s.title === title);
-
-	if (index > -1)
-	{
-		const session = sessions.splice(index, 1);
-		await fs.writeFile(path, JSON.stringify(sessions));
-		return session;
-	}
-
-	return null; */
 }

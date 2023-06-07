@@ -1,58 +1,86 @@
+import { PrismaClient } from '@prisma/client';
 import {promises as fs} from 'fs';
 
-export async function readPapers(){
-    const data = await fs.readFile("data/papers.json");
-    let papers = JSON.parse(data);
-    // if (author){
-    //     papers = papers.filter((paper) => paper.author === author);
-    // }
-    console.log(papers);
-    if(papers.length>0)
-        return papers;
-    return null;
-}
+const prisma = new PrismaClient();
 
 export async function createPaper(obj){
-    const data = await fs.readFile("data/papers.json");
-    let papers = JSON.parse(data);
-    
-    
-    
-    papers.push(obj);
+	const data = await fs.readFile("data/papers.json");
+	let papers = JSON.parse(data);
+	
+	
+	
+	papers.push(obj);
 
-    await fs.writeFile("data/papers.json", JSON.stringify(papers));
-    return obj;
-
-
+	await fs.writeFile("data/papers.json", JSON.stringify(papers));
+	return obj;
 }
 
-export async function readPaperByTitle(title){
-    const data = await fs.readFile("data/papers.json");
-    let papers = JSON.parse(data);
+export async function readPapers(){
+	try
+	{
+		const papers = await prisma.paper.findMany();
 
-    let paper = papers.filter((p) => p.title.toLowerCase()===title.toLowerCase());
-    if(paper){
-        return paper;
-    }
-    return null;
-    
+		return { error: 0, payload: papers }
+	}
+	catch (e)
+	{
+		console.error(e.message);
+
+		return { error: 1, message: "Internal Server Error" };
+	}
+}
+
+export async function readPaper(title)
+{
+	try
+	{
+		const paper = await prisma.paper.findMany({
+			where: {
+				title
+			}
+		});
+
+		if (paper.length)
+		{
+			return { error: 0, payload: paper }
+		}
+		else
+		{
+			return { error: 1, message: "Paper not found" }
+		}
+	}
+	catch (e)
+	{
+		console.error(e.message);
+
+		return { error: 2, message: "Internal Server Error" }
+	}
+
+	/* const data = await fs.readFile("data/papers.json");
+	let papers = JSON.parse(data);
+
+	let paper = papers.filter((p) => p.title.toLowerCase()===title.toLowerCase());
+	if(paper){
+		return paper;
+	}
+	return null; */
 }
 
 export async function updatePaper(title, modPaper){
-    const data = await fs.readFile("data/papers.json");
-    let papers = JSON.parse(data);
+	const data = await fs.readFile("data/papers.json");
+	let papers = JSON.parse(data);
 
-    let index = papers.findIndex((p) => p.title.toLowerCase()===title.toLowerCase());
+	let index = papers.findIndex((p) => p.title.toLowerCase()===title.toLowerCase());
 
-    if(index !== -1){
-        papers[index] = {...papers[index], ...modPaper};
-        console.log(papers[index]);
+	if(index !== -1){
+		papers[index] = {...papers[index], ...modPaper};
+		console.log(papers[index]);
 
 
-        await fs.writeFile("data/papers.json", JSON.stringify(papers));
-        return papers[index];
-    }
-    
-    return null;
-    
+		await fs.writeFile("data/papers.json", JSON.stringify(papers));
+		return papers[index];
+	}
+	
+	return null;
+	
 }
