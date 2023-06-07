@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import {promises as fs} from 'fs';
-
+const prisma = new PrismaClient();
 
 
 export async function NoOfPapers(){
@@ -10,7 +10,8 @@ export async function NoOfPapers(){
 		},
 	});
 
-	console.log("Total Number of submitted papers: "+submittedPapers._count)
+	console.log("Total Number of submitted papers: "+submittedPapers._count.id)
+    
 
 	const acceptedPapers = await prisma.Paper.aggregate({
 		_count:{
@@ -21,7 +22,7 @@ export async function NoOfPapers(){
 		},
 	});
 
-	console.log("Number of accepted papers: "+acceptedPapers._count);
+	console.log("Number of accepted papers: "+acceptedPapers._count.id);
 
 	const rejectedPapers = await prisma.Paper.aggregate({
 		_count:{
@@ -32,9 +33,17 @@ export async function NoOfPapers(){
 		},
 	});
 
-	console.log("Number of rejected papers: "+rejectedPapers._count)
-
+	console.log("Number of rejected papers: "+rejectedPapers._count.id)
+    return ({
+        submitted: submittedPapers._count.id,
+        accepted: acceptedPapers._count.id,
+        rejected: rejectedPapers._count.id
+    });
 }
+
+
+
+
 
 
 export async function NoOfConfereneSessions(){

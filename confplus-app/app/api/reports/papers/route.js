@@ -1,4 +1,4 @@
-import repo from "././repository.js";
+import * as repo from "../repository.js";
 
 export async function GET(request) {
     try {
@@ -7,9 +7,9 @@ export async function GET(request) {
             // const { searchParams } = new URL(request.url);
             // const region = searchParams.get("region");
             // let recipes = await repo.getRecipes(region);
-            await repo.NoOfPapers();
+            let papersNum = await repo.NoOfPapers();
 
-            return Response.json( { status: 200 });
+            return Response.json(papersNum,  { status: 200 });
         } catch (e) {
             console.log(e);
         }
