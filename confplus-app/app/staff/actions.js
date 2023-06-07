@@ -58,3 +58,7 @@ export async function login(formData) {
 export async function submitPaper(formData){
   console.log(formData);
 }
+
+export async function submitReview(formData){
+  console.log(formData);
+}

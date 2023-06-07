@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getUser } from "../actions.js";
+import { getUser, submitReview } from "../actions.js";
 import { FiChevronsDown, FiChevronsUp } from "react-icons/fi";
-import { BiPlus, BiMinus } from "react-icons/bi";
+import { BiPlus, BiMinus, BiDownload } from "react-icons/bi";
 
 export default function ReviewerPage() {
   const [user, setUser] = useState(null);
@@ -16,7 +16,7 @@ export default function ReviewerPage() {
       setUser(user);
     });
 
-    fetch("/api/papers", { cache: "no-cache" })
+    fetch("/api/papers", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         setPapers(data);
@@ -101,7 +101,7 @@ export default function ReviewerPage() {
 
 function PaperCard({ paper, selectPaper, setSelectPaper }) {
   return (
-    <div className="not-italic text-slate-950 border-2 w-full rounded-md p-1">
+    <div className="flex flex-col items-center not-italic text-slate-950 border-2 w-full rounded-md p-1">
       <h4>{paper.title}</h4>
       <h5>
         {paper.authors
@@ -109,41 +109,87 @@ function PaperCard({ paper, selectPaper, setSelectPaper }) {
           .join(", ")}
       </h5>
 
+      <button className="flex items-center hover:underline gap-1">
+        Download <BiDownload />
+      </button>
       {selectPaper === paper.id ? (
-        <div className="border-t-2 w-full">Details</div>
+        <div className="border-t-2 w-full">
+          <ReviewForm paper={paper} />
+        </div>
       ) : (
         <></>
       )}
 
-      <button
-        className="font-bold text-slate-800 bg-slate-300 rounded-md hover:bg-slate-400 hover:text-slate-50 px-1"
-        onClick={() => {
-          setSelectPaper(paper.id);
-        }}
-      >
-        review
-      </button>
+      {selectPaper === paper.id ? (
+        <></>
+      ) : (
+        <button
+          className="font-bold text-slate-800 bg-slate-300 rounded-md hover:bg-slate-400 hover:text-slate-50 px-1"
+          onClick={() => {
+            setSelectPaper(paper.id);
+          }}
+        >
+          review
+        </button>
+      )}
     </div>
+  );
+}
 
-    // <div className="w-full flex flex-col gap-2 items-center md:max-w-sm">
-    //   <div className="flex gap-2 justify-between">
-    //     <h3>{paper.title}</h3>
-    //     <button
-    //       onClick={() => {
-    //         setShowDetails(!showDetails);
-    //       }}
-    //       className="text-2xl bg-slate-300 rounded-lg hover:bg-slate-400 md:hidden"
-    //     >
-    //       {showDetails ? <BiMinus /> : <BiPlus />}
-    //     </button>
-    //   </div>
-    //   {showDetails ? (
-    //     <div className="border-2 rounded w-full text-center text-gray-400 italic">
-    //       paper
-    //     </div>
-    //   ) : (
-    //     <div className="border-t-2 w-full">&nbsp;</div>
-    //   )}
-    // </div>
+function ReviewForm({ paper }) {
+  return (
+    <form className="flex flex-col gap-2 w-full mb-2"
+    action={submitReview}>
+      <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="evaluation">Overall Evaluation</label>
+          <select name="evaluation" className="border-2 rounded-md p-1">
+            <option value="2">Strong Accept</option>
+            <option value="1">Accept</option>
+            <option value="0">Borderline</option>
+            <option value="-1">Reject</option>
+            <option value="-2">Strong Reject</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="contribution">Paper Contribution</label>
+          <select name="contribution" className="border-2 rounded-md p-1">
+            <option value="5">Major Contribution</option>
+            <option value="4">Clear Contribution</option>
+            <option value="3">Decent Contribution</option>
+            <option value="2">Minor Contribution</option>
+            <option value="1">No Contribution</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="strengths">Paper Strengths</label>
+          <textarea
+            name="strengths"
+            className="border-2 rounded-md p-1"
+            rows="5"
+          ></textarea>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="weaknesses">Paper weaknesses</label>
+          <textarea
+            name="weaknesses"
+            className="border-2 rounded-md p-1"
+            rows="5"
+          ></textarea>
+        </div>
+      </div>
+
+      <input type="hidden" name="paperId" value={paper.id} />
+
+      <button
+        type="submit"
+        className="bg-slate-300 rounded-md hover:bg-slate-400 hover:text-slate-50 px-1"
+      >
+        Submit
+      </button>
+    </form>
   );
 }
