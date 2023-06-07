@@ -55,15 +55,6 @@ export async function readPaper(title)
 
 		return { error: 2, message: "Internal Server Error" }
 	}
-
-	/* const data = await fs.readFile("data/papers.json");
-	let papers = JSON.parse(data);
-
-	let paper = papers.filter((p) => p.title.toLowerCase()===title.toLowerCase());
-	if(paper){
-		return paper;
-	}
-	return null; */
 }
 
 export async function updatePaper(title, modPaper){

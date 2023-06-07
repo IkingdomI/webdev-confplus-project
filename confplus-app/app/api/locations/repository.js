@@ -13,6 +13,16 @@ if (!prisma)
 
 export async function readLocations()
 {
-	const locations= await prisma.location.findMany();
-	return locations;
+	try
+	{
+		const locations= await prisma.location.findMany();
+		
+		return { error: 0, payload: locations };
+	}
+	catch (e)
+	{
+		console.error(e.message);
+		
+		return { error: 1, message: "Internal Server Error" }
+	}
 }
