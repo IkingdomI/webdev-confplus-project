@@ -101,7 +101,9 @@ export async function readUser(id){
 		const user = await prisma.user.findUnique({
 			include: {
 				[temp.role]: {
-					[list]: true
+					select:{
+						[list]: true
+					}
 				}
 			},
 			where: {
