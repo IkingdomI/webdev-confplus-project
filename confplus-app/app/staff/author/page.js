@@ -112,7 +112,7 @@ function NewPaperForm({ authors, setAuthors, affiliations }) {
         <label className="mt-3 border-b-2 w-full pb-1" htmlFor="file">
           Upload Paper
         </label>
-        <input type="file" name="file" accept=".pdf" required />
+        <input type="file" name="file" accept=".pdf"/>
 
         {/* <label>Author</label>
         <input

@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getUser, submitReview } from "../actions.js";
+import { downloadPaper, getUser, submitReview } from "../actions.js";
 import { FiChevronsDown, FiChevronsUp } from "react-icons/fi";
 import { BiPlus, BiMinus, BiDownload } from "react-icons/bi";
+// import {downloadPaper} from "../actions.js";
+import Link from "next/link";
 
 export default function ReviewerPage() {
   const [user, setUser] = useState(null);
@@ -109,9 +111,19 @@ function PaperCard({ paper, selectPaper, setSelectPaper }) {
           .join(", ")}
       </h5>
 
-      <button className="flex items-center hover:underline gap-1">
+      {/* <button className="flex items-center hover:underline gap-1"
+      onClick={downloadPaper}>
         Download <BiDownload />
-      </button>
+      </button> */}
+      <Link
+        className="flex items-center hover:underline gap-1"
+        href={`/api/papers/${paper.id}/download`}
+        // download={`${paper.title}.pdf`}
+        target="_blank"
+      >
+        Download <BiDownload />
+      </Link>
+
       {selectPaper === paper.id ? (
         <div className="border-t-2 w-full">
           <ReviewForm paper={paper} />
@@ -137,9 +149,28 @@ function PaperCard({ paper, selectPaper, setSelectPaper }) {
 }
 
 function ReviewForm({ paper }) {
+  const [showAbstract, setShowAbstract] = useState(false);
+
   return (
-    <form className="flex flex-col gap-2 w-full mb-2"
-    action={submitReview}>
+    <form className="flex flex-col gap-2 w-full mb-2 items-center mt-1" action={submitReview}>
+      <div className="flex gap-2">
+        <label htmlFor="abstract">Abstract</label>
+        <button className="text-2xl bg-slate-300 rounded-lg hover:bg-slate-400 w-fit"
+        onClick={(e)=>{
+          e.preventDefault();
+          setShowAbstract(!showAbstract);
+        }}>
+          {" "}
+          {showAbstract ? <FiChevronsUp /> : <FiChevronsDown />}{" "}
+        </button>
+      </div>
+      <div className="border w-full">
+        {showAbstract ? (
+          <p className="p-2">{paper.abstract}</p>
+        ) : (
+          <></>
+        )}
+      </div>
       <div className="flex flex-col gap-2 w-full">
         <div className="flex flex-col gap-2">
           <label htmlFor="evaluation">Overall Evaluation</label>

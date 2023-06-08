@@ -19,44 +19,43 @@ const query = {
 export async function createPaper(paperObj, fileName, content){
 	// const data = await fs.readFile("data/papers.json");
 	// let papers = JSON.parse(data);
-	
-	
-	
 	// papers.push(obj);
 
 	// await fs.writeFile("data/papers.json", JSON.stringify(papers));
 	// return obj;
 	try{
-		console.log(paperObj);
+		// console.log(paperObj);
 
-		const paper = await prisma.paper.create({
+		const newPaper = await prisma.paper.create({
 			data: {
 				title: paperObj.title,
 				abstract: paperObj.abstract,
-				authorId: paperObj.authorId,
-				presenter: paperObj.presenter,
+				authorId: Number(paperObj.authorId),
+				presenter: Number(paperObj.presenter),
 				
 			}
 		});
+		console.log("newPaper", newPaper);
 
 		const authors = paperObj.PaperAuthors;
+		console.log("authors", authors);
 		authors.forEach(async (element) => {
 			await prisma.PaperAuthor.create({
 				data:{
 				fname: element.fname,
 				lname: element.lname, 
 				email: element.email, 
-				affilId: element.affilId,
-				paperId: paper.id
+				affilId: Number(element.affilId),
+				paperId: Number(newPaper.id)
 				}
 			})
 		});
 		
-		const pdf = await prisma.pdf.create({
+		await prisma.pDF.create({
 			data: {
 				name: fileName, 
 				content,
-				paperId: paper.id
+				paperId: Number(newPaper.id)
 			}
 		});
 	}catch(e){

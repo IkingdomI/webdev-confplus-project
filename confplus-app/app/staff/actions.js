@@ -2,6 +2,8 @@
 
 import { cookies } from "next/headers";
 import * as repo from '../api/papers/repository.js'
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 export async function isUserExist() {
   return cookies().get("user") !== undefined;
@@ -60,7 +62,7 @@ export async function submitPaper(formData){
   const author = await getUser();
   const authorId = author.id;
 
-  console.log(formData);
+  // console.log(formData);
   const paper = {
     title: formData.get('title'),
     abstract: formData.get('abstract'),
@@ -71,7 +73,7 @@ export async function submitPaper(formData){
 
 
   const authors = [];
-  const i = 1;
+  let i = 1;
   while(formData.get(`author-fname-${i}`)){
     const authorObj = {
       fname: formData.get(`author-fname-${i}`),
@@ -80,6 +82,7 @@ export async function submitPaper(formData){
       affilId: formData.get(`author-aff-${i}`),
     }
     authors.push(authorObj);
+    i++;
   }
 
   paper.PaperAuthors = authors;
@@ -88,8 +91,20 @@ export async function submitPaper(formData){
   const content = Buffer.from(await file.arrayBuffer());
   const fileName = file.name;
 
-  // await repo.createPaper(paper, fileName, content);
-  console.log("paper should be submitted");
+  await repo.createPaper(paper, fileName, content);
+  // console.log("paper should be submitted");
   
   return (true);
+}
+
+export async function downloadPaper(paperId){
+  const pdf = await prisma.pDF.findUnique({
+    where: {
+      paperId: Number(paperId)
+    }
+  });
+
+  const blob = new Blob([pdf.content], {type: 'application/pdf'});
+
+  return blob;
 }
