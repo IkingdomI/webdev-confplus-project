@@ -37,11 +37,11 @@ export async function GET(request, { params })
 	}
 	else
 	{
-		console.log(error.message);
+		console.log(response.message);
 
 		return Response.json(
 			{
-				message: error.message
+				message: response.message
 			},
 			{
 				status: 500
