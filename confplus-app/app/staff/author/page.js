@@ -93,26 +93,22 @@ function NewPaperForm({ authors, setAuthors, affiliations }) {
   return (
     <form
       className="flex flex-col gap-2 px-6 py-4 xl:max-h-[450px] xl:flex-wrap"
-
-      action={submitPaper}
+      action={async (formData) => {
+        const result = await submitPaper(formData);
+        if(result) {
+          alert("Paper submitted successfully");
+        }else{
+          alert("Error submitting paper");
+        }
+      }}
     >
       <div className="flex flex-col gap-2 xl:max-w-[276.7px] xl:order-1">
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          required
-        />
-        <input
-          type="text"
-          name="abstract"
-          placeholder="Abstract"
-          required
-        />
+        <input type="text" name="title" placeholder="Title" required />
+        <input type="text" name="abstract" placeholder="Abstract" required />
         <label className="mt-3 border-b-2 w-full pb-1" htmlFor="file">
           Upload Paper
         </label>
-        <input type="file" name="file" accept=".pdf"/>
+        <input type="file" name="file" accept=".pdf" />
 
         {/* <label>Author</label>
         <input
@@ -147,7 +143,6 @@ function NewPaperForm({ authors, setAuthors, affiliations }) {
             </option>
           ))} */}
         {/* </select> */}
-
       </div>
       <div className="flex flex-col gap-2 xl:order-3 xl:max-w-[263.3px]">
         <div className="flex border-b-2 items-center xl:w-[263.3px]">
@@ -171,7 +166,8 @@ function NewPaperForm({ authors, setAuthors, affiliations }) {
               onClick={(e) => {
                 e.preventDefault();
 
-                if (authors.length > 1) setAuthors([...authors.slice(0, authors.length - 1)]);
+                if (authors.length > 1)
+                  setAuthors([...authors.slice(0, authors.length - 1)]);
               }}
             >
               <BiMinus className="text-xl" />
@@ -221,7 +217,6 @@ function NewPaperForm({ authors, setAuthors, affiliations }) {
                 {`Author #${author.id}`}
               </option>
             ))}
-
           </select>
         </div>
       </div>

@@ -9,11 +9,30 @@ export default function OrganizerPage() {
   const [user, setUser] = useState(null);
   const [coauthors, setCoauthors] = useState([]);
 
+  const [dates, setDates] = useState([]);
+  const [times, setTimes] = useState([]);
+  const [locations, setLocations] = useState([]);
+
   useEffect(() => {
     getUser().then((user) => {
       console.log(user);
       setUser(user);
     });
+    fetch("/api/conference-dates")
+      .then((response) => response.json())
+      .then((data) => {
+        setDates(data);
+      });
+    fetch("/api/times")
+      .then((response) => response.json())
+      .then((data) => {
+        setTimes(data);
+      });
+    fetch("/api/locations")
+      .then((response) => response.json())
+      .then((data) => {
+        setLocations(data);
+      });
   }, []);
 
   const [showPublishedSessions, setShowPublishedSessions] = useState(true);
@@ -88,7 +107,11 @@ export default function OrganizerPage() {
           </div>
           {showNewSession ? (
             <div className="border-2 rounded w-full text-center text-gray-400 italic">
-              <NewSessionForm />
+              <NewSessionForm
+                dates={dates}
+                times={times}
+                locations={locations}
+              />
             </div>
           ) : (
             <div className="border-t-2 w-full">&nbsp;</div>
@@ -107,7 +130,7 @@ function AcceptedPapers() {
   return <>No Accepted Papers Submitted</>;
 }
 
-function NewSessionForm({ author, coauthors, setCoauthors }) {
+function NewSessionForm({ dates, times, locations }) {
   return (
     <form className="flex flex-col gap-2 px-6 py-4 text-slate-950 not-italic">
       <div className="w-full border rounded">Test</div>
@@ -116,15 +139,21 @@ function NewSessionForm({ author, coauthors, setCoauthors }) {
         <input type="text" name="title" placeholder="Title" required />
         <label htmlFor="date">Date</label>
         <select name="date">
-          <option value="none">16-04-2002</option>
+          {dates.map((date) => (
+            <option value={date.id}>{date.date}</option>
+          ))}
         </select>
         <label htmlFor="time">Time</label>
         <select name="time">
-          <option value="none">16:00-18:00</option>
+          {times.map((time) => (
+            <option value={time.id}>{time.time}</option>
+          ))}
         </select>
         <label htmlFor="location">Location</label>
         <select name="location">
-          <option value="none">wakra</option>
+          {locations.map((location) => (
+            <option value={location.id}>{location.name}</option>
+          ))}
         </select>
       </div>
 

@@ -6,24 +6,37 @@ import { FiChevronsDown, FiChevronsUp } from "react-icons/fi";
 import { BiPlus, BiMinus, BiDownload } from "react-icons/bi";
 // import {downloadPaper} from "../actions.js";
 import Link from "next/link";
+import { revalidatePath } from "next/cache.js";
 
 export default function ReviewerPage() {
   const [user, setUser] = useState(null);
-  const [papers, setPapers] = useState([]);
+  // const [papers, setPapers] = useState([]);
   const [selectPaper, setSelectPaper] = useState(0);
+  const [selectReview, setSelectReview] = useState(0);
+  const [reviews, setReviews] = useState([]);
+  const [reviewedPapers, setReviewedPapers] = useState([]);
 
   useEffect(() => {
     getUser().then((user) => {
       // console.log(user);
       setUser(user);
+      fetch("/api/papers/0/reviews/" + user.id + "?status=pending", {
+        cache: "no-store",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setReviews(data);
+          // console.log(data);
+        });
+      fetch("/api/papers/0/reviews/" + user.id + "?status=rated", {
+        cache: "no-store",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setReviewedPapers(data);
+          // console.log(data);
+        });
     });
-
-    fetch("/api/papers", { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => {
-        setPapers(data);
-        console.log(data);
-      });
   }, []);
 
   const [showReviewedPapers, setShowReviewedPapers] = useState(true);
@@ -56,8 +69,22 @@ export default function ReviewerPage() {
             </button>
           </div>
           {showReviewedPapers ? (
-            <div className="border-2 rounded w-full text-center text-gray-400 italic">
-              No papers Reviewed
+            <div className="border-2 rounded w-full text-center text-gray-400 italic p-2">
+              {reviewedPapers.length === 0 ? (
+                <>No Papers Reviewed</>
+              ) : (
+                reviewedPapers.map((review) => {
+                  return (
+                    <ReviewedPaperCard
+                      key={review.id}
+                      paper={review.paper}
+                      selectReview={selectReview}
+                      setSelectReview={setSelectPaper}
+                      reviewId={review.id}
+                    />
+                  );
+                })
+              )}
             </div>
           ) : (
             <div className="border-t-2 w-full">&nbsp;</div>
@@ -77,16 +104,17 @@ export default function ReviewerPage() {
           </div>
           {showNotReviewedPapers ? (
             <div className="border-2 rounded w-full text-center text-gray-400 italic p-2 gap-2 flex flex-col items-center">
-              {papers.length === 0 ? (
+              {reviews.length === 0 ? (
                 <>No Papers Waiting For Review</>
               ) : (
-                papers.map((paper) => {
+                reviews.map((review) => {
                   return (
                     <PaperCard
-                      key={paper.id}
-                      paper={paper}
+                      key={review.id}
+                      paper={review.paper}
                       selectPaper={selectPaper}
                       setSelectPaper={setSelectPaper}
+                      reviewId={review.id}
                     />
                   );
                 })
@@ -101,7 +129,7 @@ export default function ReviewerPage() {
   );
 }
 
-function PaperCard({ paper, selectPaper, setSelectPaper }) {
+function PaperCard({ paper, selectPaper, setSelectPaper, reviewId }) {
   return (
     <div className="flex flex-col items-center not-italic text-slate-950 border-2 w-full rounded-md p-1">
       <h4>{paper.title}</h4>
@@ -126,7 +154,7 @@ function PaperCard({ paper, selectPaper, setSelectPaper }) {
 
       {selectPaper === paper.id ? (
         <div className="border-t-2 w-full">
-          <ReviewForm paper={paper} />
+          <ReviewForm paper={paper} reviewId={reviewId} />
         </div>
       ) : (
         <></>
@@ -148,28 +176,38 @@ function PaperCard({ paper, selectPaper, setSelectPaper }) {
   );
 }
 
-function ReviewForm({ paper }) {
+function ReviewForm({ paper, reviewId }) {
   const [showAbstract, setShowAbstract] = useState(false);
 
   return (
-    <form className="flex flex-col gap-2 w-full mb-2 items-center mt-1" action={submitReview}>
+    <form
+      className="flex flex-col gap-2 w-full mb-2 items-center mt-1"
+      action={async (formData) => {
+        const result = await submitReview(formData);
+        if (result) {
+          setSelectPaper(0);
+          alert("Review Submitted");
+          revalidatePath("/staff/reviewer");
+        } else {
+          alert("Review Failed");
+        }
+      }}
+    >
       <div className="flex gap-2">
         <label htmlFor="abstract">Abstract</label>
-        <button className="text-2xl bg-slate-300 rounded-lg hover:bg-slate-400 w-fit"
-        onClick={(e)=>{
-          e.preventDefault();
-          setShowAbstract(!showAbstract);
-        }}>
+        <button
+          className="text-2xl bg-slate-300 rounded-lg hover:bg-slate-400 w-fit"
+          onClick={(e) => {
+            e.preventDefault();
+            setShowAbstract(!showAbstract);
+          }}
+        >
           {" "}
           {showAbstract ? <FiChevronsUp /> : <FiChevronsDown />}{" "}
         </button>
       </div>
       <div className="border w-full">
-        {showAbstract ? (
-          <p className="p-2">{paper.abstract}</p>
-        ) : (
-          <></>
-        )}
+        {showAbstract ? <p className="p-2">{paper.abstract}</p> : <></>}
       </div>
       <div className="flex flex-col gap-2 w-full">
         <div className="flex flex-col gap-2">
@@ -214,6 +252,7 @@ function ReviewForm({ paper }) {
       </div>
 
       <input type="hidden" name="paperId" value={paper.id} />
+      <input type="hidden" name="reviewId" value={reviewId} />
 
       <button
         type="submit"
@@ -222,5 +261,52 @@ function ReviewForm({ paper }) {
         Submit
       </button>
     </form>
+  );
+}
+
+function ReviewedPaperCard({ paper, selectReview, setSelectReview , reviewId}) {
+  return (
+    <div className="flex flex-col items-center not-italic text-slate-950 border-2 w-full rounded-md p-1">
+      <h4>{paper.title}</h4>
+      <h5>
+        {paper.authors
+          .map((author) => author.fname + " " + author.lname)
+          .join(", ")}
+      </h5>
+
+      {/* <button className="flex items-center hover:underline gap-1"
+      onClick={downloadPaper}>
+        Download <BiDownload />
+      </button> */}
+      <Link
+        className="flex items-center hover:underline gap-1"
+        href={`/api/papers/${paper.id}/download`}
+        // download={`${paper.title}.pdf`}
+        target="_blank"
+      >
+        Download <BiDownload />
+      </Link>
+
+      {selectReview === paper.id ? (
+        <div className="border-t-2 w-full">
+          <ReviewForm paper={paper} reviewId={reviewId} />
+        </div>
+      ) : (
+        <></>
+      )}
+
+      {selectReview === paper.id ? (
+        <></>
+      ) : (
+        <button
+          className="font-bold text-slate-800 bg-slate-300 rounded-md hover:bg-slate-400 hover:text-slate-50 px-1"
+          onClick={() => {
+            setSelectReview(paper.id);
+          }}
+        >
+          review
+        </button>
+      )}
+    </div>
   );
 }

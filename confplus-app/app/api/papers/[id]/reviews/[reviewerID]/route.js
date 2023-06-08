@@ -6,7 +6,19 @@ export async function GET(request, {params})
     const { searchParams } = new URL(request.url);
 	const status = searchParams.get("status")?.toLowerCase();
 
-    if (isNaN(Number(id)) || isNaN(Number(reviewerID)))
+    // if (isNaN(Number(id)) || isNaN(Number(reviewerID)))
+    // {
+    //     return Response.json(
+	// 		{
+	// 			message: "Bad Route"
+	// 		},
+	// 		{
+	// 			status: 400
+	// 		}
+	// 	);
+    // }
+
+	if (isNaN(Number(reviewerID)))
     {
         return Response.json(
 			{
@@ -18,7 +30,9 @@ export async function GET(request, {params})
 		);
     }
 
-    const res = await repo.readReviews(Number(id), Number(reviewerID), status);
+    // const res = await repo.readReviews(Number(id), Number(reviewerID), status);
+    const res = await repo.readReviews(Number(reviewerID), status);
+
 
 	if (res.error === 0)
 	{
@@ -46,6 +60,18 @@ export async function PUT(request, { params })
 {
     const { id, reviewerID } = params;
 	const body = await request.json();
+
+	    if (isNaN(Number(id)) || isNaN(Number(reviewerID)))
+    {
+        return Response.json(
+			{
+				message: "Bad Route"
+			},
+			{
+				status: 400
+			}
+		);
+    }
 
 	if (
 		"evaluation" in body && !isNaN(Number(body.evaluation)) ||

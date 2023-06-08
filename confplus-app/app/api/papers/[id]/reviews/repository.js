@@ -1,14 +1,14 @@
 import { PrismaClient } from "@prisma/client"
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 const prisma = new PrismaClient();
 
-export async function readReviews(paperId, reviewerID, status)
+export async function readReviews(reviewerID, status)
 {
+	// console.log(reviewerID, status);
 	try
 	{
 		const where = {
-			paperId,
 			reviewerID
 		};
 
@@ -19,9 +19,16 @@ export async function readReviews(paperId, reviewerID, status)
 
 		const reviews = await prisma.review.findMany({
 			where,
+			// include: {
+			// 	paper: {
+			// 		pdf: true
+			// 	}
+			// }
 			include: {
 				paper: {
-					pdf: true
+					include: {
+						authors: true,
+					}
 				}
 			}
 		});
@@ -42,7 +49,50 @@ export async function readReviews(paperId, reviewerID, status)
 	}
 }
 
-export async function updateReview(paperId, reviewerID, obj)
+
+
+// export async function readReviews(paperId, reviewerID, status)
+// {
+// 	try
+// 	{
+// 		const where = {
+// 			paperId,
+// 			reviewerID
+// 		};
+
+// 		if (status === "pending" || status === "rated" || status === "rejected")
+// 		{
+// 			where.status = status
+// 		}
+
+// 		const reviews = await prisma.review.findMany({
+// 			where,
+// 			include: {
+// 				paper: {
+// 					pdf: true
+// 				}
+// 			}
+// 		});
+
+// 		return {
+// 			error: 0,
+// 			payload: reviews
+// 		};
+// 	}
+// 	catch (e)
+// 	{
+// 		console.error(e.message);
+
+// 		return {
+// 			error: 1,
+// 			message: "Internal Server Error"
+// 		};
+// 	}
+// }
+
+
+
+export async function updateReview(paperId, reviewerID, obj, reviewId)
 {
 	try
 	{
@@ -61,8 +111,7 @@ export async function updateReview(paperId, reviewerID, obj)
 
 		let review = await prisma.review.update({
 			where: {
-				paperId,
-				reviewerID
+				id: reviewId
 			},
 			data: {
 				...reviewObj

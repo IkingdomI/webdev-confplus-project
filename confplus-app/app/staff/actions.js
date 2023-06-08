@@ -3,6 +3,8 @@
 import { cookies } from "next/headers";
 import * as repo from '../api/papers/repository.js'
 import { PrismaClient } from "@prisma/client";
+import { updateReview } from "../api/papers/[id]/reviews/repository.js";
+
 const prisma = new PrismaClient();
 
 export async function isUserExist() {
@@ -107,4 +109,30 @@ export async function downloadPaper(paperId){
   const blob = new Blob([pdf.content], {type: 'application/pdf'});
 
   return blob;
+}
+
+export async function submitReview(formData){
+  const reviewer = await getUser();
+  const reviewerID = reviewer.id;
+  const paperId = formData.get('paperId');
+  const reviewId = Number(formData.get('reviewId'));
+  const obj = {
+    
+    contribution: Number(formData.get('contribution')),
+    evaluation: Number(formData.get('evaluation')),
+    strength: formData.get('strengths'),
+    weakness: formData.get('weaknesses'),
+    
+  }
+  
+  
+  // console.log(formData);
+
+  const result = await updateReview(Number(paperId), Number(reviewerID), obj, reviewId);
+
+  if(result.error){
+    return false;
+  }
+
+  return true;
 }
