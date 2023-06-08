@@ -18,7 +18,12 @@ export async function readReviews(paperId, reviewerID, status)
 		}
 
 		const reviews = await prisma.review.findMany({
-			where
+			where,
+			include: {
+				paper: {
+					pdf: true
+				}
+			}
 		});
 
 		return {
