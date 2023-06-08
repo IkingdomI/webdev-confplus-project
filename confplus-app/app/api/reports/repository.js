@@ -4,47 +4,64 @@ const prisma = new PrismaClient();
 
 
 export async function NoOfPapers(){
-	const submittedPapers = await prisma.Paper.aggregate({
+	
+	const NumberOfPapers = await prisma.paper.groupBy({
+		by:['status'],
 		_count:{
 			id: true,
-		},
+		}
 	});
 
-	console.log("Total Number of submitted papers: "+submittedPapers._count.id)
-    
-
-	const acceptedPapers = await prisma.Paper.aggregate({
-		_count:{
-			id: true,
-		},
-		where :{
-			status: 'accepted'
-		},
-	});
-
-	console.log("Number of accepted papers: "+acceptedPapers._count.id);
-
-	const rejectedPapers = await prisma.Paper.aggregate({
-		_count:{
-			id: true,
-		},
-		where :{
-			status: 'rejected'
-		},
-	});
-
-	console.log("Number of rejected papers: "+rejectedPapers._count.id)
-    return ({
-        submitted: submittedPapers._count.id,
-        accepted: acceptedPapers._count.id,
-        rejected: rejectedPapers._count.id
-    });
+	console.log(NumberOfPapers);
+    return (NumberOfPapers);
 }
 
 
 
 
+export async function AverageAuthorsPerPaper(){
+	// const avgAuthor = await prisma.paper.findMany({
+	// 	include: {
+	// 	  _count: {
+	// 		select: { authors: true },
+	// 	  },
+	// 	},
+	//   });
+	// console.log(avgAuthor[0]._count);
+	// return (avgAuthor);
 
+	// const avgAuthor = await prisma.paper.findMany({
+	// 	select:{
+	// 		_count:{
+	// 			select: {authors: true},
+	// 		},
+	// 	}
+	// });
+	// const authorCounts = [];
+	// avgAuthor.forEach(el => authorCounts.push(el._count.authors));
+	// console.log(authorCounts);
+
+	const avgAuthorperPaper = await prisma.paper.aggregate({
+		
+			_count:{
+				authors: {
+					email: true,
+					paperId: true
+				}
+			}
+		
+	});
+	// return (avgAuthor);
+	console.log(avgAuthorperPaper);
+
+	// const authorCount = await prisma.paper.count({
+	// 	select:{
+	// 		authors: true,
+	// 	}
+	// });
+	// console.log(authorCount);
+	// return (authorCount);
+}
 
 export async function NoOfConfereneSessions(){
 	const sessions = await prisma.Session.aggregate({
