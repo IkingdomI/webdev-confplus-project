@@ -77,11 +77,32 @@ export async function readUser(id){
 		role: true,
 	};
 
-	try {
-		const user = await prisma.user.findUnique({
+	try
+	{
+		const temp = await prisma.user.findUnique({
 			select:
 			{
 				...query
+			},
+			where: {
+				id: Number(id)
+			}
+		});
+
+		let list = null;
+
+		if (temp.role === "organizer")
+			return { error: 0, payload: temp };
+		else if (temp.role === "reviewer")
+			list = "reviews"
+		else if (temp.role === "author")
+			list = "papers"
+
+		const user = await prisma.user.findUnique({
+			include: {
+				[temp.role]: {
+					[list]: true
+				}
 			},
 			where: {
 				id: Number(id)

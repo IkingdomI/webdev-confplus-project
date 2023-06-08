@@ -1,7 +1,5 @@
 import * as repo from '../repository.js';
 
-
-
 export async function GET(request, { params }) 
 {
 	const { id } = params;
@@ -22,9 +20,12 @@ export async function GET(request, { params })
 
 	const response = await repo.readUser(Math.floor(Number(id)));
 
-	if (response.error === 0) {
+	if (response.error === 0)
+	{
 		return Response.json(response.payload, { status: 200 });
-	} else if (response.error === 1) {
+	}
+	else if (response.error === 1)
+	{
 		return Response.json(
 			{
 				message: response.message
@@ -33,7 +34,9 @@ export async function GET(request, { params })
 				status: 404
 			}
 		);
-	} else {
+	}
+	else
+	{
 		console.log(error.message);
 
 		return Response.json(

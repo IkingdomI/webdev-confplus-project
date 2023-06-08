@@ -8,7 +8,7 @@ export async function GET(request){
 
 		const users = await (await repo.readUsers(role)).payload;
 
-	return Response.json(users, { status: 200 });
+		return Response.json(users, { status: 200 });
 	}
 	catch (e)
 	{
