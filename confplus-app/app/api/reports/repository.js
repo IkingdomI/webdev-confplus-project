@@ -49,8 +49,9 @@ export async function AverageAuthorsPerPaper(){
 				authors: true
 			}
 		});
+		
 		// return (avgAuthor);
-		console.log(papers);
+		//console.log(papers);
 
 		const counts = papers.map((p) => p.authors.length);
 		const avg = counts.reduce((acc, p) => acc + p, 0) / counts.length;
