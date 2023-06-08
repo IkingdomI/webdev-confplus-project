@@ -148,13 +148,14 @@ function PaperCard({ paper, selectPaper, setSelectPaper, reviewId }) {
         href={`/api/papers/${paper.id}/download`}
         // download={`${paper.title}.pdf`}
         target="_blank"
+        download={paper.title}
       >
         Download <BiDownload />
       </Link>
 
       {selectPaper === paper.id ? (
         <div className="border-t-2 w-full">
-          <ReviewForm paper={paper} reviewId={reviewId} />
+          <ReviewForm paper={paper} reviewId={reviewId} setSelectPaper={setSelectPaper}/>
         </div>
       ) : (
         <></>
@@ -176,7 +177,7 @@ function PaperCard({ paper, selectPaper, setSelectPaper, reviewId }) {
   );
 }
 
-function ReviewForm({ paper, reviewId }) {
+function ReviewForm({ paper, reviewId, setSelectPaper }) {
   const [showAbstract, setShowAbstract] = useState(false);
 
   return (

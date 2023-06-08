@@ -4,7 +4,7 @@ export async function GET(request, { params }) {
   try {
     const { id } = params;
 
-    const file = await repo.readPdf(17);
+    const file = await repo.readPdf(id);
 
     if (!file) {
       return Response.json({ message: "File not found." }, { status: 404 });

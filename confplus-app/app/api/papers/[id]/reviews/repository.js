@@ -127,8 +127,10 @@ export async function updateReview(paperId, reviewerID, obj, reviewId)
 			}
 		});
 
-		const totEval = reviews.filter(r => r.evaluation !== null)
-						.reduce((acc, r) => acc + r.evaluation);
+		const totEval = reviews.filter(r => r.evaluation !== null).map(r => r.evaluation)
+						.reduce((acc, r) => acc + r);
+
+		console.error(totEval)
 
 		if (reviews.filter(r => r.evaluation !== null).length === 2)
 		{
@@ -156,8 +158,7 @@ export async function updateReview(paperId, reviewerID, obj, reviewId)
 
 				review = await prisma.review.update({
 					where: {
-						paperId,
-						reviewerID
+						id: reviewId
 					},
 					data: {
 						status: "rejected"
