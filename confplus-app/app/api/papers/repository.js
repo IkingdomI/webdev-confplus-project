@@ -160,7 +160,7 @@ export async function updatePaper(title, modPaper)
 {
 	try
 	{
-		const paper = 
+		const paper = await prisma.paper.update();
 	}
 	catch (e)
 	{
