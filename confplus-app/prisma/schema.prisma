@@ -82,7 +82,7 @@ model Review {
   contribution Int?
   strength     String
   weakness     String
-  status       String @default("not approaved")
+  status       String @default("pending")
 
   reviewer   Reviewer @relation(fields: [reviewerID], references: [id])
   reviewerID Int

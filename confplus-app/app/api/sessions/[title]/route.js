@@ -42,6 +42,10 @@ export async function GET(request, {params})
 export async function PATCH(request, {params})
 {
 	const { title } = params;
+
+	console.log("==========================================================");
+	console.log(await request.json());
+
 	const body = await request.json();
 
 	if (

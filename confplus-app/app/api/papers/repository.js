@@ -106,7 +106,7 @@ export async function readPapers(reviewerID, status){
 				}
 			}: {};
 
-		if (status === "approved" || status === "rejected" || status === "not approved")
+		if (status === "approved" || status === "rejected" || status === "pending")
 			where.status == status;
 
 		const papers = await prisma.paper.findMany({
@@ -154,34 +154,4 @@ export async function readPaper(id)
 
 		return { error: 2, message: "Internal Server Error" }
 	}
-}
-
-export async function updatePaper(id, modPaper)
-{
-	try
-	{	
-		const paper = await prisma.paper.update({
-			
-		});
-	}
-	catch (e)
-	{
-		console.error(e.message);
-	}
-
-	/* const data = await fs.readFile("data/papers.json");
-	let papers = JSON.parse(data);
-
-	let index = papers.findIndex((p) => p.title.toLowerCase()===title.toLowerCase());
-
-	if(index !== -1){
-		papers[index] = {...papers[index], ...modPaper};
-		console.log(papers[index]);
-
-
-		await fs.writeFile("data/papers.json", JSON.stringify(papers));
-		return papers[index];
-	}
-	
-	return null; */	
 }

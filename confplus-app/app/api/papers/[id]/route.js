@@ -49,33 +49,3 @@ export async function GET(request, {params}) {
 		);
 	}
 }
-
-export async function PUT(request, {params}){
-	try{
-		const {id} = params;
-		const body = await request.json();
-
-		if (isNaN(Number(id)))
-		{
-			return Response.json(
-				{
-					message: "Bad Route"
-				},
-				{
-					status: 400
-				}
-			);
-		}
-
-		const paper = await repo.updatePaper(id, body);
-		console.log(paper);
-		if(paper){
-			return Response.json(paper, {status: 200});
-		}else{
-			return Response.json("paper not found", {status: 404});
-		}
-	}catch(error){
-		console.log(error.message);
-		return Response.json({message: "Internal Server Error"}, {status: 500});
-	}
-}
