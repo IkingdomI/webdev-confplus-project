@@ -41,18 +41,27 @@ export async function AverageAuthorsPerPaper(){
 	// avgAuthor.forEach(el => authorCounts.push(el._count.authors));
 	// console.log(authorCounts);
 
-	const avgAuthorperPaper = await prisma.paper.aggregate({
-		
-			_count:{
-				authors: {
-					email: true,
-					paperId: true
-				}
+	try
+	{
+		const papers = await prisma.paper.findMany({
+			select: {
+				id: true,
+				authors: true
 			}
+		});
+		// return (avgAuthor);
+		console.log(papers);
+
+		const counts = papers.map((p) => p.authors.length);
+		const avg = counts.reduce((acc, p) => acc + p, 0) / counts.length;
 		
-	});
-	// return (avgAuthor);
-	console.log(avgAuthorperPaper);
+		return { avg };
+	}
+	catch (e)
+	{
+		console.error(e.message);
+		throw e;
+	}
 
 	// const authorCount = await prisma.paper.count({
 	// 	select:{
