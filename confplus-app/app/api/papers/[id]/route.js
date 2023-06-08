@@ -1,8 +1,21 @@
 import * as repo from '../repository.js'
 
 export async function GET(request, {params}) {
-	const { title } = params;
-	const res = await repo.readPaper(title);
+	const { id } = params;
+
+	if (isNaN(Number(id)))
+	{
+		return Response.json(
+			{
+				message: "Bad Route"
+			},
+			{
+				status: 400
+			}
+		);
+	}
+
+	const res = await repo.readPaper(id);
 
 	if (res.error === 0)
 	{
@@ -39,10 +52,22 @@ export async function GET(request, {params}) {
 
 export async function PUT(request, {params}){
 	try{
-		const {title} = params;
+		const {id} = params;
 		const body = await request.json();
 
-		const paper = await repo.updatePaper(title, body);
+		if (isNaN(Number(id)))
+		{
+			return Response.json(
+				{
+					message: "Bad Route"
+				},
+				{
+					status: 400
+				}
+			);
+		}
+
+		const paper = await repo.updatePaper(id, body);
 		console.log(paper);
 		if(paper){
 			return Response.json(paper, {status: 200});

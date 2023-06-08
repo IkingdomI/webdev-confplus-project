@@ -126,13 +126,13 @@ export async function readPapers(reviewerID, status){
 	}
 }
 
-export async function readPaper(title)
+export async function readPaper(id)
 {
 	try
 	{
-		const paper = await prisma.paper.findMany({
+		const paper = await prisma.paper.findUnique({
 			where: {
-				title
+				id: Number(id)
 			},
 			select: {
 				...query
@@ -156,11 +156,13 @@ export async function readPaper(title)
 	}
 }
 
-export async function updatePaper(title, modPaper)
+export async function updatePaper(id, modPaper)
 {
 	try
-	{
-		const paper = await prisma.paper.update();
+	{	
+		const paper = await prisma.paper.update({
+			
+		});
 	}
 	catch (e)
 	{
