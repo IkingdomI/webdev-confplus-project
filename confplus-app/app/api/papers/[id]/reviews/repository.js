@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client"
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 
 const prisma = new PrismaClient();
 
@@ -66,6 +67,14 @@ export async function updateReview(paperId, reviewerID, obj)
 	catch (e)
 	{
 		console.error(e.message);
+
+		if (e instanceof PrismaClientKnownRequestError)
+		{
+			if (e.code === "P2025")
+			{
+				return { error: 2, message: "Review to update not found" };
+			}
+		}
 
 		return { error: 1, message: "Internal Server Error" };
 	}

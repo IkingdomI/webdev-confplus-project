@@ -164,11 +164,17 @@ export async function updateSession(title, obj)
 			}
 			else if (e.code === "P2003")
 			{
-				return { error: 3, message: "Foreign Key Violation" }
+				return { error: 3, message: "Foreign Key Violation" };
+			}
+			else if (e.code === "P2025")
+			{
+				return { error: 5, message: "Session to update not found"};
 			}
 		}
 
-		return { error: 4, message: "Internal Server Error" };
+		//console.error(e);
+
+		return { error: 4, message: "Internal Server Error", e };
 	}
 }
 
@@ -200,6 +206,10 @@ export async function deleteSession(title)
 			if (e.code === "P2003")
 			{
 				return { error: 2, message: "Foreign Key Violation" }
+			}
+			else if (e.code === "P2025")
+			{
+				return { error: 4, message: "Session to delete not found" }
 			}
 		}
 

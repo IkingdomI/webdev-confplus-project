@@ -43,10 +43,9 @@ export async function PATCH(request, {params})
 {
 	const { title } = params;
 
-	console.log("==========================================================");
-	console.log(await request.json());
-
 	const body = await request.json();
+
+	//console.log(body);
 
 	if (
 		("dateID" in body && !isNaN(Number(body.dateID))) ||
@@ -107,11 +106,23 @@ export async function PATCH(request, {params})
 				}
 			);
 		}
-		else
+		else if (res.error === 5)
 		{
 			return Response.json(
 				{
 					message: res.message
+				},
+				{
+					status: 404
+				}
+			);
+		}
+		else
+		{
+			return Response.json(
+				{
+					message: res.message,
+					e: res.e
 				},
 				{
 					status: 500
@@ -165,6 +176,17 @@ export async function DELETE(request, {params})
 			},
 			{
 				status: 400
+			}
+		);
+	}
+	else if (res.error === 4)
+	{
+		return Response.json(
+			{
+				message: res.message
+			},
+			{
+				status: 404
 			}
 		);
 	}
