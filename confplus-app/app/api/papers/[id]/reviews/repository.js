@@ -3,7 +3,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 
 const prisma = new PrismaClient();
 
-export async function readPapers(paperId, reviewerID, status)
+export async function readReviews(paperId, reviewerID, status)
 {
 	try
 	{
@@ -54,7 +54,7 @@ export async function updateReview(paperId, reviewerID, obj)
 		if ("weakness" in obj)
 			reviewObj.weakness = obj.weakness;
 
-		const review = await prisma.review.update({
+		let review = await prisma.review.update({
 			where: {
 				paperId,
 				reviewerID
@@ -63,6 +63,56 @@ export async function updateReview(paperId, reviewerID, obj)
 				...reviewObj
 			}
 		});
+
+		const { reviews } = await prisma.paper.findUnique({
+			where: {
+				id: paperId
+			},
+			include: {
+				reviews: true
+			}
+		});
+
+		const totEval = reviews.filter(r => r.evaluation !== null)
+						.reduce((acc, r) => acc + r.evaluation);
+
+		if (reviews.filter(r => r.evaluation !== null).length === 2)
+		{
+			if (totEval >= 2)
+			{
+				await prisma.paper.update({
+					where: {
+						id: paperId
+					},
+					data: {
+						status: "approved"
+					}
+				});
+			}
+			else
+			{
+				await prisma.paper.update({
+					where: {
+						id: paperId
+					},
+					data: {
+						status: "rejected"
+					}
+				});
+
+				review = await prisma.review.update({
+					where: {
+						paperId,
+						reviewerID
+					},
+					data: {
+						status: "rejected"
+					}
+				});
+			}
+		}
+
+		return { error: 0, payload: review };
 	}
 	catch (e)
 	{
