@@ -1,7 +1,13 @@
 import * as repo from './repository.js'
 
 export async function GET(request) {
-	const res = await repo.readPapers();
+	const { searchParams } = new URL(request.url);
+	const reviewerID = searchParams.get("reviewerID")?.toLowerCase();
+	const status = searchParams.get("status")?.toLowerCase();
+
+	const res = await repo.readPapers(reviewerID, status);
+
+	//console.log(!null);
 
 	if (res.error === 0)
 	{

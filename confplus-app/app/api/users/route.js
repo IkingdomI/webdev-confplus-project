@@ -11,7 +11,7 @@ export async function GET(request)
 	if (res.error === 0)
 	{
 		return Response.json(
-			res,
+			res.payload,
 			{
 				status: 200
 			}

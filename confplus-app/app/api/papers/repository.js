@@ -35,7 +35,35 @@ export async function createPaper(paperObj, fileName, content){
 				
 			}
 		});
+
 		console.log("newPaper", newPaper);
+
+		const reviewers = await prisma.user.findMany({
+			select: {
+				id: true
+			},
+			where: {
+				role: "reviewer"
+			}
+		});
+
+		let i = 2;
+
+		while (i)
+		{
+			const reviewerID = reviewers.splice(Math.floor(Math.random()*reviewers.length), 1)[0].id;
+
+			await prisma.review.create({
+				data: {
+					reviewerID,
+					paperId: newPaper.id,
+					strength: "",
+					weakness: ""
+				}
+			});
+
+			i--;
+		}
 
 		const authors = paperObj.PaperAuthors;
 		console.log("authors", authors);
@@ -66,13 +94,26 @@ export async function createPaper(paperObj, fileName, content){
 }
 
 
-export async function readPapers(){
+export async function readPapers(reviewerID, status){
 	try
 	{
+		const where = (!isNaN(Number(reviewerID)))?
+			{
+				reviews: {
+					some: {
+						reviewerID: Number(reviewerID)
+					}
+				}
+			}: {};
+
+		if (status === "approved" || status === "rejected" || status === "not approved")
+			where.status == status;
+
 		const papers = await prisma.paper.findMany({
 			select: {
 				...query
-			}
+			},
+			where
 		});
 
 		return { error: 0, payload: papers }
@@ -115,8 +156,18 @@ export async function readPaper(title)
 	}
 }
 
-export async function updatePaper(title, modPaper){
-	const data = await fs.readFile("data/papers.json");
+export async function updatePaper(title, modPaper)
+{
+	try
+	{
+		const paper = 
+	}
+	catch (e)
+	{
+		console.error(e.message);
+	}
+
+	/* const data = await fs.readFile("data/papers.json");
 	let papers = JSON.parse(data);
 
 	let index = papers.findIndex((p) => p.title.toLowerCase()===title.toLowerCase());
@@ -130,6 +181,5 @@ export async function updatePaper(title, modPaper){
 		return papers[index];
 	}
 	
-	return null;
-	
+	return null; */	
 }
